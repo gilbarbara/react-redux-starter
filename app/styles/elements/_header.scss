@@ -1,0 +1,41 @@
+.app__header {
+  @include jagged($brand-primary, 12, bottom, border);
+  height: $header-height;
+  padding: $grid-gutter-width 0;
+  position: relative;
+
+  h1 {
+    margin: 0;
+  }
+
+  .menu {
+    margin-top: $grid-gutter-width / 2;
+
+    .navbar-nav {
+      margin: 0;
+
+      > li {
+        display: inline-block;
+
+        &.active a {
+          color: $brand-primary;
+          font-weight: bold;
+        }
+
+        > a {
+          color: $body-color;
+          padding: 0 1.5rem 0 0;
+
+          &:hover,
+          &:focus {
+            background-color: transparent;
+          }
+
+          .fa {
+            margin-right: 5px;
+          }
+        }
+      }
+    }
+  }
+}

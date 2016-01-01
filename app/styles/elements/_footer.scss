@@ -1,0 +1,36 @@
+.app__footer {
+  @include jagged($brand-primary, 12, top, border);
+//  height: $header-height;
+  padding: $grid-gutter-width 0;
+  position: relative;
+
+  h3 {
+    margin-bottom: $grid-gutter-width / 2;
+  }
+
+  ul {
+    align-items: center;
+    display: flex;
+    flex-flow: wrap;
+    justify-content: space-between;
+    margin-bottom: 0;
+
+    > li {
+      margin-bottom: 30px;
+      text-align: center;
+      width: 100%;
+
+      @include sm {
+        width: 50%;
+      }
+
+      @include md {
+        width: percentage(1 / 3);
+      }
+      
+      @include lg {
+        width: auto;
+      }
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "react-starter",
+  "dependencies": {
+    "bootstrap": "^4",
+    "fontawesome": "~4.4",
+	"sass-mediaqueries": "^1.6"
+  }
+}

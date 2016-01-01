@@ -1,0 +1,24 @@
+.app {
+  background-color: #f7f7f7;
+  min-height: 100vh;
+
+  @include sm {
+    background-position: 15px 30px;
+    background-size: 256px;
+  }
+
+  &__content {
+    min-height: calc(100vh - #{$header-height});
+    padding-top: $grid-gutter-width;
+  }
+
+  &__container {
+    @include app-container();
+    margin: 0 auto;
+  }
+
+  &__actions {
+    margin: $grid-gutter-width 0;
+    text-align: center;
+  }
+}
