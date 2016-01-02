@@ -1,4 +1,4 @@
-import { XHR } from '../constants/AppConstants';
+import { XHR } from '../constants';
 import Storage from '../utils/Storage';
 
 /**

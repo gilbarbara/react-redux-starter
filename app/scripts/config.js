@@ -1,9 +1,10 @@
 import NPMPackage from '../../package.json';
 
 export default {
+	apiUrl: 'https://api.hypem.com/v2/',
 	items: [
 		{ react: NPMPackage.dependencies.react.replace(/~|\^/, '') },
-		{ 'react-router': NPMPackage.dependencies['react-router'].replace(/~|\^/, '') },
-		{ flux: NPMPackage.dependencies.flux.replace(/~|\^/, '') }
+		{ redux: NPMPackage.dependencies.redux.replace(/~|\^/, '') },
+		{ 'react-router': NPMPackage.dependencies['react-router'].replace(/~|\^/, '') }
 	]
 };
