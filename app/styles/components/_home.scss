@@ -2,6 +2,7 @@
   background: linear-gradient(125deg, $brand-primary, 70%, lighten($brand-primary, 6%));
   color: lighten($brand-primary, 25%);
   font-size: 3rem;
+  margin-bottom: $grid-gutter-width;
   padding: 30px;
 
   h3 {

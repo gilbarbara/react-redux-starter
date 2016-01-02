@@ -1,7 +1,7 @@
 {
   "name": "react-redux",
   "title": "React Redux",
-  "description": "Starter Kit for React with redux + router + bootstrap",
+  "description": "Starter Kit for React with redux and router",
   "version": "0.1.0",
   "author": "Gil Barbara <gilbarbara@gmail.com>",
   "repository": {

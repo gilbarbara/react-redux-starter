@@ -2,7 +2,7 @@ import { CALL_API } from 'redux-api-middleware';
 import { pushPath } from 'redux-simple-router';
 
 import config from '../config';
-import { ActionTypes, XHR } from '../constants';
+import { ActionTypes } from '../constants';
 
 /**
  * @module Actions
@@ -10,35 +10,42 @@ import { ActionTypes, XHR } from '../constants';
  */
 
 /**
- * Request Featured
+ * Fetch Popular
  * @instance
  * @param {String} [query]
  *
  * @returns {Object}
  */
-let requestFeatured = (query) => {
+export let fetchPopular = (query) => {
 	return {
-		type: ActionTypes.FEATURED_REQUEST,
-		query
+		[CALL_API]: {
+			endpoint: config.apiUrl + 'popular' + (query ? `?${query}` : ''),
+			method: 'GET',
+			types: [
+				'POPULAR_REQUEST',
+				'POPULAR_SUCCESS',
+				'POPULAR_FAILURE'
+			]
+		}
 	};
 };
 
 /**
- * Fetch Featured
+ * Fetch LastWeek
  * @instance
  * @param {String} [query]
  *
  * @returns {Object}
  */
-export let fetchFeatured = (query) => {
+export let fetchLastWeek = (query) => {
 	return {
 		[CALL_API]: {
-			endpoint: config.apiUrl + 'tracks?sort=loved' + (query ? `&${query}` : ''),
+			endpoint: config.apiUrl + 'popular?mode=lastweek' + (query ? `&${query}` : ''),
 			method: 'GET',
 			types: [
-				'FEATURED_REQUEST',
-				'FEATURED_SUCCESS',
-				'FEATURED_FAILURE'
+				'LASTWEEK_REQUEST',
+				'LASTWEEK_SUCCESS',
+				'LASTWEEK_FAILURE'
 			]
 		}
 	};

@@ -3,10 +3,10 @@ import reactUpdate from 'react-addons-update';
 import { autobind } from 'core-decorators';
 import shouldComponentUpdate from '../utils/PureRender';
 
-import { fetchFeatured, showAlert } from '../actions';
+import { fetchPopular, showAlert } from '../actions';
 import Loader from './elements/Loader';
 
-class Featured extends React.Component {
+class Popular extends React.Component {
 	constructor (props) {
 		super(props);
 	}
@@ -18,14 +18,14 @@ class Featured extends React.Component {
 	shouldComponentUpdate = shouldComponentUpdate;
 
 	componentWillMount () {
-		this.setState(this.context.store.getState().HM);
+		this.setState(this.context.store.getState().HypeMachine.popular);
 	}
 
 	componentDidMount () {
 		this.storeUnsubscribe = this.context.store.subscribe(this.handleStoreChange);
 
 		if (!this.state.error && this.state.page === 1) {
-			this.context.store.dispatch(fetchFeatured());
+			this.context.store.dispatch(fetchPopular());
 		}
 	}
 
@@ -44,12 +44,12 @@ class Featured extends React.Component {
 		let state = this.context.store.getState(),
 			newState;
 
-		if (this.state.featured.length !== state.HM.featured.length) {
-			newState = state.HM;
+		if (this.state.items.length !== state.HypeMachine.popular.items.length) {
+			newState = state.HypeMachine.popular;
 		}
 
-		if (state.HM.error && !this.state.error) {
-			newState = state.HM;
+		if (state.HypeMachine.popular.error && !this.state.error) {
+			newState = state.HypeMachine.popular;
 		}
 
 		if (newState) {
@@ -57,15 +57,15 @@ class Featured extends React.Component {
 		}
 	}
 
-	loadFeatured () {
-		this.context.store.dispatch(fetchFeatured('page=' + this.state.page));
+	loadMore () {
+		this.context.store.dispatch(fetchPopular('page=' + this.state.page));
 	}
 
 	@autobind
 	onClickLoadMore (e) {
 		e.preventDefault();
 
-		this.loadFeatured();
+		this.loadMore();
 	}
 
 	render () {
@@ -73,13 +73,13 @@ class Featured extends React.Component {
 		let output = {};
 
 		if (STATE.ready) {
-			output.html = STATE.featured.map((d, i) => {
+			output.html = STATE.items.map((d, i) => {
 				return (
-					<div key={i} className="featured">
-						<div className="featured__image">
+					<div key={i} className="tracks">
+						<div className="tracks__image">
 							<img src={d.thumb_url_large} />
 						</div>
-						<div className="featured__info">
+						<div className="tracks__info">
 							<h2><a href={'http://hypem.com/track/' + d.itemid}
 								   target="_blank">{d.artist} - {d.title}</a></h2>
 							{d.description}
@@ -102,14 +102,14 @@ class Featured extends React.Component {
 		}
 
 		return (
-			<div key="Featured" className="featured-app">
-				<h1>Hype Machine - Featured</h1>
+			<div key="Tracks" className="tracks-app">
+				<h1>Hype Machine - Popular</h1>
 
-				<div className="featured__wrapper">{output.html}</div>
+				<div className="tracks__wrapper">{output.html}</div>
 				{output.actions}
 			</div>
 		);
 	}
 }
 
-export default Featured;
+export default Popular;

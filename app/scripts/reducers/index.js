@@ -1,5 +1,5 @@
 import Browser from './Browser';
-import HypeMachine from './Hypem';
+import HypeMachine from './HypeMachine';
 
 export default {
 	...Browser,
