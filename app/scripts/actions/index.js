@@ -1,5 +1,7 @@
-import HypeApi from '../api/HypemApi';
+import { CALL_API } from 'redux-api-middleware';
 import { pushPath } from 'redux-simple-router';
+
+import config from '../config';
 import { ActionTypes, XHR } from '../constants';
 
 /**
@@ -8,28 +10,37 @@ import { ActionTypes, XHR } from '../constants';
  */
 
 /**
- * Fetch Stories' IDs
+ * Request Featured
  * @instance
  * @param {String} [query]
  *
- * @returns {Function}
+ * @returns {Object}
+ */
+let requestFeatured = (query) => {
+	return {
+		type: ActionTypes.FEATURED_REQUEST,
+		query
+	};
+};
+
+/**
+ * Fetch Featured
+ * @instance
+ * @param {String} [query]
+ *
+ * @returns {Object}
  */
 export let fetchFeatured = (query) => {
-	return (dispatch, getState) => {
-		HypeApi.fetchFeatured(query)
-			.then(response => {
-				dispatch({
-					type: ActionTypes.FEATURED_SUCCESS,
-					status: response.status,
-					data: response.data
-				});
-			})
-		.catch(err => {
-			console.log('error', err);
-			dispatch({
-				type: ActionTypes.FEATURED_FAIL
-			});
-		});
+	return {
+		[CALL_API]: {
+			endpoint: config.apiUrl + 'tracks?sort=loved' + (query ? `&${query}` : ''),
+			method: 'GET',
+			types: [
+				'FEATURED_REQUEST',
+				'FEATURED_SUCCESS',
+				'FEATURED_FAILURE'
+			]
+		}
 	};
 };
 
@@ -64,4 +75,15 @@ export let showAlert = (status, message, withTimeout = true) => {
 	};
 };
 
-export default { fetchFeatured, goTo, showAlert };
+/**
+ * Hide message
+ * @instance
+ *
+ * @returns {Object}
+ */
+export let hideAlert = (status = 'info') => {
+	return {
+		type: ActionTypes.HIDE_ALERT,
+		status
+	};
+};

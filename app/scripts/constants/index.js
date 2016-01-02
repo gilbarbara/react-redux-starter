@@ -10,9 +10,11 @@ import keyMirror from 'fbjs/lib/keyMirror';
  * @memberof Constants
  */
 export const ActionTypes = keyMirror({
+	FEATURED_REQUEST: undefined,
 	FEATURED_SUCCESS: undefined,
-	FEATURED_FAIL: undefined,
-	SHOW_ALERT: undefined
+	FEATURED_FAILURE: undefined,
+	SHOW_ALERT: undefined,
+	HIDE_ALERT: undefined
 });
 
 /**

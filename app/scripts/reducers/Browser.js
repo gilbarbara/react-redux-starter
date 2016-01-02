@@ -11,11 +11,17 @@ export default {
 		switch (action.type) {
 			case 'SHOW_ALERT':
 			{
-				return Object.assign({}, initialState, {
+				return Object.assign({}, state, {
 					visible: true,
 					message: action.message,
 					status: action.status,
 					withTimeout: action.withTimeout !== undefined || true
+				});
+			}
+			case 'HIDE_ALERT':
+			{
+				return Object.assign({}, initialState, {
+					status: action.status
 				});
 			}
 			default:

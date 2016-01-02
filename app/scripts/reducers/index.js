@@ -1,4 +1,3 @@
-import Actions from '../actions';
 import Browser from './Browser';
 import HypeMachine from './Hypem';
 
