@@ -1,23 +1,14 @@
 import React from 'react';
 import reactUpdate from 'react-addons-update';
 import { autobind } from 'core-decorators';
-
 import shouldComponentUpdate from '../utils/PureRender';
+
 import { fetchFeatured, showAlert } from '../actions';
-import { ActionTypes, XHR } from '../constants';
 import Loader from './elements/Loader';
 
 class Featured extends React.Component {
 	constructor (props) {
 		super(props);
-
-		this.state = {
-			ready: false,
-			error: undefined,
-			finished: false,
-			page: 1,
-			featured: []
-		};
 	}
 
 	static contextTypes = {
@@ -26,9 +17,22 @@ class Featured extends React.Component {
 
 	shouldComponentUpdate = shouldComponentUpdate;
 
+	componentWillMount () {
+		this.setState(this.context.store.getState().HM);
+	}
+
 	componentDidMount () {
 		this.storeUnsubscribe = this.context.store.subscribe(this.handleStoreChange);
-		this.context.store.dispatch(fetchFeatured(this.state.page > 1 ? 'page=' + this.state.page : ''));
+
+		if (!this.state.error && this.state.page === 1) {
+			this.context.store.dispatch(fetchFeatured());
+		}
+	}
+
+	componentDidUpdate (prevProps, prevState) {
+		if (!prevState.error && this.state.error) {
+			this.context.store.dispatch(showAlert('error', this.state.message, true));
+		}
 	}
 
 	componentWillUnmount () {
@@ -37,21 +41,19 @@ class Featured extends React.Component {
 
 	@autobind
 	handleStoreChange () {
-		let state = this.context.store.getState();
+		let state = this.context.store.getState(),
+			newState;
 
-		if (state.HM) {
-			let hm = state.HM;
+		if (this.state.featured.length !== state.HM.featured.length) {
+			newState = state.HM;
+		}
 
-			this.setState({
-				featured: [
-					...this.state.featured,
-					...hm.featured
-				],
-				page: ++this.state.page,
-				ready: this.state.ready || hm.featured.length,
-				finished: !hm.featured.length,
-				error: hm.error
-			});
+		if (state.HM.error && !this.state.error) {
+			newState = state.HM;
+		}
+
+		if (newState) {
+			this.setState(newState);
 		}
 	}
 
@@ -67,24 +69,26 @@ class Featured extends React.Component {
 	}
 
 	render () {
+		const STATE = this.state;
 		let output = {};
 
-		if (this.state.ready) {
-			output.html = this.state.featured.map((d, i) => {
+		if (STATE.ready) {
+			output.html = STATE.featured.map((d, i) => {
 				return (
 					<div key={i} className="featured">
 						<div className="featured__image">
 							<img src={d.thumb_url_large} />
 						</div>
 						<div className="featured__info">
-							<h2><a href={'http://hypem.com/track/' + d.itemid} target="_blank">{d.artist} - {d.title}</a></h2>
+							<h2><a href={'http://hypem.com/track/' + d.itemid}
+								   target="_blank">{d.artist} - {d.title}</a></h2>
 							{d.description}
 						</div>
 					</div>
 				);
 			});
 
-			if (!this.state.finished) {
+			if (!STATE.error) {
 				output.actions = (
 					<div className="app__actions">
 						<a href="#" className="load-more btn btn-primary btn-lg"

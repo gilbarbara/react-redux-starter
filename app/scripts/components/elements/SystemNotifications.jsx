@@ -2,19 +2,13 @@ import React from 'react';
 import shouldComponentUpdate from '../../utils/PureRender';
 import { autobind } from 'core-decorators';
 
-let defaultState = {
-		visible: false,
-		message: '',
-		status: '',
-		withTimeout: false
-	},
-	hideTimeout;
+import { hideAlert } from '../../actions';
+
+let hideTimeout;
 
 class SystemNotifications extends React.Component {
 	constructor (props) {
 		super(props);
-
-		this.state = defaultState;
 	}
 
 	static contextTypes = {
@@ -23,17 +17,21 @@ class SystemNotifications extends React.Component {
 
 	shouldComponentUpdate = shouldComponentUpdate;
 
+	componentWillMount () {
+		this.setState(this.context.store.getState().Browser);
+	}
+
 	componentDidMount () {
 		this.storeUnsubscribe = this.context.store.subscribe(this.handleStoreChange);
 	}
 
 	componentDidUpdate () {
-		if (this.state.withTimeout) {
+		if (this.state.visible && this.state.withTimeout) {
 			window.clearTimeout(hideTimeout);
 
 			hideTimeout = setTimeout(() => {
 				this.hideNotification();
-			}, 2000);
+			}, 3500);
 		}
 	}
 
@@ -45,21 +43,13 @@ class SystemNotifications extends React.Component {
 	handleStoreChange () {
 		let state = this.context.store.getState();
 
-		if (state.BS) {
-			this.setState(state.BS);
+		if (state.Browser.message !== this.state.message) {
+			this.setState(state.Browser);
 		}
 	}
 
 	hideNotification () {
-		if (this.state.visible) {
-			this.setState({
-				visible: false
-			});
-
-			setTimeout(() => {
-				this.setState(defaultState);
-			}, 1000);
-		}
+		this.context.store.dispatch(hideAlert(this.state.status));
 	}
 
 	@autobind
@@ -79,7 +69,7 @@ class SystemNotifications extends React.Component {
 
 		return (
 			<div ref="systemNotification" className={classes} onClick={this.onClick}>
-				<i className={'fa fa-' + ( STATE.status === 'success' ? 'thumbs-up' : (STATE.status === 'warning' ? 'exclamation-circle' : (STATE.status === 'info' ? 'info-circle' : 'times-circle')))} />
+				<i className={'fa fa-' + ( STATE.status === 'success' ? 'thumbs-up' : (STATE.status === 'warning' ? 'exclamation-circle' : (STATE.status === 'info' ? 'info-circle' : 'thumbs-down')))} />
 
 				<div>{STATE.message}</div>
 			</div>
