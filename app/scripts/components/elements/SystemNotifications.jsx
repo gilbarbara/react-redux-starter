@@ -2,8 +2,6 @@ import React from 'react';
 import shouldComponentUpdate from '../../utils/PureRender';
 import { autobind } from 'core-decorators';
 
-import BrowserStore from '../../stores/BrowserStore';
-
 let defaultState = {
 		visible: false,
 		message: '',
@@ -19,10 +17,14 @@ class SystemNotifications extends React.Component {
 		this.state = defaultState;
 	}
 
+	static contextTypes = {
+		store: React.PropTypes.object
+	};
+
 	shouldComponentUpdate = shouldComponentUpdate;
 
 	componentDidMount () {
-		BrowserStore.addChangeListener(this.handleChange);
+		this.storeUnsubscribe = this.context.store.subscribe(this.handleStoreChange);
 	}
 
 	componentDidUpdate () {
@@ -36,20 +38,15 @@ class SystemNotifications extends React.Component {
 	}
 
 	componentWillUnmount () {
-		BrowserStore.removeChangeListener(this.handleChange);
+		this.storeUnsubscribe();
 	}
 
 	@autobind
-	handleChange () {
-		let alert = BrowserStore.getAlertMessage();
+	handleStoreChange () {
+		let state = this.context.store.getState();
 
-		if (alert) {
-			this.setState({
-				visible: true,
-				message: alert.message,
-				status: alert.status,
-				withTimeout: alert.withTimeout
-			});
+		if (state.BS) {
+			this.setState(state.BS);
 		}
 	}
 
@@ -72,19 +69,19 @@ class SystemNotifications extends React.Component {
 	}
 
 	render () {
-		let state = this.state;
+		const STATE = this.state;
 
 /*		 state.visible = true;
 		 state.status = 'info';
 		 state.message = 'O seu resgate foi efetuado com sucesso';*/
 
-		let classes = 'system-notifications' + (this.state.visible ? ' active' : '') + (this.state.status ? ' ' + this.state.status : '');
+		let classes = 'system-notifications' + (STATE.visible ? ' active' : '') + (STATE.status ? ' ' + STATE.status : '');
 
 		return (
 			<div ref="systemNotification" className={classes} onClick={this.onClick}>
-				<i className={'fa fa-' + ( state.status === 'success' ? 'thumbs-up' : (state.status === 'warning' ? 'exclamation-circle' : (state.status === 'info' ? 'info-circle' : 'times-circle')))} />
+				<i className={'fa fa-' + ( STATE.status === 'success' ? 'thumbs-up' : (STATE.status === 'warning' ? 'exclamation-circle' : (STATE.status === 'info' ? 'info-circle' : 'times-circle')))} />
 
-				<div>{this.state.message}</div>
+				<div>{STATE.message}</div>
 			</div>
 		);
 	}

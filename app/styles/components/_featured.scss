@@ -1,0 +1,50 @@
+.featured-app {
+  h1 {
+    color: $brand-primary;
+    margin: 0 0 30px;
+    text-align: center;
+  }
+}
+
+.featured {
+  align-items: flex-start;
+  display: inline-flex;
+  flex-wrap: wrap;
+  width: 100%;
+
+  @include md {
+    width: 50%;
+  }
+
+  + div {
+    margin-top: $grid-gutter-width;
+  }
+
+  &__wrapper {
+    margin-bottom: $grid-gutter-width;
+  }
+
+  &__image {
+    @include sm {
+      flex: 0 percentage(1 / 4);
+    }
+
+    img {
+      max-width: 100%;
+    }
+  }
+
+  &__info {
+    padding: $grid-gutter-width / 2;
+
+    @include sm {
+      flex: 0 percentage(1 / 1.333333333);
+      padding: 0 $grid-gutter-width / 2;
+    }
+
+    a {
+      @include truncate();
+      display: block;
+    }
+  }
+}

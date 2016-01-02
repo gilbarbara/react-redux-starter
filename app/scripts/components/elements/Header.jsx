@@ -1,9 +1,8 @@
 import React from 'react';
-import shouldComponentUpdate from '../../utils/PureRender';
 import { autobind } from 'core-decorators';
+import shouldComponentUpdate from '../../utils/PureRender';
 
-import Actions from '../../actions/AppActions';
-import BrowserStore from '../../stores/BrowserStore';
+import { goTo } from '../../actions';
 import NPMPackage from '../../../../package.json';
 
 class Header extends React.Component {
@@ -13,7 +12,8 @@ class Header extends React.Component {
 	}
 
 	static contextTypes = {
-		location: React.PropTypes.object
+		app: React.PropTypes.object,
+		store: React.PropTypes.object
 	};
 
 	shouldComponentUpdate = shouldComponentUpdate;
@@ -21,7 +21,7 @@ class Header extends React.Component {
 	@autobind
 	onClickLink (e) {
 		e.preventDefault();
-		Actions.goTo(e.currentTarget.dataset.destination);
+		this.context.store.dispatch(goTo(e.currentTarget.dataset.destination));
 	}
 
 	render () {
@@ -33,17 +33,17 @@ class Header extends React.Component {
 					<div className="menu clearfix">
 
 						<ul className="nav navbar-nav">
-							<li className={this.context.location.pathname === '/home' ? 'active' : ''}
+							<li className={this.context.app.location.pathname === '/home' ? 'active' : ''}
 								onClick={this.onClickLink} data-destination="/home">
 								<a href="#"><span
 									className="fa fa-home" />Home
 								</a>
 							</li>
-							<li className={['/', '/stories'].indexOf(this.context.location.pathname) > -1 ? 'active' : ''}
-								href="#" onClick={this.onClickLink} data-destination="/stories">
+							<li className={['/', '/stories'].indexOf(this.context.app.location.pathname) > -1 ? 'active' : ''}
+								href="#" onClick={this.onClickLink} data-destination="/featured">
 								<a href="#">
 									<span
-										className="fa fa-fire" />Hacker News</a>
+										className="fa fa-fire" />Featured</a>
 							</li>
 						</ul>
 					</div>

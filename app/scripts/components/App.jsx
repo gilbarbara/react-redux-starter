@@ -8,8 +8,21 @@ class App extends React.Component {
 		super(props);
 	}
 
+	static childContextTypes = {
+		app: React.PropTypes.object
+	};
+
+	getChildContext () {
+		return {
+			app: {
+				location: this.props.location
+			}
+		};
+	}
+
 	static propTypes = {
-		children: React.PropTypes.object.isRequired
+		children: React.PropTypes.object.isRequired,
+		location: React.PropTypes.object.isRequired
 	};
 
 	render () {
