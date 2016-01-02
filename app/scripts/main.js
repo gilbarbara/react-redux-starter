@@ -1,34 +1,30 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { applyMiddleware, createStore, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
-import { syncReduxAndRouter, routeReducer } from 'redux-simple-router';
-import thunkMiddleware from 'redux-thunk';
-import createLogger from 'redux-logger';
+import { syncReduxAndRouter } from 'redux-simple-router';
 
+import configStore from './store';
 import rootReducer from './reducers';
-
 import routes from './routes';
 
-const middleware = process.env.NODE_ENV === 'production' ?
-	[ thunkMiddleware ] :
-	[ thunkMiddleware, createLogger() ];
-
-const createStoreWithMiddleware = applyMiddleware(...middleware)(createStore);
-
-const reducer = combineReducers(Object.assign({}, rootReducer, {
-	routing: routeReducer
-}));
-
-const store = createStoreWithMiddleware(reducer);
-
+const store = configStore();
 syncReduxAndRouter(browserHistory, store);
 
 document.addEventListener('DOMContentLoaded', () => {
+	let showDevTools;
+
+	if (process.env.NODE_ENV !== 'production') {
+		let DevTools = require('./components/DevTools');
+		showDevTools = <DevTools/>;
+	}
+
 	ReactDOM.render(
 		<Provider store={store}>
-			<Router history={browserHistory} routes={routes} />
+			<div>
+				<Router history={browserHistory} routes={routes} />
+				{showDevTools}
+			</div>
 		</Provider>,
 		document.getElementById('react'));
 });
