@@ -16,12 +16,10 @@ class Home extends React.Component {
 	shouldComponentUpdate = shouldComponentUpdate;
 
 	componentDidMount () {
-		setTimeout(() => {
-			this.setState({
-				ready: true,
-				items: config.items
-			});
-		}, 1000);
+		this.setState({
+			ready: true,
+			items: config.items
+		});
 	}
 
 	render () {

@@ -5,6 +5,9 @@ export default {
 	items: [
 		{ react: NPMPackage.dependencies.react.replace(/~|\^/, '') },
 		{ redux: NPMPackage.dependencies.redux.replace(/~|\^/, '') },
-		{ 'react-router': NPMPackage.dependencies['react-router'].replace(/~|\^/, '') }
+		{ 'react-redux': NPMPackage.dependencies['react-redux'].replace(/~|\^/, '') },
+		{ 'react-router': NPMPackage.dependencies['react-router'].replace(/~|\^/, '') },
+		{ babel: NPMPackage.devDependencies['babel-core'].replace(/~|\^/, '') },
+		{ browserify: NPMPackage.devDependencies.browserify.replace(/~|\^/, '') }
 	]
 };
