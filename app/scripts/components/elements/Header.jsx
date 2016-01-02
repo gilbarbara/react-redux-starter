@@ -39,7 +39,7 @@ class Header extends React.Component {
 									className="fa fa-home" />Home
 								</a>
 							</li>
-							<li className={['/', '/stories'].indexOf(this.context.app.location.pathname) > -1 ? 'active' : ''}
+							<li className={this.context.app.location.pathname === '/featured' ? 'active' : ''}
 								href="#" onClick={this.onClickLink} data-destination="/featured">
 								<a href="#">
 									<span

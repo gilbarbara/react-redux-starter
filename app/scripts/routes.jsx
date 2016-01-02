@@ -8,7 +8,7 @@ import NotFound from './components/NotFound';
 
 export default (
 	<Route path="/" component={App}>
-		<IndexRedirect to="stories" />
+		<IndexRedirect to="featured" />
 		<Route path="home" component={Home} />
 		<Route path="featured" component={Featured} />
 		<Route path="*" component={NotFound} />

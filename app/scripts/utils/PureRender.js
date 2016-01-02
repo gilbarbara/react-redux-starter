@@ -6,9 +6,9 @@ import shallowEqual from 'fbjs/lib/shallowEqual';
  * @requires shallowEqual
  *
  * @param {Object} instance
- * @param {Object}nextProps
- * @param {Object}nextState
- * @param {Object}nextContext
+ * @param {Object} nextProps
+ * @param {Object} nextState
+ * @param {Object} nextContext
  *
  * @returns {Boolean}
  */
