@@ -40,19 +40,10 @@ class Popular extends React.Component {
 
 	@autobind
 	handleStoreChange () {
-		let state = this.context.store.getState(),
-			newState;
+		let state = this.context.store.getState();
 
-		if (this.state.items.length !== state.hypeMachine.popular.items.length) {
-			newState = state.hypeMachine.popular;
-		}
-
-		if (state.hypeMachine.popular.error && !this.state.error) {
-			newState = state.hypeMachine.popular;
-		}
-
-		if (newState) {
-			this.setState(newState);
+		if (this.state.items.length !== state.hypeMachine.popular.items.length || state.hypeMachine.popular.error && !this.state.error) {
+			this.setState(state.hypeMachine.popular);
 		}
 	}
 

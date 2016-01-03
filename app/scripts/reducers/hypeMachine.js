@@ -17,10 +17,10 @@ export default {
 			case 'POPULAR_REQUEST':
 			{
 				let newState = state;
-
 				if (action.error) {
 					newState = Object.assign({}, state, {
 						popular: {
+							...state.popular,
 							error: action.error,
 							message: action.payload.message
 						}
@@ -46,6 +46,7 @@ export default {
 			{
 				return Object.assign({}, state, {
 					popular: {
+						...state.popular,
 						error: action.error,
 						message: action.payload.message
 					}
@@ -58,6 +59,7 @@ export default {
 				if (action.error) {
 					newState = Object.assign({}, state, {
 						lastweek: {
+							...state.lastweek,
 							error: action.error,
 							message: action.payload.message
 						}
@@ -83,6 +85,7 @@ export default {
 			{
 				return Object.assign({}, state, {
 					lastweek: {
+						...state.lastweek,
 						error: action.error,
 						message: action.payload.message
 					}
