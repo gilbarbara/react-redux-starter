@@ -1,12 +1,12 @@
-const initialState = {
+export const browserState = {
 	visible: false,
 	message: '',
-	status: '',
+	status: 'info',
 	withTimeout: true
 };
 
 export default {
-	browser: (state = initialState, action) => {
+	browser: (state = browserState, action) => {
 		switch (action.type) {
 			case 'SHOW_ALERT':
 			{
@@ -19,8 +19,8 @@ export default {
 			}
 			case 'HIDE_ALERT':
 			{
-				return Object.assign({}, initialState, {
-					status: action.status
+				return Object.assign({}, browserState, {
+					status: state.status
 				});
 			}
 			default:

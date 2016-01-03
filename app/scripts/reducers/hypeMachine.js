@@ -1,4 +1,4 @@
-const initialState = {
+export const hypeMachineState = {
 	popular: {
 		items: [],
 		page: 1,
@@ -12,77 +12,81 @@ const initialState = {
 };
 
 export default {
-	hypeMachine: (state = initialState, action) => {
+	hypeMachine: (state = hypeMachineState, action) => {
 		switch (action.type) {
 			case 'POPULAR_REQUEST':
 			{
-				let newState = Object.assign({}, state);
+				let newState = state;
 
 				if (action.error) {
-					newState.popular.error = action.error;
-					newState.popular.message = action.payload.message;
+					newState = Object.assign({}, state, {
+						popular: {
+							error: action.error,
+							message: action.payload.message
+						}
+					});
 				}
 
 				return newState;
 			}
 			case 'POPULAR_SUCCESS':
 			{
-				let newState = Object.assign({}, state);
-
-				newState.popular.items = [
-					...state.popular.items,
-					...action.payload
-				];
-				newState.popular.page = state.popular.page + 1;
-				newState.popular.ready = true;
-
-				return newState;
+				return Object.assign({}, state, {
+					popular: {
+						items: [
+							...state.popular.items,
+							...action.payload
+						],
+						page: state.popular.page + 1,
+						ready: true
+					}
+				});
 			}
 			case 'POPULAR_FAILURE':
 			{
-				let newState = Object.assign({}, state);
-
-				if (action.error) {
-					newState.popular.error = action.error;
-					newState.popular.message = action.payload.message;
-				}
-
-				return newState;
+				return Object.assign({}, state, {
+					popular: {
+						error: action.error,
+						message: action.payload.message
+					}
+				});
 			}
 			case 'LASTWEEK_REQUEST':
 			{
-				let newState = Object.assign({}, state);
+				let newState = state;
 
 				if (action.error) {
-					newState.lastweek.error = action.error;
-					newState.lastweek.message = action.payload.message;
+					newState = Object.assign({}, state, {
+						lastweek: {
+							error: action.error,
+							message: action.payload.message
+						}
+					});
 				}
 
 				return newState;
 			}
 			case 'LASTWEEK_SUCCESS':
 			{
-				let newState = Object.assign({}, state);
-
-				newState.lastweek.items = [
-					...state.lastweek.items,
-					...action.payload
-				];
-				newState.lastweek.page = state.lastweek.page + 1;
-				newState.lastweek.ready = true;
-
-				return newState;
+				return Object.assign({}, state, {
+					lastweek: {
+						items: [
+							...state.lastweek.items,
+							...action.payload
+						],
+						page: state.lastweek.page + 1,
+						ready: true
+					}
+				});
 			}
 			case 'LASTWEEK_FAILURE':
 			{
-				let newState = Object.assign({}, state);
-
-				if (action.error) {
-					newState.lastweek.error = action.error;
-					newState.lastweek.message = action.payload.message;
-				}
-
-				return newState;
+				return Object.assign({}, state, {
+					lastweek: {
+						error: action.error,
+						message: action.payload.message
+					}
+				});
 			}
 			default:
 			{
