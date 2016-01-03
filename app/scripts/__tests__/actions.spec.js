@@ -11,18 +11,6 @@ import { ActionTypes } from '../constants';
 const middlewares = [ thunk, apiMiddleware ];
 const createMockStore = configureMockStore(middlewares);
 
-//function createFakeActionsRequires (options) {
-//	let defaultRequires = {
-//		'../constants': require('../constants')
-//	};
-//
-//	return Object.assign(defaultRequires, options);
-//}
-//
-//const Actions = SandboxedModule.require('../actions', {
-//	requires: createFakeActionsRequires()
-//});
-
 describe('Actions', () => {
 	describe('goTo', () => {
 		it('should create an action to navigate with react-router > UPDATE_PATH', () => {
@@ -58,7 +46,6 @@ describe('Actions', () => {
 
 describe('Async Actions', () => {
 	afterEach(() => {
-		console.log('eee');
 		nock.cleanAll();
 	});
 
