@@ -18,7 +18,7 @@ class LastWeek extends React.Component {
 	shouldComponentUpdate = shouldComponentUpdate;
 
 	componentWillMount () {
-		this.setState(this.context.store.getState().HypeMachine.lastweek);
+		this.setState(this.context.store.getState().hypeMachine.lastweek);
 	}
 
 	componentDidMount () {
@@ -44,12 +44,12 @@ class LastWeek extends React.Component {
 		let state = this.context.store.getState(),
 			newState;
 
-		if (this.state.items.length !== state.HypeMachine.lastweek.items.length) {
-			newState = state.HypeMachine.lastweek;
+		if (this.state.items.length !== state.hypeMachine.lastweek.items.length) {
+			newState = state.hypeMachine.lastweek;
 		}
 
-		if (state.HypeMachine.lastweek.error && !this.state.error) {
-			newState = state.HypeMachine.lastweek;
+		if (state.hypeMachine.lastweek.error && !this.state.error) {
+			newState = state.hypeMachine.lastweek;
 		}
 
 		if (newState) {

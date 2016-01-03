@@ -61,7 +61,7 @@ export let fetchLastWeek = (query) => {
  * @returns {Object}
  */
 export let goTo = (destination, params, query) => {
-	return pushPath(destination);
+	return pushPath(destination + (params ? `/${params}` : '') + (query ? `?${query}` : ''));
 };
 
 /**
@@ -91,6 +91,7 @@ export let showAlert = (status, message, withTimeout = true) => {
 export let hideAlert = (status = 'info') => {
 	return {
 		type: ActionTypes.HIDE_ALERT,
-		status
+		status,
+		message: ''
 	};
 };

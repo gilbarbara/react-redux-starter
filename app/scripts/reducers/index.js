@@ -1,7 +1,7 @@
-import Browser from './Browser';
-import HypeMachine from './HypeMachine';
+import browser from './browser';
+import hypeMachine from './hypeMachine';
 
 export default {
-	...Browser,
-	...HypeMachine
+	...browser,
+	...hypeMachine
 };

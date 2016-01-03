@@ -18,7 +18,7 @@ class SystemNotifications extends React.Component {
 	shouldComponentUpdate = shouldComponentUpdate;
 
 	componentWillMount () {
-		this.setState(this.context.store.getState().Browser);
+		this.setState(this.context.store.getState().browser);
 	}
 
 	componentDidMount () {
@@ -43,8 +43,8 @@ class SystemNotifications extends React.Component {
 	handleStoreChange () {
 		let state = this.context.store.getState();
 
-		if (state.Browser.message !== this.state.message) {
-			this.setState(state.Browser);
+		if (state.browser.message !== this.state.message) {
+			this.setState(state.browser);
 		}
 	}
 

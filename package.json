@@ -49,6 +49,7 @@
     "envify": "^3.4.0",
     "eslint": "^1.10",
     "eslint-plugin-react": "^3.13",
+    "expect": "^1.13.4",
     "gulp": "^3.9",
     "gulp-autoprefixer": "^3.1",
     "gulp-cache": "^0.4",
@@ -75,11 +76,13 @@
     "livereactload": "^2.1",
     "merge-stream": "^1.0",
     "minami": "^1.1",
+    "nock": "^3.6.0",
     "react-proxy": "^1.1",
     "redux-api-middleware": "^1.0.0-beta3",
     "redux-devtools": "^3.0",
     "redux-devtools-dock-monitor": "^1.0.1",
     "redux-devtools-log-monitor": "^1.0.1",
+    "redux-mock-store": "0.0.4",
     "redux-thunk": "^1.0",
     "run-sequence": "^1.1",
     "sandboxed-module": "^2.0",
@@ -149,7 +152,8 @@
     "start": "gulp serve",
     "lint": "gulp lint",
     "build": "gulp build",
-    "test": "gulp mocha"
+    "test": "export NODE_ENV=test && ./node_modules/.bin/_mocha  --compilers js:babel-register $(find app/scripts/__tests__ -name *.spec.js)",
+    "test-watch": "export NODE_ENV=test && ./node_modules/.bin/_mocha --watch --compilers js:babel-register $(find app/scripts/__tests__ -name *.spec.js)"
   },
   "engines": {
     "node": ">=0.12.0"

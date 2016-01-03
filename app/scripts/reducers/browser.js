@@ -6,8 +6,7 @@ const initialState = {
 };
 
 export default {
-	Browser: (state = initialState, action) => {
-
+	browser: (state = initialState, action) => {
 		switch (action.type) {
 			case 'SHOW_ALERT':
 			{

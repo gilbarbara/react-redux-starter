@@ -12,7 +12,7 @@ const initialState = {
 };
 
 export default {
-	HypeMachine: (state = initialState, action) => {
+	hypeMachine: (state = initialState, action) => {
 		switch (action.type) {
 			case 'POPULAR_REQUEST':
 			{

@@ -18,12 +18,11 @@ class Popular extends React.Component {
 	shouldComponentUpdate = shouldComponentUpdate;
 
 	componentWillMount () {
-		this.setState(this.context.store.getState().HypeMachine.popular);
+		this.setState(this.context.store.getState().hypeMachine.popular);
 	}
 
 	componentDidMount () {
 		this.storeUnsubscribe = this.context.store.subscribe(this.handleStoreChange);
-
 		if (!this.state.error && this.state.page === 1) {
 			this.context.store.dispatch(fetchPopular());
 		}
@@ -44,12 +43,12 @@ class Popular extends React.Component {
 		let state = this.context.store.getState(),
 			newState;
 
-		if (this.state.items.length !== state.HypeMachine.popular.items.length) {
-			newState = state.HypeMachine.popular;
+		if (this.state.items.length !== state.hypeMachine.popular.items.length) {
+			newState = state.hypeMachine.popular;
 		}
 
-		if (state.HypeMachine.popular.error && !this.state.error) {
-			newState = state.HypeMachine.popular;
+		if (state.hypeMachine.popular.error && !this.state.error) {
+			newState = state.hypeMachine.popular;
 		}
 
 		if (newState) {

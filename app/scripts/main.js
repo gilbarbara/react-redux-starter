@@ -5,7 +5,6 @@ import { Router, browserHistory } from 'react-router';
 import { syncReduxAndRouter } from 'redux-simple-router';
 
 import configStore from './store';
-import rootReducer from './reducers';
 import routes from './routes';
 
 const store = configStore();
