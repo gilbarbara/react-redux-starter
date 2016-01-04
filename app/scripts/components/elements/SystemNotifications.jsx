@@ -73,8 +73,8 @@ class SystemNotifications extends React.Component {
 				<i className={classNames('fa', {
 					'fa-thumbs-up': STATE.status === 'success',
 					'fa-exclamation-circle': STATE.status === 'warning',
-					'info-circle': STATE.status === 'info',
-					'thumbs-down': STATE.status === 'error'
+					'fa-info-circle': STATE.status === 'info',
+					'fa-thumbs-down': STATE.status === 'error'
 				})} />
 
 				<div>{STATE.message}</div>

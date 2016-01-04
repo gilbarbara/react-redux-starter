@@ -50,14 +50,9 @@
 	"no-unused-vars": 1,
 	"one-var": 0,
 	"prefer-const": 1,
-	"space-before-function-paren": [
-	  1,
-	  {
-		"anonymous": "never",
-		"named": "always"
-	  }
-	],
+	"space-before-function-paren": [1, "always" ],
 	"space-in-parens": 1,
+	"spaced-comment": [1, "always", { "exceptions": ["-+"], "markers": ["eslint-disable"] }],
 	// JSDoc
 	"require-jsdoc/require-jsdoc": 2,
 	"jsdoc/check-param-names": 1,
@@ -73,10 +68,7 @@
 	"jsdoc/require-returns-type": 1,
 	// React
 	"jsx-quotes": 1,
-	"react/jsx-closing-bracket-location": [
-	  1,
-	  "after-props"
-	],
+	"react/jsx-closing-bracket-location": [1, "after-props"],
 	"react/jsx-indent-props": [1, "tab"],
 	"react/no-did-mount-set-state": 1,
 	"react/no-did-update-set-state": 1,

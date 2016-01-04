@@ -1,4 +1,4 @@
-/*eslint no-var:0, prefer-arrow-callback:0, object-shorthand:0 */
+/*eslint-disable no-var, func-names, indent, prefer-arrow-callback, object-shorthand,  require-jsdoc/require-jsdoc  */
 var gulp               = require('gulp'),
 	$                  = require('gulp-load-plugins')(),
 	babelRegister      = require('babel-register'),
@@ -8,7 +8,7 @@ var gulp               = require('gulp'),
 	del                = require('del'),
 	exec               = require('child_process').exec,
 	historyApiFallback = require('connect-history-api-fallback'),
-	//lrload                = require('livereactload'),
+	// lrload                = require('livereactload'),
 	merge              = require('merge-stream'),
 	path               = require('path'),
 	runSequence        = require('run-sequence'),
@@ -41,10 +41,10 @@ function watchifyTask (options) {
 		basedir: __dirname,
 		insertGlobals: options.watch,
 		cache: {}, // required for watchify
-		//debug: options.watch,
+		// debug: options.watch,
 		packageCache: {}, // required for watchify
 		fullPaths: options.watch,
-		//plugin: options.watch ? [lrload] : [],
+		// plugin: options.watch ? [lrload] : [],
 		extensions: ['.jsx']
 	});
 
@@ -276,7 +276,7 @@ gulp.task('serve', ['assets', 'scripts'], function () {
 
 gulp.task('build', ['clean'], function (cb) {
 	process.env.NODE_ENV = 'production';
-	runSequence('scripts:lint', 'assets', ['bundle', 'media', 'docs'], 'sizer', cb);
+	runSequence('scripts:lint', 'assets', ['bundle', 'media'], 'sizer', cb);
 });
 
 gulp.task('deploy', function (cb) {
