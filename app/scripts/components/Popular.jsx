@@ -6,7 +6,7 @@ import { fetchPopular, showAlert } from '../actions';
 import Loader from './elements/Loader';
 
 class Popular extends React.Component {
-	constructor (props) {
+	constructor(props) {
 		super(props);
 	}
 
@@ -16,29 +16,29 @@ class Popular extends React.Component {
 
 	shouldComponentUpdate = shouldComponentUpdate;
 
-	componentWillMount () {
+	componentWillMount() {
 		this.setState(this.context.store.getState().hypeMachine.popular);
 	}
 
-	componentDidMount () {
+	componentDidMount() {
 		this.storeUnsubscribe = this.context.store.subscribe(this.handleStoreChange);
 		if (!this.state.error && this.state.page === 1) {
 			this.context.store.dispatch(fetchPopular());
 		}
 	}
 
-	componentDidUpdate (prevProps, prevState) {
+	componentDidUpdate(prevProps, prevState) {
 		if (!prevState.error && this.state.error) {
 			this.context.store.dispatch(showAlert('error', this.state.message, true));
 		}
 	}
 
-	componentWillUnmount () {
+	componentWillUnmount() {
 		this.storeUnsubscribe();
 	}
 
 	@autobind
-	handleStoreChange () {
+	handleStoreChange() {
 		const state = this.context.store.getState();
 
 		if (this.state.items.length !== state.hypeMachine.popular.items.length || state.hypeMachine.popular.error && !this.state.error) {
@@ -46,18 +46,18 @@ class Popular extends React.Component {
 		}
 	}
 
-	loadMore () {
+	loadMore() {
 		this.context.store.dispatch(fetchPopular('page=' + this.state.page));
 	}
 
 	@autobind
-	onClickLoadMore (e) {
+	onClickLoadMore(e) {
 		e.preventDefault();
 
 		this.loadMore();
 	}
 
-	render () {
+	render() {
 		const STATE = this.state;
 		const output = {};
 
@@ -70,7 +70,9 @@ class Popular extends React.Component {
 						</div>
 						<div className="tracks__info">
 							<h2>
-								<a href={'http://hypem.com/track/' + d.itemid} target="_blank">{d.artist} - {d.title}</a>
+								<a
+									href={'http://hypem.com/track/' + d.itemid}
+									target="_blank">{d.artist} - {d.title}</a>
 							</h2>
 							{d.description}
 						</div>
@@ -81,7 +83,9 @@ class Popular extends React.Component {
 			if (!STATE.error) {
 				output.actions = (
 					<div className="app__actions">
-						<a href="#" className="load-more btn btn-primary btn-lg" onClick={this.onClickLoadMore}> Load More</a>
+						<a
+							href="#" className="load-more btn btn-primary btn-lg"
+							onClick={this.onClickLoadMore}> Load More</a>
 					</div>
 				);
 			}

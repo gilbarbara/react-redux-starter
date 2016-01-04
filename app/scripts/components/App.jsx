@@ -4,7 +4,7 @@ import Footer from './elements/Footer';
 import SystemNotifications from './elements/SystemNotifications';
 
 class App extends React.Component {
-	constructor (props) {
+	constructor(props) {
 		super(props);
 	}
 
@@ -12,7 +12,7 @@ class App extends React.Component {
 		app: React.PropTypes.object
 	};
 
-	getChildContext () {
+	getChildContext() {
 		return {
 			app: {
 				location: this.props.location
@@ -25,7 +25,7 @@ class App extends React.Component {
 		location: React.PropTypes.object.isRequired
 	};
 
-	render () {
+	render() {
 		return (
 			<div className="app">
 				<Header />

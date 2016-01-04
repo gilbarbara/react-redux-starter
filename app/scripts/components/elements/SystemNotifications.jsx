@@ -8,7 +8,7 @@ import { hideAlert } from '../../actions';
 let hideTimeout;
 
 class SystemNotifications extends React.Component {
-	constructor (props) {
+	constructor(props) {
 		super(props);
 	}
 
@@ -18,15 +18,15 @@ class SystemNotifications extends React.Component {
 
 	shouldComponentUpdate = shouldComponentUpdate;
 
-	componentWillMount () {
+	componentWillMount() {
 		this.setState(this.context.store.getState().browser);
 	}
 
-	componentDidMount () {
+	componentDidMount() {
 		this.storeUnsubscribe = this.context.store.subscribe(this.handleStoreChange);
 	}
 
-	componentDidUpdate () {
+	componentDidUpdate() {
 		if (this.state.visible && this.state.withTimeout) {
 			window.clearTimeout(hideTimeout);
 
@@ -36,12 +36,12 @@ class SystemNotifications extends React.Component {
 		}
 	}
 
-	componentWillUnmount () {
+	componentWillUnmount() {
 		this.storeUnsubscribe();
 	}
 
 	@autobind
-	handleStoreChange () {
+	handleStoreChange() {
 		const state = this.context.store.getState();
 
 		if (state.browser.message !== this.state.message) {
@@ -49,17 +49,17 @@ class SystemNotifications extends React.Component {
 		}
 	}
 
-	hideNotification () {
+	hideNotification() {
 		this.context.store.dispatch(hideAlert(this.state.status));
 	}
 
 	@autobind
-	onClick () {
+	onClick() {
 		window.clearTimeout(hideTimeout);
 		this.hideNotification();
 	}
 
-	render () {
+	render() {
 		const STATE = this.state;
 
 		/*		 state.visible = true;

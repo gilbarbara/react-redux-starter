@@ -2,13 +2,13 @@ import React from 'react';
 import shouldComponentUpdate from '../utils/PureRender';
 
 class NotFound extends React.Component {
-	constructor (props) {
+	constructor(props) {
 		super(props);
 	}
 
 	shouldComponentUpdate = shouldComponentUpdate;
 
-	render () {
+	render() {
 		return (
 			<div key="404" className="not-found">
 				<h1>404</h1>

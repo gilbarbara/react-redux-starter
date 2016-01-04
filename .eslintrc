@@ -47,10 +47,12 @@
 		}
 	  }
 	],
+	"no-trailing-spaces": 1,
 	"no-unused-vars": 1,
+	"object-shorthand": [1, "always"],
 	"one-var": 0,
 	"prefer-const": 1,
-	"space-before-function-paren": [1, "always" ],
+	"space-before-function-paren": [1, {"anonymous": "always", "named": "never"} ],
 	"space-in-parens": 1,
 	"spaced-comment": [1, "always", { "exceptions": ["-+"], "markers": ["eslint-disable"] }],
 	// JSDoc
@@ -62,16 +64,26 @@
 	"jsdoc/require-description-complete-sentence": 1,
 	"jsdoc/require-hyphen-before-description": 1,
 	"jsdoc/require-param": 1,
-	//"jsdoc/require-param-description": 1,
 	"jsdoc/require-param-type": 1,
-	//"jsdoc/require-returns-description": 1,
 	"jsdoc/require-returns-type": 1,
 	// React
 	"jsx-quotes": 1,
 	"react/jsx-closing-bracket-location": [1, "after-props"],
 	"react/jsx-indent-props": [1, "tab"],
+	"react/jsx-key": 1,
+	"react/jsx-max-props-per-line": [
+	  1,
+	  {
+		"maximum": 4
+	  }
+	],
 	"react/no-did-mount-set-state": 1,
 	"react/no-did-update-set-state": 1,
+	"react/jsx-no-duplicate-props": 1,
+	"react/jsx-pascal-case": 1,
+	"react/jsx-sort-prop-types": 1,
+	"react/no-direct-mutation-state": 1,
+	"react/prop-types": 2,
 	"react/sort-comp": [
 	  1,
 	  {

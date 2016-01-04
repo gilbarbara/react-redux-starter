@@ -7,7 +7,7 @@ import NPMPackage from '../../../../package.json';
 
 class Header extends React.Component {
 
-	constructor (props) {
+	constructor(props) {
 		super(props);
 	}
 
@@ -19,12 +19,12 @@ class Header extends React.Component {
 	shouldComponentUpdate = shouldComponentUpdate;
 
 	@autobind
-	onClickLink (e) {
+	onClickLink(e) {
 		e.preventDefault();
 		this.context.store.dispatch(goTo(e.currentTarget.dataset.destination));
 	}
 
-	render () {
+	render() {
 		return (
 			<header className="app__header">
 				<div className="app__container">

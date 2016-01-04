@@ -4,7 +4,7 @@ import config from '../config';
 import Loader from './elements/Loader';
 
 class Home extends React.Component {
-	constructor (props) {
+	constructor(props) {
 		super(props);
 
 		this.state = {
@@ -15,18 +15,18 @@ class Home extends React.Component {
 
 	shouldComponentUpdate = shouldComponentUpdate;
 
-	componentDidMount () {
+	componentDidMount() {
 		this.initialize();
 	}
 
-	initialize () {
+	initialize() {
 		this.setState({
 			ready: true,
 			items: config.items
 		});
 	}
 
-	render () {
+	render() {
 		let html,
 			items;
 

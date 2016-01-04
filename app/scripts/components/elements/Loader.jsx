@@ -2,13 +2,13 @@ import React from 'react';
 import shouldComponentUpdate from '../../utils/PureRender';
 
 class Loader extends React.Component {
-	constructor (props) {
+	constructor(props) {
 		super(props);
 	}
 
 	shouldComponentUpdate = shouldComponentUpdate;
 
-	render () {
+	render() {
 		return (
 			<div className="loader">
 				<svg className="loader__svg">
