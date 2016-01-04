@@ -4,11 +4,10 @@ import thunk from 'redux-thunk';
 import { apiMiddleware } from 'redux-api-middleware';
 import nock from 'nock';
 
-//import SandboxedModule from '../utils/SandboxedES2015';
 import * as Actions from '../actions';
 import { ActionTypes } from '../constants';
 
-const middlewares = [ thunk, apiMiddleware ];
+const middlewares = [thunk, apiMiddleware];
 const createMockStore = configureMockStore(middlewares);
 
 describe('Actions', () => {

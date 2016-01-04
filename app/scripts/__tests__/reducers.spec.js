@@ -1,5 +1,4 @@
 import expect from 'expect';
-import deepFreeze from 'deep-freeze';
 
 import reducers from '../reducers';
 import { browserState } from '../reducers/browser';
@@ -8,7 +7,6 @@ import * as Actions from '../actions';
 import { ActionTypes } from '../constants';
 
 describe('Reducers', () => {
-
 	context('browser', () => {
 		it(`should return the initial state`, () => {
 			expect(reducers.browser(undefined, {}))
@@ -60,7 +58,7 @@ describe('Reducers', () => {
 				type: ActionTypes.POPULAR_SUCCESS,
 				payload: [{ a: 1 }]
 			}))
-				.toEqual({ popular: { items: [ { a: 1 }], page: 2, ready: true } });
+				.toEqual({ popular: { items: [{ a: 1 }], page: 2, ready: true } });
 		});
 
 		it(`should handle ${ActionTypes.POPULAR_FAILURE}`, () => {
@@ -97,7 +95,7 @@ describe('Reducers', () => {
 				type: ActionTypes.LASTWEEK_SUCCESS,
 				payload: [{ a: 1 }]
 			}))
-				.toEqual({ lastweek: { items: [ { a: 1 } ], page: 2, ready: true } });
+				.toEqual({ lastweek: { items: [{ a: 1 }], page: 2, ready: true } });
 		});
 
 		it(`should handle ${ActionTypes.LASTWEEK_FAILURE}`, () => {
@@ -110,6 +108,5 @@ describe('Reducers', () => {
 			}))
 				.toEqual({ lastweek: { error: true, message: 'failed' } });
 		});
-
 	});
 });

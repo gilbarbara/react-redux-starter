@@ -1,5 +1,4 @@
 import React from 'react';
-import reactUpdate from 'react-addons-update';
 import { autobind } from 'core-decorators';
 import shouldComponentUpdate from '../utils/PureRender';
 
@@ -40,7 +39,7 @@ class Popular extends React.Component {
 
 	@autobind
 	handleStoreChange () {
-		let state = this.context.store.getState();
+		const state = this.context.store.getState();
 
 		if (this.state.items.length !== state.hypeMachine.popular.items.length || state.hypeMachine.popular.error && !this.state.error) {
 			this.setState(state.hypeMachine.popular);
@@ -60,7 +59,7 @@ class Popular extends React.Component {
 
 	render () {
 		const STATE = this.state;
-		let output = {};
+		const output = {};
 
 		if (STATE.ready) {
 			output.html = STATE.items.map((d, i) => {
@@ -70,8 +69,9 @@ class Popular extends React.Component {
 							<img src={d.thumb_url_large} />
 						</div>
 						<div className="tracks__info">
-							<h2><a href={'http://hypem.com/track/' + d.itemid}
-								   target="_blank">{d.artist} - {d.title}</a></h2>
+							<h2>
+								<a href={'http://hypem.com/track/' + d.itemid} target="_blank">{d.artist} - {d.title}</a>
+							</h2>
 							{d.description}
 						</div>
 					</div>
@@ -81,8 +81,7 @@ class Popular extends React.Component {
 			if (!STATE.error) {
 				output.actions = (
 					<div className="app__actions">
-						<a href="#" className="load-more btn btn-primary btn-lg"
-						   onClick={this.onClickLoadMore}> Load More</a>
+						<a href="#" className="load-more btn btn-primary btn-lg" onClick={this.onClickLoadMore}> Load More</a>
 					</div>
 				);
 			}

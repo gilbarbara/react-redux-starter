@@ -10,13 +10,14 @@ import { ActionTypes } from '../constants';
  */
 
 /**
- * Fetch Popular
+ * Fetch popular tracks.
+ *
  * @instance
- * @param {String} [query]
+ * @param {string} [query]
  *
  * @returns {Object}
  */
-export let fetchPopular = (query) => {
+export const fetchPopular = (query) => {
 	return {
 		[CALL_API]: {
 			endpoint: config.apiUrl + 'popular' + (query ? `?${query}` : ''),
@@ -31,13 +32,14 @@ export let fetchPopular = (query) => {
 };
 
 /**
- * Fetch LastWeek
+ * Fetch last week tracks.
+ *
  * @instance
- * @param {String} [query]
+ * @param {string} [query]
  *
  * @returns {Object}
  */
-export let fetchLastWeek = (query) => {
+export const fetchLastWeek = (query) => {
 	return {
 		[CALL_API]: {
 			endpoint: config.apiUrl + 'popular?mode=lastweek' + (query ? `&${query}` : ''),
@@ -52,28 +54,30 @@ export let fetchLastWeek = (query) => {
 };
 
 /**
- * Change route path
+ * Change route path.
+ *
  * @instance
- * @param {String} destination - Route's Name
- * @param {Object} [params] - Route's Params
- * @param {String} [query] - Route's Query
+ * @param {string} destination
+ * @param {Object} [params]
+ * @param {string} [query]
  *
  * @returns {Object}
  */
-export let goTo = (destination, params, query) => {
+export const goTo = (destination, params, query) => {
 	return pushPath(destination + (params ? `/${params}` : '') + (query ? `?${query}` : ''));
 };
 
 /**
- * Show a message
+ * Show a message.
+ *
  * @instance
- * @param {String} status - Message type: success, warning, error, info
- * @param {String} message
- * @param {Boolean} withTimeout - Should close after a while?
+ * @param {string} status - Message type: success, warning, error, info.
+ * @param {string} message
+ * @param {boolean} withTimeout - Should close after a while.
  *
  * @returns {Object}
  */
-export let showAlert = (status, message, withTimeout = true) => {
+export const showAlert = (status, message, withTimeout = true) => {
 	return {
 		type: ActionTypes.SHOW_ALERT,
 		status,
@@ -83,12 +87,14 @@ export let showAlert = (status, message, withTimeout = true) => {
 };
 
 /**
- * Hide message
+ * Hide message.
+ *
  * @instance
+ * @param {string} [status]
  *
  * @returns {Object}
  */
-export let hideAlert = (status = 'info') => {
+export const hideAlert = (status = 'info') => {
 	return {
 		type: ActionTypes.HIDE_ALERT,
 		status,

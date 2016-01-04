@@ -15,7 +15,6 @@ export default {
 	hypeMachine: (state = hypeMachineState, action) => {
 		switch (action.type) {
 			case 'POPULAR_REQUEST':
-			{
 				let newState = state;
 				if (action.error) {
 					newState = Object.assign({}, state, {
@@ -28,9 +27,7 @@ export default {
 				}
 
 				return newState;
-			}
 			case 'POPULAR_SUCCESS':
-			{
 				return Object.assign({}, state, {
 					popular: {
 						items: [
@@ -41,9 +38,7 @@ export default {
 						ready: true
 					}
 				});
-			}
 			case 'POPULAR_FAILURE':
-			{
 				return Object.assign({}, state, {
 					popular: {
 						...state.popular,
@@ -51,13 +46,11 @@ export default {
 						message: action.payload.message
 					}
 				});
-			}
 			case 'LASTWEEK_REQUEST':
-			{
-				let newState = state;
+				let lrState = state;
 
 				if (action.error) {
-					newState = Object.assign({}, state, {
+					lrState = Object.assign({}, state, {
 						lastweek: {
 							...state.lastweek,
 							error: action.error,
@@ -66,10 +59,8 @@ export default {
 					});
 				}
 
-				return newState;
-			}
+				return lrState;
 			case 'LASTWEEK_SUCCESS':
-			{
 				return Object.assign({}, state, {
 					lastweek: {
 						items: [
@@ -80,9 +71,7 @@ export default {
 						ready: true
 					}
 				});
-			}
 			case 'LASTWEEK_FAILURE':
-			{
 				return Object.assign({}, state, {
 					lastweek: {
 						...state.lastweek,
@@ -90,11 +79,8 @@ export default {
 						message: action.payload.message
 					}
 				});
-			}
 			default:
-			{
 				return state;
-			}
 		}
 	}
 };

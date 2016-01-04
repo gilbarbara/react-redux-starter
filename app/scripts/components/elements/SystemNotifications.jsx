@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import shouldComponentUpdate from '../../utils/PureRender';
 import { autobind } from 'core-decorators';
 
@@ -41,7 +42,7 @@ class SystemNotifications extends React.Component {
 
 	@autobind
 	handleStoreChange () {
-		let state = this.context.store.getState();
+		const state = this.context.store.getState();
 
 		if (state.browser.message !== this.state.message) {
 			this.setState(state.browser);
@@ -61,15 +62,20 @@ class SystemNotifications extends React.Component {
 	render () {
 		const STATE = this.state;
 
-/*		 state.visible = true;
+		/*		 state.visible = true;
 		 state.status = 'info';
 		 state.message = 'O seu resgate foi efetuado com sucesso';*/
 
-		let classes = 'system-notifications' + (STATE.visible ? ' active' : '') + (STATE.status ? ' ' + STATE.status : '');
+		const classes = 'system-notifications' + (STATE.visible ? ' active' : '') + (STATE.status ? ' ' + STATE.status : '');
 
 		return (
 			<div ref="systemNotification" className={classes} onClick={this.onClick}>
-				<i className={'fa fa-' + ( STATE.status === 'success' ? 'thumbs-up' : (STATE.status === 'warning' ? 'exclamation-circle' : (STATE.status === 'info' ? 'info-circle' : 'thumbs-down')))} />
+				<i className={classNames('fa', {
+					'fa-thumbs-up': STATE.status === 'success',
+					'fa-exclamation-circle': STATE.status === 'warning',
+					'info-circle': STATE.status === 'info',
+					'thumbs-down': STATE.status === 'error'
+				})} />
 
 				<div>{STATE.message}</div>
 			</div>

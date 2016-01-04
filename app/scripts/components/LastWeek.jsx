@@ -1,5 +1,4 @@
 import React from 'react';
-import reactUpdate from 'react-addons-update';
 import { autobind } from 'core-decorators';
 import shouldComponentUpdate from '../utils/PureRender';
 
@@ -41,19 +40,10 @@ class LastWeek extends React.Component {
 
 	@autobind
 	handleStoreChange () {
-		let state = this.context.store.getState(),
-			newState;
+		const state = this.context.store.getState();
 
-		if (this.state.items.length !== state.hypeMachine.lastweek.items.length) {
-			newState = state.hypeMachine.lastweek;
-		}
-
-		if (state.hypeMachine.lastweek.error && !this.state.error) {
-			newState = state.hypeMachine.lastweek;
-		}
-
-		if (newState) {
-			this.setState(newState);
+		if (this.state.items.length !== state.hypeMachine.lastweek.items.length || state.hypeMachine.lastweek.error && !this.state.error) {
+			this.setState(state.hypeMachine.lastweek);
 		}
 	}
 
@@ -70,7 +60,7 @@ class LastWeek extends React.Component {
 
 	render () {
 		const STATE = this.state;
-		let output = {};
+		const output = {};
 
 		if (STATE.ready) {
 			output.html = STATE.items.map((d, i) => {
@@ -80,8 +70,9 @@ class LastWeek extends React.Component {
 							<img src={d.thumb_url_large} />
 						</div>
 						<div className="tracks__info">
-							<h2><a href={'http://hypem.com/track/' + d.itemid}
-								   target="_blank">{d.artist} - {d.title}</a></h2>
+							<h2>
+								<a href={'http://hypem.com/track/' + d.itemid} target="_blank">{d.artist} - {d.title}</a>
+							</h2>
 							{d.description}
 						</div>
 					</div>
@@ -91,8 +82,7 @@ class LastWeek extends React.Component {
 			if (!STATE.error) {
 				output.actions = (
 					<div className="app__actions">
-						<a href="#" className="load-more btn btn-primary btn-lg"
-						   onClick={this.onClickLoadMore}> Load More</a>
+						<a href="#" className="load-more btn btn-primary btn-lg" onClick={this.onClickLoadMore}> Load More</a>
 					</div>
 				);
 			}

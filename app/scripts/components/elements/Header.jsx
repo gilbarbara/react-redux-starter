@@ -33,23 +33,19 @@ class Header extends React.Component {
 					<div className="menu clearfix">
 
 						<ul className="nav navbar-nav">
-							<li className={this.context.app.location.pathname === '/home' ? 'active' : ''}
-								onClick={this.onClickLink} data-destination="/home">
-								<a href="#"><span
-									className="fa fa-home" />Home
+							<li className={this.context.app.location.pathname === '/home' ? 'active' : ''}>
+								<a href="#" onClick={this.onClickLink} data-destination="/home">
+									<span className="fa fa-home" />Home
 								</a>
 							</li>
-							<li className={this.context.app.location.pathname === '/popular' ? 'active' : ''}
-								href="#" onClick={this.onClickLink} data-destination="/popular">
-								<a href="#">
-									<span
-										className="fa fa-fire" />Popular</a>
+							<li className={this.context.app.location.pathname === '/popular' ? 'active' : ''}>
+								<a href="#" onClick={this.onClickLink} data-destination="/popular">
+									<span className="fa fa-fire" />Popular</a>
 							</li>
-							<li className={this.context.app.location.pathname === '/lastweek' ? 'active' : ''}
-								href="#" onClick={this.onClickLink} data-destination="/lastweek">
-								<a href="#">
-									<span
-										className="fa fa-calendar" />Last Week</a>
+							<li className={this.context.app.location.pathname === '/lastweek' ? 'active' : ''}>
+								<a href="#" onClick={this.onClickLink} data-destination="/lastweek">
+									<span className="fa fa-calendar" />Last Week
+								</a>
 							</li>
 						</ul>
 					</div>

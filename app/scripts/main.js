@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	let showDevTools;
 
 	if (process.env.NODE_ENV !== 'production') {
-		let DevTools = require('./components/DevTools');
+		const DevTools = require('./components/DevTools');
 		showDevTools = <DevTools/>;
 	}
 

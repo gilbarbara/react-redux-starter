@@ -2,7 +2,7 @@ import shallowEqual from 'fbjs/lib/shallowEqual';
 
 /**
  * @module PureRender
- * @desc shouldComponentUpdate with context
+ * @description shouldComponentUpdate with context
  * @requires shallowEqual
  *
  * @param {Object} instance
@@ -10,7 +10,7 @@ import shallowEqual from 'fbjs/lib/shallowEqual';
  * @param {Object} nextState
  * @param {Object} nextContext
  *
- * @returns {Boolean}
+ * @returns {boolean}
  */
 export default (instance, nextProps, nextState, nextContext) => {
 	return !shallowEqual(instance.props, nextProps)

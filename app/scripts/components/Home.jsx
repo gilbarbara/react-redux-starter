@@ -16,6 +16,10 @@ class Home extends React.Component {
 	shouldComponentUpdate = shouldComponentUpdate;
 
 	componentDidMount () {
+		this.initialize();
+	}
+
+	initialize () {
 		this.setState({
 			ready: true,
 			items: config.items
@@ -27,7 +31,7 @@ class Home extends React.Component {
 			items;
 
 		items = this.state.items.map((item, i) => {
-			let key = Object.keys(item);
+			const key = Object.keys(item);
 			return (
 				<div key={i} className="col-xs-12 col-sm-6 col-md-4">
 					<div className="item">
