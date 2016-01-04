@@ -1,15 +1,8 @@
 {
-  "extends": "eslint:recommended",
+  "extends": "airbnb",
   "parser": "babel-eslint",
-  "ecmaFeatures": {
-	"modules": true,
-	"experimentalObjectRestSpread": true
-  },
   "env": {
-	"browser": true,
-	"es6": true,
-	"mocha": true,
-	"node": true
+	"mocha": true
   },
   "globals": {
 	"$": true,
@@ -18,79 +11,9 @@
   },
   "plugins": [
 	"jsdoc",
-	"react",
 	"require-jsdoc"
   ],
   "rules": {
-	// Possible Errors
-	"comma-dangle": 2,
-	"no-cond-assign": 0,
-	"no-console": 0,
-	"no-debugger": 2,
-	"no-dupe-args": 2,
-	"no-dupe-keys": 2,
-	"no-duplicate-case": 2,
-	"no-empty": 2,
-	"no-empty-character-class": 2,
-	"no-ex-assign": 2,
-	"no-extra-boolean-cast": 1,
-	"no-extra-semi": 1,
-	"no-inner-declarations": 1,
-	"no-invalid-regexp": 1,
-	"no-irregular-whitespace": 1,
-	"no-obj-calls": 2,
-	"no-regex-spaces": 2,
-	"no-sparse-arrays": 2,
-	"no-unreachable": 2,
-	"valid-jsdoc": [
-	  1,
-	  {
-		"prefer": {
-		  "return": "returns"
-		},
-		"requireParamDescription": false,
-		"requireReturn": false,
-		"requireReturnDescription": false
-	  }
-	],
-	"valid-typeof": 2,
-	// Best Practices
-	"block-scoped-var": 1,
-	"default-case": 1,
-	"dot-notation": 1,
-	"guard-for-in": 1,
-	"no-else-return": 1,
-	"no-floating-decimal": 2,
-	"no-implicit-coercion": [
-	  1,
-	  {
-		"boolean": true,
-		"number": false,
-		"string": true
-	  }
-	],
-	"no-invalid-this": 1,
-	"no-param-reassign": 0,
-	"no-redeclare": 1,
-	"no-self-compare": 2,
-	"no-throw-literal": 2,
-	"no-useless-concat": 1,
-	"no-void": 2,
-	"no-warning-comments": 0,
-	"radix": 2,
-	"vars-on-top": 0,
-	"wrap-iife": 2,
-	// Variables
-	"no-undef": 1,
-	"no-undefined": 0,
-	"no-unused-vars": [
-	  0,
-	  {
-		"vars": "all",
-		"args": "after-used"
-	  }
-	],
-	// Stylistic Issues
 	"brace-style": [
 	  1,
 	  "stroustrup",
@@ -98,99 +21,43 @@
 		"allowSingleLine": true
 	  }
 	],
-	"comma-style": [
+	"comma-dangle": 0,
+	"indent": [
 	  1,
-	  "last"
-	],
-	"consistent-this": [
-	  1,
-	  "self"
-	],
-	"lines-around-comment": [
-	  0,
+	  "tab",
 	  {
-		"beforeBlockComment": true,
-		"beforeLineComment": true
+		"VariableDeclarator": {
+		  "var": 1,
+		  "let": 1,
+		  "const": 2
+		},
+		"SwitchCase": 1
 	  }
 	],
-	"linebreak-style": [
-	  1,
-	  "unix"
-	],
-	"max-nested-callbacks": [
-	  2,
-	  4
-	],
-	"newline-after-var": 0,
-	"no-continue": 2,
-	"no-lonely-if": 1,
 	"no-mixed-spaces-and-tabs": [
 	  1,
 	  "smart-tabs"
 	],
-	"no-multiple-empty-lines": [
+	"no-multi-spaces": [
 	  1,
 	  {
-		"max": 1
+		"exceptions": {
+		  "VariableDeclarator": true,
+		  "Property": false
+		}
 	  }
 	],
-	"no-nested-ternary": 0,
-	"no-unneeded-ternary": 0,
-	"object-curly-spacing": [
-	  1,
-	  "always"
-	],
+	"no-unused-vars": 1,
 	"one-var": 0,
-	"padded-blocks": 0,
-	"quote-props": [
-	  1,
-	  "as-needed"
-	],
-	"quotes": [
-	  1,
-	  "single"
-	],
-	"space-after-keywords": 1,
-	"space-before-blocks": 1,
-	"space-before-function-paren": 1,
-	"space-before-keywords": 1,
-	// Node
-	"callback-return": [
-	  1,
-	  [
-		"callback",
-		"cb",
-		"next"
-	  ]
-	],
-	"handle-callback-err": 1,
-	"no-mixed-requires": 0,
-	//Es6
-	"arrow-parens": 0,
-	"arrow-spacing": [
+	"prefer-const": 1,
+	"space-before-function-paren": [
 	  1,
 	  {
-		"before": true,
-		"after": true
+		"anonymous": "never",
+		"named": "always"
 	  }
 	],
-	"constructor-super": 1,
-	"generator-star-spacing": [
-	  1,
-	  "after"
-	],
-	"no-class-assign": 2,
-	"no-const-assign": 2,
-	"no-this-before-super": 2,
-	"no-var": 1,
-	"object-shorthand": [
-	  1,
-	  "always"
-	],
-	"prefer-arrow-callback": 1,
-	"prefer-const": 0,
-	"prefer-spread": 1,
-	"require-yield": 1,
+	"space-in-parens": 1,
 	// JSDoc
 	"require-jsdoc/require-jsdoc": 2,
 	"jsdoc/check-param-names": 1,
@@ -206,44 +73,13 @@
 	"jsdoc/require-returns-type": 1,
 	// React
 	"jsx-quotes": 1,
-	"react/jsx-boolean-value": [
-	  0,
-	  "always"
-	],
 	"react/jsx-closing-bracket-location": [
 	  1,
 	  "after-props"
 	],
-	"react/jsx-curly-spacing": [
-	  1,
-	  "never"
-	],
-	"react/jsx-key": 1,
-	"react/jsx-max-props-per-line": [
-	  1,
-	  {
-		"maximum": 4
-	  }
-	],
-	"react/jsx-no-bind": 1,
-	"react/jsx-no-duplicate-props": 1,
-	"react/jsx-no-undef": 1,
-	"react/jsx-pascal-case": 1,
-	"react/jsx-sort-prop-types": 1,
-	"react/jsx-sort-props": 0,
-	"react/jsx-uses-react": 1,
-	"react/jsx-uses-vars": 1,
-	"react/no-deprecated": 1,
-	"react/no-did-mount-set-state": 0,
+	"react/jsx-indent-props": [1, "tab"],
+	"react/no-did-mount-set-state": 1,
 	"react/no-did-update-set-state": 1,
-	"react/no-direct-mutation-state": 1,
-	"react/no-is-mounted": 1,
-	"react/no-multi-comp": 1,
-	"react/no-unknown-property": 1,
-	"react/prefer-es6-class": 1,
-	"react/prop-types": 1,
-	"react/react-in-jsx-scope": 1,
-	"react/self-closing-comp": 1,
 	"react/sort-comp": [
 	  1,
 	  {
@@ -271,7 +107,6 @@
 		  ]
 		}
 	  }
-	],
-	"react/wrap-multilines": 1
+	]
   }
 }
