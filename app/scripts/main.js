@@ -1,14 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Router, browserHistory } from 'react-router';
+import { Router, useRouterHistory } from 'react-router';
+import { createHashHistory } from 'history';
 import { syncReduxAndRouter } from 'redux-simple-router';
 
 import configStore from './store';
 import routes from './routes';
 
+const hashHistory = useRouterHistory(createHashHistory)({ queryKey: false });
 const store = configStore();
-syncReduxAndRouter(browserHistory, store);
+syncReduxAndRouter(hashHistory, store);
 
 document.addEventListener('DOMContentLoaded', () => {
 	let showDevTools;
@@ -21,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
 	ReactDOM.render(
 		<Provider store={store}>
 			<div>
-				<Router history={browserHistory} routes={routes} />
+				<Router history={hashHistory} routes={routes} />
 				{showDevTools}
 			</div>
 		</Provider>,
