@@ -56,7 +56,7 @@
 	"space-in-parens": 1,
 	"spaced-comment": [1, "always", { "exceptions": ["-+"], "markers": ["eslint-disable"] }],
 	// JSDoc
-	"require-jsdoc/require-jsdoc": 2,
+	"require-jsdoc/require-jsdoc": 1,
 	"jsdoc/check-param-names": 1,
 	"jsdoc/check-tag-names": 1,
 	"jsdoc/check-types": 1,
