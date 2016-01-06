@@ -1,10 +1,22 @@
 .app__header {
-  @include jagged($brand-primary, 12, bottom, border);
   height: $header-height;
   padding: $grid-gutter-width 0;
   position: relative;
 
+  &:before {
+    background-image: linear-gradient(to right, lighten($brand-primary, 25), $brand-primary);
+    bottom: 0;
+    content: '';
+    height: 0.5rem;
+    left: 0;
+    position: absolute;
+    right: 0;
+  }
+
   h1 {
+    color: $brand-primary;
+    font-family: Bevan, serif;
+    font-size: 4rem;
     margin: 0;
   }
 

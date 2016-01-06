@@ -3,9 +3,10 @@
   color: lighten($brand-primary, 25%);
   font-size: 3rem;
   margin-bottom: $grid-gutter-width;
-  padding: 30px;
+  padding: 2.5rem;
 
   h3 {
+    line-height: 1;
     margin-bottom: 5px;
     margin-top: 0;
   }

@@ -1,7 +1,9 @@
 .tracks-app {
   h1 {
     color: $brand-primary;
-    margin: 0 0 30px;
+    font-family: Bevan, serif;
+    line-height: 4rem;
+    margin: 0 0 3rem;
     text-align: center;
   }
 }
@@ -10,6 +12,7 @@
   align-items: flex-start;
   display: inline-flex;
   flex-wrap: wrap;
+  justify-content: center;
   width: 100%;
 
   @include md {
@@ -22,6 +25,8 @@
 
   &__wrapper {
     margin-bottom: $grid-gutter-width;
+    min-height: 40vh;
+    position: relative;
   }
 
   &__image {
@@ -35,16 +40,17 @@
   }
 
   &__info {
-    padding: $grid-gutter-width / 2;
+    max-width: 100%;
+    padding: ($grid-gutter-width / 2) 0;
 
     @include sm {
       flex: 0 percentage(1 / 1.333333333);
-      padding: 0 $grid-gutter-width / 2;
+      padding: 0 ($grid-gutter-width / 2);
     }
 
     a {
-      @include truncate();
       display: block;
+      line-height: 2.6rem;
     }
   }
 }
