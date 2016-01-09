@@ -39,6 +39,7 @@ export function diffArrays(a, b) {
 /**
  * @function
  * @param {Object} obj
+ *
  * @returns {boolean}
  */
 export function isObject(obj) {
@@ -51,6 +52,7 @@ export function isObject(obj) {
  * @function
  * @param {Object} a
  * @param {Object} b
+ *
  * @returns {Object}
  */
 export function diffObjects(a, b) {

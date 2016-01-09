@@ -12,12 +12,12 @@ import { ActionTypes } from '../constants';
 /**
  * Fetch popular tracks.
  *
- * @instance
+ * @function
  * @param {string} [query]
  *
  * @returns {Object}
  */
-export const fetchPopular = (query) => {
+export function fetchPopular(query) {
 	return {
 		[CALL_API]: {
 			endpoint: config.apiUrl + 'popular' + (query ? `?${query}` : ''),
@@ -29,17 +29,17 @@ export const fetchPopular = (query) => {
 			]
 		}
 	};
-};
+}
 
 /**
  * Fetch last week tracks.
  *
- * @instance
+ * @function
  * @param {string} [query]
  *
  * @returns {Object}
  */
-export const fetchLastWeek = (query) => {
+export function fetchLastWeek(query) {
 	return {
 		[CALL_API]: {
 			endpoint: config.apiUrl + 'popular?mode=lastweek' + (query ? `&${query}` : ''),
@@ -51,53 +51,53 @@ export const fetchLastWeek = (query) => {
 			]
 		}
 	};
-};
+}
 
 /**
  * Change route path.
  *
- * @instance
+ * @function
  * @param {string} destination
  * @param {Object} [params]
  * @param {string} [query]
  *
  * @returns {Object}
  */
-export const goTo = (destination, params, query) => {
+export function goTo(destination:boolean, params, query) {
 	return pushPath(destination + (params ? `/${params}` : '') + (query ? `?${query}` : ''));
-};
+}
 
 /**
  * Show a message.
  *
- * @instance
+ * @function
  * @param {string} status - Message type: success, warning, error, info.
  * @param {string} message
  * @param {boolean} withTimeout - Should close after a while.
  *
  * @returns {Object}
  */
-export const showAlert = (status, message, withTimeout = true) => {
+export function showAlert(status, message, withTimeout = true) {
 	return {
 		type: ActionTypes.SHOW_ALERT,
 		status,
 		message,
 		withTimeout
 	};
-};
+}
 
 /**
  * Hide message.
  *
- * @instance
+ * @function
  * @param {string} [status]
  *
  * @returns {Object}
  */
-export const hideAlert = (status = 'info') => {
+export function hideAlert(status = 'info') {
 	return {
 		type: ActionTypes.HIDE_ALERT,
 		status,
 		message: ''
 	};
-};
+}
