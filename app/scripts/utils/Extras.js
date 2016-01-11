@@ -116,6 +116,12 @@ export function isEqual(a, b) {
  * @returns {string}
  */
 export function param(data) {
+	/**
+	 * @param {Object} obj
+	 * @param {Array} topLevel
+	 * @param {string} keyProp
+	 * @returns {string}
+     */
 	function stringify(obj, topLevel, keyProp) {
 		let string = '';
 
