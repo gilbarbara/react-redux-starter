@@ -113,7 +113,7 @@ gulp.task('scripts', function (cb) {
 gulp.task('scripts:lint', function () {
 	return gulp.src('app/scripts/**/*')
 		.pipe($.eslint({
-			plugins: ['react', 'jsdoc', 'require-jsdoc']
+			plugins: ['react', 'jsdoc']
 		}))
 		.pipe($.eslint.format())
 		.pipe($.eslint.failOnError());
@@ -200,7 +200,7 @@ gulp.task('assets', function (cb) {
 	runSequence('styles', 'scripts', ['modernizr', 'fonts'], cb);
 });
 
-gulp.task('mocha', function () {
+gulp.task('test', function () {
 	return gulp.src('app/scripts/**/__tests__/*.js', {
 			read: false
 		})

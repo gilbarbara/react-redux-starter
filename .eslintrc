@@ -10,8 +10,7 @@
 	"fetch": false
   },
   "plugins": [
-	"jsdoc",
-	"require-jsdoc"
+	"jsdoc"
   ],
   "rules": {
 	"brace-style": [
@@ -34,6 +33,7 @@
 		"SwitchCase": 1
 	  }
 	],
+	"max-len": 0,
 	"no-mixed-spaces-and-tabs": [
 	  1,
 	  "smart-tabs"
@@ -50,22 +50,32 @@
 	"no-trailing-spaces": 1,
 	"no-unused-vars": 1,
 	"object-shorthand": [1, "always"],
-	"one-var": 0,
+	"one-var": 1,
 	"prefer-const": 1,
+	"require-jsdoc": [1, {
+	  "require": {
+		"FunctionDeclaration": true,
+		"MethodDefinition": false,
+		"ClassDeclaration": false
+	  }
+	}],
 	"space-before-function-paren": [1, {"anonymous": "always", "named": "never"} ],
 	"space-in-parens": 1,
 	"spaced-comment": [1, "always", { "exceptions": ["-+"], "markers": ["eslint-disable"] }],
+	"valid-jsdoc": [1, {
+	  "prefer": {
+		"return": "returns"
+	  },
+	  "requireReturn": false,
+	  "requireParamDescription": false,
+	  "requireReturnDescription": false
+	}],
 	// JSDoc
-	"require-jsdoc/require-jsdoc": 1,
-	"jsdoc/check-param-names": 1,
 	"jsdoc/check-tag-names": 1,
 	"jsdoc/check-types": 1,
 	"jsdoc/newline-after-description": 1,
 	"jsdoc/require-description-complete-sentence": 1,
 	"jsdoc/require-hyphen-before-description": 1,
-	"jsdoc/require-param": 1,
-	"jsdoc/require-param-type": 1,
-	"jsdoc/require-returns-type": 1,
 	// React
 	"jsx-quotes": 1,
 	"react/jsx-closing-bracket-location": [1, "after-props"],
