@@ -33,9 +33,6 @@ class Header extends React.Component {
 					<div className="menu clearfix">
 
 						<ul className="nav navbar-nav">
-							<li className={this.context.app.location.pathname === '/home' ? 'active' : ''}>
-								<a href="#" onClick={this.onClickLink} data-destination="/home">
-									<span className="fa fa-home" />Home
 							<li className={this.context.app.location.pathname === '/artists' ? 'active' : ''}>
 								<a href="#" onClick={this.onClickLink} data-destination="/artists">
 									<span className="fa fa-music" />Artists
@@ -48,6 +45,11 @@ class Header extends React.Component {
 							<li className={this.context.app.location.pathname === '/lastweek' ? 'active' : ''}>
 								<a href="#" onClick={this.onClickLink} data-destination="/lastweek">
 									<span className="fa fa-calendar" />Last Week
+								</a>
+							</li>
+							<li className={this.context.app.location.pathname === '/about' ? 'active' : ''}>
+								<a href="#" onClick={this.onClickLink} data-destination="/about">
+									<span className="fa fa-info-circle" />About
 								</a>
 							</li>
 						</ul>

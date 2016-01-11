@@ -27,10 +27,7 @@ class Home extends React.Component {
 	}
 
 	render() {
-		let html,
-			items;
-
-		items = this.state.items.map((item, i) => {
+		const items = this.state.items.map((item, i) => {
 			const key = Object.keys(item);
 			return (
 				<div key={i} className="col-xs-12 col-sm-6 col-md-4">
@@ -41,6 +38,7 @@ class Home extends React.Component {
 				</div>
 			);
 		});
+		let html;
 
 		if (this.state.ready) {
 			html = (
