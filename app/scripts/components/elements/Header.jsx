@@ -36,6 +36,9 @@ class Header extends React.Component {
 							<li className={this.context.app.location.pathname === '/home' ? 'active' : ''}>
 								<a href="#" onClick={this.onClickLink} data-destination="/home">
 									<span className="fa fa-home" />Home
+							<li className={this.context.app.location.pathname === '/artists' ? 'active' : ''}>
+								<a href="#" onClick={this.onClickLink} data-destination="/artists">
+									<span className="fa fa-music" />Artists
 								</a>
 							</li>
 							<li className={this.context.app.location.pathname === '/popular' ? 'active' : ''}>

@@ -10,6 +10,28 @@ import { ActionTypes } from '../constants';
  */
 
 /**
+ * Fetch popular artists.
+ *
+ * @function
+ * @param {string} [query]
+ *
+ * @returns {Object}
+ */
+export function fetchArtists(query) {
+	return {
+		[CALL_API]: {
+			endpoint: config.apiUrl + 'artists' + (query ? `?${query}` : ''),
+			method: 'GET',
+			types: [
+				'ARTISTS_REQUEST',
+				'ARTISTS_SUCCESS',
+				'ARTISTS_FAILURE'
+			]
+		}
+	};
+}
+
+/**
  * Fetch popular tracks.
  *
  * @function
