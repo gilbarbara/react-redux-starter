@@ -56,7 +56,7 @@ class Header extends React.Component {
 					</div>
 				</div>
 				<a href="https://github.com/gilbarbara/react-redux" className="github-ribbon">
-					<img src="/media/github-fork.png" />
+					<img src="media/github-fork.png" />
 				</a>
 			</header>
 		);

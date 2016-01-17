@@ -1,4 +1,4 @@
-/*eslint-disable no-var, func-names, indent, prefer-arrow-callback, object-shorthand,  require-jsdoc/require-jsdoc  */
+/*eslint-disable no-var, one-var, func-names, indent, prefer-arrow-callback, object-shorthand,  require-jsdoc  */
 var gulp               = require('gulp'),
 	$                  = require('gulp-load-plugins')(),
 	babelRegister      = require('babel-register'),
@@ -34,7 +34,7 @@ var AUTOPREFIXER_BROWSERS = [
 	commitMessage;
 
 // Functions
-function watchifyTask (options) {
+function watchifyTask(options) {
 	var bundler, rebundle, tap, iteration = 0;
 	bundler = browserify({
 		entries: path.join(__dirname, '/app/scripts/main.js'),
@@ -241,7 +241,8 @@ gulp.task('gh-pages', ['get-commit'], function () {
 		.pipe(vinylPaths(del));
 
 	push = gulp.src([
-			'dist/**/*'
+			'dist/**/*',
+			'README.md'
 		])
 		.pipe($.ghPages({
 			branch: 'gh-pages',

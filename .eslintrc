@@ -25,11 +25,6 @@
 	  1,
 	  "tab",
 	  {
-		"VariableDeclarator": {
-		  "var": 1,
-		  "let": 1,
-		  "const": 2
-		},
 		"SwitchCase": 1
 	  }
 	],
@@ -47,11 +42,8 @@
 		}
 	  }
 	],
-	"no-trailing-spaces": 1,
 	"no-unused-vars": 1,
 	"object-shorthand": [1, "always"],
-	"one-var": 1,
-	"prefer-const": 1,
 	"require-jsdoc": [1, {
 	  "require": {
 		"FunctionDeclaration": true,
