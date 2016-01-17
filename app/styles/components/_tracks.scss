@@ -1,5 +1,4 @@
-.tracks-app,
-.artists-app {
+.tracks-app {
   h1 {
     color: $brand-primary;
     font-family: Bevan, serif;
@@ -9,8 +8,7 @@
   }
 }
 
-.tracks,
-.artists {
+.tracks {
   align-items: flex-start;
   display: inline-flex;
   flex-wrap: wrap;
@@ -55,8 +53,4 @@
       line-height: 2.6rem;
     }
   }
-}
-
-.artists h2 {
-  font-size: 3rem;
 }

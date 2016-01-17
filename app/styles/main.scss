@@ -22,7 +22,8 @@
 // *** Components
 @import 'components/app';
 @import 'components/home';
-@import 'components/layout';
+@import 'components/tracks';
+@import 'components/artists';
 
 .browsehappy {
   background: #ccc;
@@ -59,7 +60,6 @@ body {
     }
   }
 }
-
 
 @keyframes appear {
   0% {

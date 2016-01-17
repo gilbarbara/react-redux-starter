@@ -65,16 +65,20 @@ class Artists extends React.Component {
 		if (STATE.ready) {
 			output.html = STATE.items.map((d, i) => {
 				return (
-					<div key={i} className="artists">
+					<div key={i} className="artists__item col-xs-12 col-is-6 col-lg-4">
 						<div className="artists__image">
-							<img src={d.thumb_url_artist} />
+							<a
+								href={'http://hypem.com/artist/' + d.artist.replace(' ', '+')}
+								target="_blank">
+								<img src={d.thumb_url_artist} />
+							</a>
 						</div>
 						<div className="artists__info">
-							<h2>
-								<a
-									href={'http://hypem.com/artist/' + d.artist.replace(' ', '+')}
-									target="_blank">{d.artist}</a>
-							</h2>
+							<a
+								href={'http://hypem.com/artist/' + d.artist.replace(' ', '+')}
+								target="_blank">
+								{d.artist}
+							</a>
 							{d.description}
 						</div>
 					</div>
@@ -86,7 +90,8 @@ class Artists extends React.Component {
 					<div className="app__actions">
 						<a
 							href="#" className="load-more btn btn-primary btn-lg"
-							onClick={this.onClickLoadMore}> Load More</a>
+							onClick={this.onClickLoadMore}>Load More
+						</a>
 					</div>
 				);
 			}
@@ -99,7 +104,7 @@ class Artists extends React.Component {
 			<div key="Artists" className="artists-app">
 				<h1>Hype Machine - Artists</h1>
 
-				<div className="artists__wrapper">{output.html}</div>
+				<div className="artists row">{output.html}</div>
 				{output.actions}
 			</div>
 		);

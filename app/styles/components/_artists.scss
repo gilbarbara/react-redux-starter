@@ -1,0 +1,47 @@
+.artists-app {
+  h1 {
+    color: $brand-primary;
+    font-family: Bevan, serif;
+    line-height: 4rem;
+    margin: 0 0 3rem;
+    text-align: center;
+  }
+}
+
+.artists {
+  margin-bottom: $grid-gutter-width;
+  min-height: 40vh;
+  position: relative;
+
+  &__image {
+    padding-bottom: percentage(257 / 367);
+    position: relative;
+    width: 100%;
+
+    a {
+      display: block;
+      position: absolute;
+    }
+
+    img {
+      max-width: 100%;
+    }
+  }
+
+  &__info {
+    min-height: 8rem;
+    padding-top: ($grid-gutter-width / 3);
+
+    a {
+      display: block;
+      font-size: 2.4rem;
+      line-height: 2.6rem;
+      text-align: center;
+
+      @include md {
+        font-size: 3rem;
+      }
+    }
+  }
+}
+
