@@ -1,5 +1,5 @@
 import { CALL_API } from 'redux-api-middleware';
-import { pushPath } from 'redux-simple-router';
+import { routeActions } from 'redux-simple-router';
 
 import config from '../config';
 import { ActionTypes } from '../constants';
@@ -86,7 +86,7 @@ export function fetchLastWeek(query) {
  * @returns {Object}
  */
 export function goTo(destination:boolean, params, query) {
-	return pushPath(destination + (params ? `/${params}` : '') + (query ? `?${query}` : ''));
+	return routeActions.push(destination + (params ? `/${params}` : '') + (query ? `?${query}` : ''));
 }
 
 /**

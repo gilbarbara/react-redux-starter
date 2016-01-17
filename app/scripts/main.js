@@ -3,14 +3,12 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router, useRouterHistory } from 'react-router';
 import { createHashHistory } from 'history';
-import { syncReduxAndRouter } from 'redux-simple-router';
 
 import configStore from './store';
 import routes from './routes';
 
 const hashHistory = useRouterHistory(createHashHistory)({ queryKey: false });
-const store = configStore();
-syncReduxAndRouter(hashHistory, store);
+const store = configStore(hashHistory);
 
 document.addEventListener('DOMContentLoaded', () => {
 	let showDevTools;
