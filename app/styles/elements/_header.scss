@@ -36,7 +36,12 @@
 
         > a {
           color: $body-color;
+          font-size: 1.2rem;
           padding: 0 1.5rem 0 0;
+
+          @include ix {
+            font-size: 1.6rem;
+          }
 
           &:hover,
           &:focus {
@@ -55,5 +60,13 @@
     position: absolute;
     right: 0;
     top: 0;
+
+    img {
+      width: 120px;
+
+      @include md {
+        width: auto;
+      }
+    }
   }
 }
