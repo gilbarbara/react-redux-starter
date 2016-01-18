@@ -2,7 +2,7 @@
   "name": "react-redux",
   "title": "React Redux",
   "description": "Starter Kit for React with redux and router",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "Gil Barbara <gilbarbara@gmail.com>",
   "repository": {
     "type": "git",
@@ -22,10 +22,11 @@
     "react-addons-update": "^0.14",
     "react-dom": "^0.14",
     "react-redux": "^4.0",
-    "react-router": "^2.0.0-rc4",
+    "react-router": "^2.0.0-rc5",
     "redux": "^3.0",
-    "redux-logger": "^2.3",
+    "redux-api-middleware": "^1.0.0-beta3",
     "redux-simple-router": "^2.0",
+    "redux-thunk": "^1.0",
     "whatwg-fetch": "^0.10"
   },
   "devDependencies": {
@@ -81,13 +82,12 @@
     "minami": "^1.1",
     "nock": "^5.2",
     "react-proxy": "^1.1",
-    "redux-api-middleware": "^1.0.0-beta3",
     "redux-devtools": "^3.0",
     "redux-devtools-dock-monitor": "^1.0",
     "redux-devtools-log-monitor": "^1.0",
     "redux-diff-logger": "0.0.9",
+    "redux-logger": "^2.3",
     "redux-mock-store": "0.0.6",
-    "redux-thunk": "^1.0",
     "run-sequence": "^1.1",
     "sandboxed-module": "^2.0",
     "vinyl-buffer": "^1.0",
@@ -158,6 +158,7 @@
     "test-watch": "export NODE_ENV=test && ./node_modules/.bin/_mocha --watch --compilers js:babel-register $(find app/scripts/__tests__ -name *.spec.js)"
   },
   "engines": {
-    "node": ">=0.12.0"
+    "node": ">=4.2.0",
+    "npm": ">=3.0.0"
   }
 }

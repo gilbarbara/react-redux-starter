@@ -8,7 +8,7 @@ var gulp               = require('gulp'),
 	del                = require('del'),
 	exec               = require('child_process').exec,
 	historyApiFallback = require('connect-history-api-fallback'),
-	// lrload                = require('livereactload'),
+	lrload                = require('livereactload'),
 	merge              = require('merge-stream'),
 	path               = require('path'),
 	runSequence        = require('run-sequence'),
@@ -39,12 +39,12 @@ function watchifyTask(options) {
 	bundler = browserify({
 		entries: path.join(__dirname, '/app/scripts/main.js'),
 		basedir: __dirname,
-		insertGlobals: options.watch,
+		insertGlobals: false,
 		cache: {}, // required for watchify
 		// debug: options.watch,
 		packageCache: {}, // required for watchify
-		fullPaths: options.watch,
-		// plugin: options.watch ? [lrload] : [],
+		fullPaths: false,
+		plugin: options.watch ? [lrload] : [],
 		extensions: ['.jsx']
 	});
 
@@ -64,14 +64,12 @@ function watchifyTask(options) {
 
 		if (options.watch) {
 			stream.on('error', $.util.log);
-			$.util.log($.util.colors.cyan('watchifyTask'), $.util.colors.magenta(iteration));
 		}
 
 		stream
 			.pipe(source('app.js'))
 			.pipe(buffer())
 			.pipe(gulp.dest('.tmp/scripts'))
-			.pipe(browserSync.stream())
 			.pipe($.tap(tap));
 	};
 
