@@ -18,17 +18,17 @@ import { ActionTypes } from '../constants';
  * @returns {Object}
  */
 export function fetchArtists(query) {
-	return {
-		[CALL_API]: {
-			endpoint: config.apiUrl + 'artists' + (query ? `?${query}` : ''),
-			method: 'GET',
-			types: [
-				'ARTISTS_REQUEST',
-				'ARTISTS_SUCCESS',
-				'ARTISTS_FAILURE'
-			]
-		}
-	};
+  return {
+    [CALL_API]: {
+      endpoint: config.apiUrl + 'artists' + (query ? `?${query}` : ''),
+      method: 'GET',
+      types: [
+        'ARTISTS_REQUEST',
+        'ARTISTS_SUCCESS',
+        'ARTISTS_FAILURE'
+      ]
+    }
+  };
 }
 
 /**
@@ -40,17 +40,17 @@ export function fetchArtists(query) {
  * @returns {Object}
  */
 export function fetchPopular(query) {
-	return {
-		[CALL_API]: {
-			endpoint: config.apiUrl + 'popular' + (query ? `?${query}` : ''),
-			method: 'GET',
-			types: [
-				'POPULAR_REQUEST',
-				'POPULAR_SUCCESS',
-				'POPULAR_FAILURE'
-			]
-		}
-	};
+  return {
+    [CALL_API]: {
+      endpoint: config.apiUrl + 'popular' + (query ? `?${query}` : ''),
+      method: 'GET',
+      types: [
+        'POPULAR_REQUEST',
+        'POPULAR_SUCCESS',
+        'POPULAR_FAILURE'
+      ]
+    }
+  };
 }
 
 /**
@@ -62,17 +62,17 @@ export function fetchPopular(query) {
  * @returns {Object}
  */
 export function fetchLastWeek(query) {
-	return {
-		[CALL_API]: {
-			endpoint: config.apiUrl + 'popular?mode=lastweek' + (query ? `&${query}` : ''),
-			method: 'GET',
-			types: [
-				'LASTWEEK_REQUEST',
-				'LASTWEEK_SUCCESS',
-				'LASTWEEK_FAILURE'
-			]
-		}
-	};
+  return {
+    [CALL_API]: {
+      endpoint: config.apiUrl + 'popular?mode=lastweek' + (query ? `&${query}` : ''),
+      method: 'GET',
+      types: [
+        'LASTWEEK_REQUEST',
+        'LASTWEEK_SUCCESS',
+        'LASTWEEK_FAILURE'
+      ]
+    }
+  };
 }
 
 /**
@@ -86,7 +86,7 @@ export function fetchLastWeek(query) {
  * @returns {Object}
  */
 export function goTo(destination:boolean, params, query) {
-	return routeActions.push(destination + (params ? `/${params}` : '') + (query ? `?${query}` : ''));
+  return routeActions.push(destination + (params ? `/${params}` : '') + (query ? `?${query}` : ''));
 }
 
 /**
@@ -100,12 +100,12 @@ export function goTo(destination:boolean, params, query) {
  * @returns {Object}
  */
 export function showAlert(status, message, withTimeout = true) {
-	return {
-		type: ActionTypes.SHOW_ALERT,
-		status,
-		message,
-		withTimeout
-	};
+  return {
+    type: ActionTypes.SHOW_ALERT,
+    status,
+    message,
+    withTimeout
+  };
 }
 
 /**
@@ -117,9 +117,9 @@ export function showAlert(status, message, withTimeout = true) {
  * @returns {Object}
  */
 export function hideAlert(status = 'info') {
-	return {
-		type: ActionTypes.HIDE_ALERT,
-		status,
-		message: ''
-	};
+  return {
+    type: ActionTypes.HIDE_ALERT,
+    status,
+    message: ''
+  };
 }

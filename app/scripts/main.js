@@ -11,19 +11,19 @@ const hashHistory = useRouterHistory(createHashHistory)({ queryKey: false });
 const store = configStore(hashHistory);
 
 document.addEventListener('DOMContentLoaded', () => {
-	let showDevTools;
+  let showDevTools;
 
-	if (process.env.NODE_ENV !== 'production') {
-		const DevTools = require('./components/DevTools');
-		showDevTools = <DevTools/>;
-	}
+  if (process.env.NODE_ENV !== 'production') {
+    const DevTools = require('./components/DevTools');
+    showDevTools = <DevTools />;
+  }
 
-	ReactDOM.render(
-		<Provider store={store}>
-			<div>
-				<Router history={hashHistory} routes={routes} />
-				{showDevTools}
-			</div>
-		</Provider>,
-		document.getElementById('react'));
+  ReactDOM.render(
+    <Provider store={store}>
+      <div>
+        <Router history={hashHistory} routes={routes} />
+        {showDevTools}
+      </div>
+    </Provider>,
+    document.getElementById('react'));
 });

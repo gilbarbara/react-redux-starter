@@ -5,11 +5,11 @@ import { apiMiddleware } from 'redux-api-middleware';
 import rootReducer from '../reducers';
 
 const reducer = combineReducers(Object.assign({}, rootReducer, {
-	routing: routeReducer
+  routing: routeReducer
 }));
 
 export default (history, initialState) => {
-	const createStoreWithMiddleware = applyMiddleware(thunk, syncHistory(history), apiMiddleware)(createStore);
+  const createStoreWithMiddleware = applyMiddleware(thunk, syncHistory(history), apiMiddleware)(createStore);
 
-	return createStoreWithMiddleware(reducer, initialState);
+  return createStoreWithMiddleware(reducer, initialState);
 };

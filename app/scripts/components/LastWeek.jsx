@@ -6,104 +6,108 @@ import { fetchLastWeek, showAlert } from '../actions';
 import Loader from './elements/Loader';
 
 class LastWeek extends React.Component {
-	constructor(props) {
-		super(props);
-	}
+  constructor(props) {
+    super(props);
+  }
 
-	static contextTypes = {
-		store: React.PropTypes.object
-	};
+  static contextTypes = {
+    store: React.PropTypes.object
+  };
 
-	shouldComponentUpdate = shouldComponentUpdate;
+  shouldComponentUpdate = shouldComponentUpdate;
 
-	componentWillMount() {
-		this.setState(this.context.store.getState().hypeMachine.lastweek);
-	}
+  componentWillMount() {
+    this.setState(this.context.store.getState().hypeMachine.lastweek);
+  }
 
-	componentDidMount() {
-		this.storeUnsubscribe = this.context.store.subscribe(this.handleStoreChange);
+  componentDidMount() {
+    this.storeUnsubscribe = this.context.store.subscribe(this.handleStoreChange);
 
-		if (!this.state.error && this.state.page === 1) {
-			this.context.store.dispatch(fetchLastWeek());
-		}
-	}
+    if (!this.state.error && this.state.page === 1) {
+      this.context.store.dispatch(fetchLastWeek());
+    }
+  }
 
-	componentDidUpdate(prevProps, prevState) {
-		if (!prevState.error && this.state.error) {
-			this.context.store.dispatch(showAlert('error', this.state.message, true));
-		}
-	}
+  componentDidUpdate(prevProps, prevState) {
+    if (!prevState.error && this.state.error) {
+      this.context.store.dispatch(showAlert('error', this.state.message, true));
+    }
+  }
 
-	componentWillUnmount() {
-		this.storeUnsubscribe();
-	}
+  componentWillUnmount() {
+    this.storeUnsubscribe();
+  }
 
-	@autobind
-	handleStoreChange() {
-		const state = this.context.store.getState();
+  @autobind
+  handleStoreChange() {
+    const state = this.context.store.getState();
 
-		if (this.state.items.length !== state.hypeMachine.lastweek.items.length || state.hypeMachine.lastweek.error && !this.state.error) {
-			this.setState(state.hypeMachine.lastweek);
-		}
-	}
+    if (this.state.items.length !== state.hypeMachine.lastweek.items.length || state.hypeMachine.lastweek.error && !this.state.error) {
+      this.setState(state.hypeMachine.lastweek);
+    }
+  }
 
-	loadMore() {
-		this.context.store.dispatch(fetchLastWeek('page=' + this.state.page));
-	}
+  loadMore() {
+    this.context.store.dispatch(fetchLastWeek('page=' + this.state.page));
+  }
 
-	@autobind
-	onClickLoadMore(e) {
-		e.preventDefault();
+  @autobind
+  onClickLoadMore(e) {
+    e.preventDefault();
 
-		this.loadMore();
-	}
+    this.loadMore();
+  }
 
-	render() {
-		const STATE = this.state;
-		const output = {};
+  render() {
+    const STATE = this.state;
+    const output = {};
 
-		if (STATE.ready) {
-			output.html = STATE.items.map((d, i) => {
-				return (
-					<div key={i} className="tracks">
-						<div className="tracks__image">
-							<img src={d.thumb_url_large} />
-						</div>
-						<div className="tracks__info">
-							<h2>
-								<a
-									href={'http://hypem.com/track/' + d.itemid}
-									target="_blank">{d.artist} - {d.title}</a>
-							</h2>
-							{d.description}
-						</div>
-					</div>
-				);
-			});
+    if (STATE.ready) {
+      output.html = STATE.items.map((d, i) => {
+        return (
+          <div key={i} className="tracks">
+            <div className="tracks__image">
+              <img src={d.thumb_url_large} />
+            </div>
+            <div className="tracks__info">
+              <h2>
+                <a
+                  href={'http://hypem.com/track/' + d.itemid}
+                  target="_blank">
+                  {d.artist} - {d.title}
+                </a>
+              </h2>
+              {d.description}
+            </div>
+          </div>
+        );
+      });
 
-			if (!STATE.error) {
-				output.actions = (
-					<div className="app__actions">
-						<a
-							href="#" className="load-more btn btn-primary btn-lg"
-							onClick={this.onClickLoadMore}> Load More</a>
-					</div>
-				);
-			}
-		}
-		else {
-			output.html = <Loader />;
-		}
+      if (!STATE.error) {
+        output.actions = (
+          <div className="app__actions">
+            <a
+              href="#" className="load-more btn btn-primary btn-lg"
+              onClick={this.onClickLoadMore}>
+              Load More
+            </a>
+          </div>
+        );
+      }
+    }
+    else {
+      output.html = <Loader />;
+    }
 
-		return (
-			<div key="Tracks" className="tracks-app">
-				<h1>Hype Machine - Last Week</h1>
+    return (
+      <div key="Tracks" className="tracks-app">
+        <h1>Hype Machine - Last Week</h1>
 
-				<div className="tracks__wrapper">{output.html}</div>
-				{output.actions}
-			</div>
-		);
-	}
+        <div className="tracks__wrapper">{output.html}</div>
+        {output.actions}
+      </div>
+    );
+  }
 }
 
 export default LastWeek;
