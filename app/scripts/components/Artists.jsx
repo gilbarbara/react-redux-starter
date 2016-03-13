@@ -1,54 +1,33 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { autobind } from 'core-decorators';
 import shouldComponentUpdate from '../utils/PureRender';
 
 import { fetchArtists, showAlert } from '../actions';
 import Loader from './elements/Loader';
 
-class Artists extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  static contextTypes = {
-    store: React.PropTypes.object
+export class Artists extends React.Component {
+  static propTypes = {
+    data: React.PropTypes.object.isRequired,
+    dispatch: React.PropTypes.func.isRequired
   };
 
   shouldComponentUpdate = shouldComponentUpdate;
 
-  componentWillMount() {
-    this.setState(this.context.store.getState().hypeMachine.artists);
-  }
-
   componentDidMount() {
-    this.storeUnsubscribe = this.context.store.subscribe(this.handleStoreChange);
-    if (!this.state.error && this.state.count === 0) {
-      this.context.store.dispatch(fetchArtists());
+    if (!this.props.data.error && this.props.data.count === 0) {
+      this.props.dispatch(fetchArtists());
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (!prevState.error && this.state.error) {
-      this.context.store.dispatch(showAlert('error', this.state.message, true));
-    }
-  }
-
-  componentWillUnmount() {
-    this.storeUnsubscribe();
-  }
-
-  @autobind
-  handleStoreChange() {
-    const state = this.context.store.getState();
-
-    if (this.state.items.length !== state.hypeMachine.artists.items.length
-      || state.hypeMachine.artists.error && !this.state.error) {
-      this.setState(state.hypeMachine.artists);
+  componentDidUpdate(prevProps) {
+    if (!prevProps.data.error && this.props.data.error) {
+      this.props.dispatch(showAlert('error', this.props.data.message, true));
     }
   }
 
   loadMore() {
-    this.context.store.dispatch(fetchArtists('count=' + (this.state.count + 10)));
+    this.props.dispatch(fetchArtists(`count=${(this.props.data.count + 10)}`));
   }
 
   @autobind
@@ -59,23 +38,23 @@ class Artists extends React.Component {
   }
 
   render() {
-    const STATE = this.state;
+    const data = this.props.data;
     const output = {};
 
-    if (STATE.ready) {
-      output.html = STATE.items.map((d, i) => {
+    if (data.ready) {
+      output.html = data.items.map((d, i) => {
         return (
           <div key={i} className="artists__item col-xs-12 col-is-6 col-lg-4">
             <div className="artists__image">
               <a
-                href={'http://hypem.com/artist/' + d.artist.replace(' ', '+')}
+                href={`http://hypem.com/artist/${d.artist.replace(' ', '+')}`}
                 target="_blank">
                 <img src={d.thumb_url_artist} />
               </a>
             </div>
             <div className="artists__info">
               <a
-                href={'http://hypem.com/artist/' + d.artist.replace(' ', '+')}
+                href={`http://hypem.com/artist/${d.artist.replace(' ', '+')}`}
                 target="_blank">
                 {d.artist}
               </a>
@@ -85,7 +64,7 @@ class Artists extends React.Component {
         );
       });
 
-      if (!STATE.error && STATE.count < 50) {
+      if (!data.error && data.count < 50) {
         output.actions = (
           <div className="app__actions">
             <a
@@ -110,5 +89,8 @@ class Artists extends React.Component {
     );
   }
 }
+function mapStateToProps(state) {
+  return { data: state.artists };
+}
 
-export default Artists;
+export default connect(mapStateToProps)(Artists);

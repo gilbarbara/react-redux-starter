@@ -1,18 +1,15 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { autobind } from 'core-decorators';
 import shouldComponentUpdate from '../../utils/PureRender';
 
 import { goTo } from '../../actions';
 import NPMPackage from '../../../../package.json';
 
-class Header extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  static contextTypes = {
-    app: React.PropTypes.object,
-    store: React.PropTypes.object
+export class Header extends React.Component {
+  static propTypes = {
+    dispatch: React.PropTypes.func.isRequired,
+    location: React.PropTypes.object.isRequired
   };
 
   shouldComponentUpdate = shouldComponentUpdate;
@@ -20,7 +17,7 @@ class Header extends React.Component {
   @autobind
   onClickLink(e) {
     e.preventDefault();
-    this.context.store.dispatch(goTo(e.currentTarget.dataset.destination));
+    this.props.dispatch(goTo(e.currentTarget.dataset.destination));
   }
 
   render() {
@@ -32,22 +29,22 @@ class Header extends React.Component {
           <div className="menu clearfix">
 
             <ul className="nav navbar-nav">
-              <li className={this.context.app.location.pathname === '/artists' ? 'active' : ''}>
+              <li className={this.props.location.pathname === '/artists' ? 'active' : ''}>
                 <a href="#" onClick={this.onClickLink} data-destination="/artists">
                   <span className="fa fa-music" />Artists
                 </a>
               </li>
-              <li className={this.context.app.location.pathname === '/popular' ? 'active' : ''}>
+              <li className={this.props.location.pathname === '/popular' ? 'active' : ''}>
                 <a href="#" onClick={this.onClickLink} data-destination="/popular">
                   <span className="fa fa-fire" />Popular
                 </a>
               </li>
-              <li className={this.context.app.location.pathname === '/lastweek' ? 'active' : ''}>
+              <li className={this.props.location.pathname === '/lastweek' ? 'active' : ''}>
                 <a href="#" onClick={this.onClickLink} data-destination="/lastweek">
                   <span className="fa fa-calendar" />Last Week
                 </a>
               </li>
-              <li className={this.context.app.location.pathname === '/about' ? 'active' : ''}>
+              <li className={this.props.location.pathname === '/about' ? 'active' : ''}>
                 <a href="#" onClick={this.onClickLink} data-destination="/about">
                   <span className="fa fa-info-circle" />About
                 </a>
@@ -61,7 +58,10 @@ class Header extends React.Component {
       </header>
     );
   }
-
 }
 
-export default Header;
+function mapStateToProps() {
+  return { };
+}
+
+export default connect(mapStateToProps)(Header);

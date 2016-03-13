@@ -1,32 +1,22 @@
 import React from 'react';
-import shouldComponentUpdate from '../../utils/PureRender';
+import { connect } from 'react-redux';
 import { autobind } from 'core-decorators';
+import shouldComponentUpdate from '../../utils/PureRender';
 
 import { hideAlert } from '../../actions';
 
 let hideTimeout;
 
 class SystemNotifications extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  static contextTypes = {
-    store: React.PropTypes.object
+  static propTypes = {
+    data: React.PropTypes.object.isRequired,
+    dispatch: React.PropTypes.func.isRequired
   };
 
   shouldComponentUpdate = shouldComponentUpdate;
 
-  componentWillMount() {
-    this.setState(this.context.store.getState().browser);
-  }
-
-  componentDidMount() {
-    this.storeUnsubscribe = this.context.store.subscribe(this.handleStoreChange);
-  }
-
   componentDidUpdate() {
-    if (this.state.visible && this.state.withTimeout) {
+    if (this.props.data.visible && this.props.data.withTimeout) {
       window.clearTimeout(hideTimeout);
 
       hideTimeout = setTimeout(() => {
@@ -39,17 +29,8 @@ class SystemNotifications extends React.Component {
     this.storeUnsubscribe();
   }
 
-  @autobind
-  handleStoreChange() {
-    const state = this.context.store.getState();
-
-    if (state.browser.message !== this.state.message) {
-      this.setState(state.browser);
-    }
-  }
-
   hideNotification() {
-    this.context.store.dispatch(hideAlert(this.state.status));
+    this.props.dispatch(hideAlert(this.props.data.status));
   }
 
   @autobind
@@ -59,13 +40,13 @@ class SystemNotifications extends React.Component {
   }
 
   render() {
-    const STATE = this.state;
+    const data = this.props.data;
 
     /*		 state.visible = true;
      state.status = 'info';
      state.message = 'O seu resgate foi efetuado com sucesso';*/
 
-    const classes = 'system-notifications' + (STATE.visible ? ' active' : '') + (STATE.status ? ' ' + STATE.status : '');
+    const classes = `system-notifications${(data.visible ? ' active' : '')}${(data.status ? ` ${data.status}` : '')}`;
     const iconClass = {
       sucess: 'fa-thumbs-up',
       warning: 'fa-exclamation-circle',
@@ -75,12 +56,16 @@ class SystemNotifications extends React.Component {
 
     return (
       <div ref="systemNotification" className={classes} onClick={this.onClick}>
-        <i className={'fa ' + iconClass} />
+        <i className={`fa ${iconClass}`} />
 
-        <div>{STATE.message}</div>
+        <div>{data.message}</div>
       </div>
     );
   }
 }
 
-export default SystemNotifications;
+function mapStateToProps(state) {
+  return { data: state.browser };
+}
+
+export default connect(mapStateToProps)(SystemNotifications);

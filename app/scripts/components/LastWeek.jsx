@@ -1,54 +1,33 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { autobind } from 'core-decorators';
 import shouldComponentUpdate from '../utils/PureRender';
 
 import { fetchLastWeek, showAlert } from '../actions';
 import Loader from './elements/Loader';
 
-class LastWeek extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  static contextTypes = {
-    store: React.PropTypes.object
+export class LastWeek extends React.Component {
+  static propTypes = {
+    data: React.PropTypes.object.isRequired,
+    dispatch: React.PropTypes.func.isRequired
   };
 
   shouldComponentUpdate = shouldComponentUpdate;
 
-  componentWillMount() {
-    this.setState(this.context.store.getState().hypeMachine.lastweek);
-  }
-
   componentDidMount() {
-    this.storeUnsubscribe = this.context.store.subscribe(this.handleStoreChange);
-
-    if (!this.state.error && this.state.page === 1) {
-      this.context.store.dispatch(fetchLastWeek());
+    if (!this.props.data.error && this.props.data.page === 1) {
+      this.props.dispatch(fetchLastWeek());
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (!prevState.error && this.state.error) {
-      this.context.store.dispatch(showAlert('error', this.state.message, true));
-    }
-  }
-
-  componentWillUnmount() {
-    this.storeUnsubscribe();
-  }
-
-  @autobind
-  handleStoreChange() {
-    const state = this.context.store.getState();
-
-    if (this.state.items.length !== state.hypeMachine.lastweek.items.length || state.hypeMachine.lastweek.error && !this.state.error) {
-      this.setState(state.hypeMachine.lastweek);
+  componentDidUpdate(prevProps) {
+    if (!prevProps.data.error && this.props.data.error) {
+      this.props.dispatch(showAlert('error', this.props.data.message, true));
     }
   }
 
   loadMore() {
-    this.context.store.dispatch(fetchLastWeek('page=' + this.state.page));
+    this.props.dispatch(fetchLastWeek(`page=${this.state.page}`));
   }
 
   @autobind
@@ -59,12 +38,12 @@ class LastWeek extends React.Component {
   }
 
   render() {
-    const STATE = this.state;
+    const data = this.props.data;
     const output = {};
 
-    if (STATE.ready) {
-      output.html = STATE.items.map((d, i) => {
-        return (
+    if (data.ready) {
+      output.html = data.items.map((d, i) =>
+        (
           <div key={i} className="tracks">
             <div className="tracks__image">
               <img src={d.thumb_url_large} />
@@ -72,7 +51,7 @@ class LastWeek extends React.Component {
             <div className="tracks__info">
               <h2>
                 <a
-                  href={'http://hypem.com/track/' + d.itemid}
+                  href={`http://hypem.com/track/${d.itemid}`}
                   target="_blank">
                   {d.artist} - {d.title}
                 </a>
@@ -80,10 +59,10 @@ class LastWeek extends React.Component {
               {d.description}
             </div>
           </div>
-        );
-      });
+        )
+      );
 
-      if (!STATE.error) {
+      if (!data.error) {
         output.actions = (
           <div className="app__actions">
             <a
@@ -110,4 +89,8 @@ class LastWeek extends React.Component {
   }
 }
 
-export default LastWeek;
+function mapStateToProps(state) {
+  return { data: state.lastweek };
+}
+
+export default connect(mapStateToProps)(LastWeek);

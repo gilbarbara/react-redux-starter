@@ -2,11 +2,6 @@ import React from 'react';
 import shouldComponentUpdate from '../../utils/PureRender';
 
 class Footer extends React.Component {
-
-  constructor(props) {
-    super(props);
-  }
-
   shouldComponentUpdate = shouldComponentUpdate;
 
   render() {

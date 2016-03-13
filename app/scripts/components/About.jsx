@@ -1,30 +1,18 @@
 import React from 'react';
 import shouldComponentUpdate from '../utils/PureRender';
 import config from '../config';
-import Loader from './elements/Loader';
 
-class Home extends React.Component {
+class About extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      ready: false,
-      items: []
+      ready: true,
+      items: config.items
     };
   }
 
   shouldComponentUpdate = shouldComponentUpdate;
-
-  componentDidMount() {
-    this.initialize();
-  }
-
-  initialize() {
-    this.setState({
-      ready: true,
-      items: config.items
-    });
-  }
 
   render() {
     const items = this.state.items.map((item, i) => {
@@ -38,20 +26,13 @@ class Home extends React.Component {
         </div>
       );
     });
-    let html;
 
-    if (this.state.ready) {
-      html = (
-        <div className="row">{items}</div>
-      );
-    }
-    else {
-      html = (<Loader />);
-    }
     return (
-      <div key="Home" className="home">{html}</div>
+      <div key="About" className="home">
+        <div className="row">{items}</div>
+      </div>
     );
   }
 }
 
-export default Home;
+export default About;

@@ -2,10 +2,6 @@ import React from 'react';
 import shouldComponentUpdate from '../../utils/PureRender';
 
 class Loader extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   shouldComponentUpdate = shouldComponentUpdate;
 
   render() {
