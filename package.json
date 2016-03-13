@@ -2,7 +2,7 @@
   "name": "react-redux-starter",
   "title": "React Redux Starter",
   "description": "Starter Kit for React with redux and router",
-  "version": "0.2.0",
+  "version": "0.2.5",
   "author": "Gil Barbara <gilbarbara@gmail.com>",
   "repository": {
     "type": "git",
