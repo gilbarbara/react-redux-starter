@@ -1,19 +1,21 @@
-export const hypeMachineState = {
-  artists: {
-    items: [],
-    count: 0,
-    ready: false
-  },
-  popular: {
-    items: [],
-    page: 1,
-    ready: false
-  },
-  lastweek: {
-    items: [],
-    page: 1,
-    ready: false
-  }
+export const artistsState = {
+  items: [],
+  count: 0,
+  ready: false,
+  running: false
+};
+export const popularState = {
+  items: [],
+  page: 1,
+  ready: false,
+  running: false
+};
+
+export const lastweekState = {
+  items: [],
+  page: 1,
+  ready: false,
+  running: false
 };
 
 /**
@@ -27,109 +29,103 @@ function printMessage(payload) {
 }
 
 export default {
-  hypeMachine: (state = hypeMachineState, action) => {
-    switch (action.type) {
-      case 'ARTISTS_REQUEST':
-        let artistsState = state;
+  artists: (state = artistsState, action) => {
+    if (action.type === 'ARTISTS_REQUEST') {
+      const thisState = { running: true };
 
-        if (action.error) {
-          artistsState = Object.assign({}, state, {
-            artists: {
-              ...state.artists,
-              error: action.error,
-              message: printMessage(action.payload)
-            }
-          });
-        }
+      if (action.error) {
+        thisState.error = action.error;
+        thisState.message = printMessage(action.payload);
+      }
 
-        return artistsState;
-      case 'ARTISTS_SUCCESS':
-        return Object.assign({}, state, {
-          artists: {
-            items: [
-              ...state.artists.items,
-              ...action.payload.slice(state.artists.count)
-            ],
-            count: state.artists.count + 10,
-            ready: true
-          }
-        });
-      case 'ARTISTS_FAILURE':
-        return Object.assign({}, state, {
-          artists: {
-            ...state.artists,
-            error: action.error,
-            message: action.payload.message
-          }
-        });
-      case 'POPULAR_REQUEST':
-        let popularState = state;
-
-        if (action.error) {
-          popularState = Object.assign({}, state, {
-            popular: {
-              ...state.popular,
-              error: action.error,
-              message: printMessage(action.payload)
-            }
-          });
-        }
-
-        return popularState;
-      case 'POPULAR_SUCCESS':
-        return Object.assign({}, state, {
-          popular: {
-            items: [
-              ...state.popular.items,
-              ...action.payload
-            ],
-            page: state.popular.page + 1,
-            ready: true
-          }
-        });
-      case 'POPULAR_FAILURE':
-        return Object.assign({}, state, {
-          popular: {
-            ...state.popular,
-            error: action.error,
-            message: action.payload.message
-          }
-        });
-      case 'LASTWEEK_REQUEST':
-        let lrState = state;
-
-        if (action.error) {
-          lrState = Object.assign({}, state, {
-            lastweek: {
-              ...state.lastweek,
-              error: action.error,
-              message: printMessage(action.payload)
-            }
-          });
-        }
-
-        return lrState;
-      case 'LASTWEEK_SUCCESS':
-        return Object.assign({}, state, {
-          lastweek: {
-            items: [
-              ...state.lastweek.items,
-              ...action.payload
-            ],
-            page: state.lastweek.page + 1,
-            ready: true
-          }
-        });
-      case 'LASTWEEK_FAILURE':
-        return Object.assign({}, state, {
-          lastweek: {
-            ...state.lastweek,
-            error: action.error,
-            message: action.payload.message
-          }
-        });
-      default:
-        return state;
+      return Object.assign({}, state, thisState);
     }
+    else if (action.type === 'ARTISTS_SUCCESS') {
+      return Object.assign({}, state, {
+        items: [
+          ...state.items,
+          ...action.payload.slice(state.count)
+        ],
+        count: state.count + 10,
+        running: false,
+        ready: true
+      });
+    }
+    else if (action.type === 'ARTISTS_FAILURE') {
+      return Object.assign({}, state, {
+        items: state.items,
+        error: action.error,
+        message: action.payload.message,
+        running: false
+      });
+    }
+
+    return state;
+  },
+  popular: (state = popularState, action) => {
+    if (action.type === 'POPULAR_REQUEST') {
+      const thisState = { running: true };
+
+      if (action.error) {
+        thisState.error = action.error;
+        thisState.message = printMessage(action.payload);
+      }
+
+      return Object.assign({}, state, thisState);
+    }
+    else if (action.type === 'POPULAR_SUCCESS') {
+      return Object.assign({}, state, {
+        items: [
+          ...state.items,
+          ...action.payload
+        ],
+        page: state.page + 1,
+        ready: true,
+        running: false
+      });
+    }
+    else if (action.type === 'POPULAR_FAILURE') {
+      return Object.assign({}, state, {
+        items: state.items,
+        error: action.error,
+        message: action.payload.message,
+        running: false
+      });
+    }
+
+    return state;
+  },
+  lastweek: (state = lastweekState, action) => {
+    if (action.type === 'LASTWEEK_REQUEST') {
+      const thisState = { running: true };
+
+      if (action.error) {
+        thisState.error = action.error;
+        thisState.message = printMessage(action.payload);
+      }
+
+      return Object.assign({}, state, thisState);
+    }
+    else if (action.type === 'LASTWEEK_SUCCESS') {
+      return Object.assign({}, state, {
+        items: [
+          ...state.items,
+          ...action.payload
+        ],
+        page: state.page + 1,
+        ready: true,
+        running: false
+      });
+    }
+    else if (action.type === 'LASTWEEK_FAILURE') {
+      return Object.assign({}, state, {
+        items: state.items,
+        error: action.error,
+        message: action.payload.message,
+        running: false
+      });
+    }
+
+    return state;
   }
 };
