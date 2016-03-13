@@ -1,5 +1,5 @@
 import { CALL_API } from 'redux-api-middleware';
-import { routeActions } from 'redux-simple-router';
+import { routerActions } from 'react-router-redux';
 
 import config from '../config';
 import { ActionTypes } from '../constants';
@@ -20,7 +20,7 @@ import { ActionTypes } from '../constants';
 export function fetchArtists(query) {
   return {
     [CALL_API]: {
-      endpoint: config.apiUrl + 'artists' + (query ? `?${query}` : ''),
+      endpoint: `${config.apiUrl}artists${(query ? `?${query}` : '')}`,
       method: 'GET',
       types: [
         'ARTISTS_REQUEST',
@@ -42,7 +42,7 @@ export function fetchArtists(query) {
 export function fetchPopular(query) {
   return {
     [CALL_API]: {
-      endpoint: config.apiUrl + 'popular' + (query ? `?${query}` : ''),
+      endpoint: `${config.apiUrl}popular${(query ? `?${query}` : '')}`,
       method: 'GET',
       types: [
         'POPULAR_REQUEST',
@@ -64,7 +64,7 @@ export function fetchPopular(query) {
 export function fetchLastWeek(query) {
   return {
     [CALL_API]: {
-      endpoint: config.apiUrl + 'popular?mode=lastweek' + (query ? `&${query}` : ''),
+      endpoint: `${config.apiUrl}popular?mode=lastweek${(query ? `&${query}` : '')}`,
       method: 'GET',
       types: [
         'LASTWEEK_REQUEST',
@@ -79,14 +79,12 @@ export function fetchLastWeek(query) {
  * Change route path.
  *
  * @function
- * @param {string} destination
- * @param {Object} [params]
- * @param {string} [query]
+ * @param {string} pathname
  *
  * @returns {Object}
  */
-export function goTo(destination:boolean, params, query) {
-  return routeActions.push(destination + (params ? `/${params}` : '') + (query ? `?${query}` : ''));
+export function goTo(pathname) {
+  return routerActions.push(pathname);
 }
 
 /**

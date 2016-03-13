@@ -1,15 +1,16 @@
 import { applyMiddleware, createStore, combineReducers } from 'redux';
-import { syncHistory, routeReducer } from 'redux-simple-router';
 import thunk from 'redux-thunk';
 import { apiMiddleware } from 'redux-api-middleware';
+import { browserHistory } from 'react-router';
+import { routerReducer, routerMiddleware } from 'react-router-redux';
 import rootReducer from '../reducers';
 
 const reducer = combineReducers(Object.assign({}, rootReducer, {
-  routing: routeReducer
+  routing: routerReducer
 }));
 
-export default (history, initialState) => {
-  const createStoreWithMiddleware = applyMiddleware(thunk, syncHistory(history), apiMiddleware)(createStore);
+export default (initialState) => {
+  const createStoreWithMiddleware = applyMiddleware(thunk, routerMiddleware(browserHistory), apiMiddleware)(createStore);
 
   return createStoreWithMiddleware(reducer, initialState);
 };
