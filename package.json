@@ -1,14 +1,14 @@
 {
-  "name": "react-redux",
-  "title": "React Redux",
+  "name": "react-redux-starter",
+  "title": "React Redux Starter",
   "description": "Starter Kit for React with redux and router",
   "version": "0.2.0",
   "author": "Gil Barbara <gilbarbara@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/gilbarbara/react-redux"
+    "url": "https://github.com/gilbarbara/react-redux-starter"
   },
-  "bugs": "https://github.com/gilbarbara/react-redux/issues",
+  "bugs": "https://github.com/gilbarbara/react-redux-starter/issues",
   "license": "MIT",
   "dependencies": {
     "classlist-polyfill": "^1.0",
