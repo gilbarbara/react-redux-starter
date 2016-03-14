@@ -72,7 +72,7 @@ describe('Reducers', () => {
         .toEqual({ error: true, message: 'failed', items: [], running: false });
     });
   });
-  
+
   context('artists', () => {
     it('should return the initial state', () => {
       expect(reducers.artists(undefined, {}))

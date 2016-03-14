@@ -8,8 +8,7 @@
     "$": true,
     "Modernizr": false,
     "fetch": false,
-    "ga": false,
-    "Vozes": true
+    "ga": false
   },
   "plugins": [
     "jsdoc"

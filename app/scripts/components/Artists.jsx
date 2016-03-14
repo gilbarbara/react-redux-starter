@@ -42,8 +42,8 @@ export class Artists extends React.Component {
     const output = {};
 
     if (data.ready) {
-      output.html = data.items.map((d, i) => {
-        return (
+      output.html = data.items.map((d, i) =>
+        (
           <div key={i} className="artists__item col-xs-12 col-is-6 col-lg-4">
             <div className="artists__image">
               <a
@@ -61,8 +61,8 @@ export class Artists extends React.Component {
               {d.description}
             </div>
           </div>
-        );
-      });
+        )
+      );
 
       if (!data.error && data.count < 50) {
         output.actions = (

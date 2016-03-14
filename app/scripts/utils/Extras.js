@@ -134,7 +134,7 @@ export function param(data) {
           string += key;
         }
         else {
-          string += '[' + key + ']';
+          string += `[${key}]`;
         }
 
         if (obj[key] instanceof Array) {
@@ -144,7 +144,7 @@ export function param(data) {
           string += stringify(obj[key], topLevel);
         }
         else {
-          string += '=' + obj[key];
+          string += `=${obj[key]}`;
           string += '&';
         }
       }

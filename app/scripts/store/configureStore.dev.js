@@ -12,9 +12,7 @@ const reducer = combineReducers(Object.assign({}, rootReducer, {
   routing: routerReducer
 }));
 
-const logger = createLogger({
-  predicate: (getState, action) => true
-});
+const logger = createLogger();
 
 export default (initialState = {}) => {
   const createStoreWithMiddleware = compose(
