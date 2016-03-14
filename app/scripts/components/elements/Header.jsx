@@ -17,10 +17,13 @@ export class Header extends React.Component {
   @autobind
   onClickLink(e) {
     e.preventDefault();
-    this.props.dispatch(goTo(e.currentTarget.dataset.destination));
+    const dest = location.host === 'gilbarbara.github.io' ? '/react-redux-starter' : '';
+    this.props.dispatch(goTo(dest + e.currentTarget.dataset.destination));
   }
 
   render() {
+    const props = this.props;
+
     return (
       <header className="app__header">
         <div className="app__container">
@@ -29,22 +32,22 @@ export class Header extends React.Component {
           <div className="menu clearfix">
 
             <ul className="nav navbar-nav">
-              <li className={this.props.location.pathname === '/artists' ? 'active' : ''}>
+              <li className={props.location.pathname.indexOf('/artists') > -1 ? 'active' : ''}>
                 <a href="#" onClick={this.onClickLink} data-destination="/artists">
                   <span className="fa fa-music" />Artists
                 </a>
               </li>
-              <li className={this.props.location.pathname === '/popular' ? 'active' : ''}>
+              <li className={props.location.pathname.indexOf('/popular') > -1 ? 'active' : ''}>
                 <a href="#" onClick={this.onClickLink} data-destination="/popular">
                   <span className="fa fa-fire" />Popular
                 </a>
               </li>
-              <li className={this.props.location.pathname === '/lastweek' ? 'active' : ''}>
+              <li className={props.location.pathname.indexOf('/lastweek') > -1 ? 'active' : ''}>
                 <a href="#" onClick={this.onClickLink} data-destination="/lastweek">
                   <span className="fa fa-calendar" />Last Week
                 </a>
               </li>
-              <li className={this.props.location.pathname === '/about' ? 'active' : ''}>
+              <li className={props.location.pathname.indexOf('/about') > -1 ? 'active' : ''}>
                 <a href="#" onClick={this.onClickLink} data-destination="/about">
                   <span className="fa fa-info-circle" />About
                 </a>
@@ -61,7 +64,7 @@ export class Header extends React.Component {
 }
 
 function mapStateToProps() {
-  return { };
+  return {};
 }
 
 export default connect(mapStateToProps)(Header);
