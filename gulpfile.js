@@ -124,6 +124,7 @@ gulp.task('modernizr', function(cb) {
 
 gulp.task('bundle', function() {
   var copy,
+      media,
       fonts,
       optimize;
 
@@ -134,6 +135,17 @@ gulp.task('bundle', function() {
     .pipe(gulp.dest('dist'))
     .pipe($.size({
       title: 'optimize'
+    }));
+
+  media = gulp.src('app/media/**/*')
+    .pipe($.cache($.imagemin({
+      verbose: true,
+      progressive: true,
+      interlaced: true
+    })))
+    .pipe(gulp.dest('dist/media'))
+    .pipe($.size({
+      title: 'Media'
     }));
 
   fonts = gulp.src('.tmp/styles/fonts/**/*')
@@ -152,20 +164,7 @@ gulp.task('bundle', function() {
       title: 'copy'
     }));
 
-  return merge(optimize, fonts, copy);
-});
-
-gulp.task('media', function() {
-  return gulp.src('app/media/**/*')
-    .pipe($.cache($.imagemin({
-      verbose: true,
-      progressive: true,
-      interlaced: true
-    })))
-    .pipe(gulp.dest('dist/media'))
-    .pipe($.size({
-      title: 'Media'
-    }));
+  return merge(optimize, media, fonts, copy);
 });
 
 gulp.task('fonts', function() {
@@ -275,7 +274,7 @@ gulp.task('serve', ['assets', 'scripts'], function() {
 
 gulp.task('build', ['clean'], function(cb) {
   process.env.NODE_ENV = 'production';
-  runSequence('scripts:lint', 'assets', ['bundle', 'media'], 'sizer', cb);
+  runSequence('scripts:lint', 'assets', 'bundle', 'sizer', cb);
 });
 
 gulp.task('deploy', function(cb) {
