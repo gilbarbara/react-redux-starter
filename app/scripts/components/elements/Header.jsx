@@ -28,9 +28,7 @@ export class Header extends React.Component {
       <header className="app__header">
         <div className="app__container">
           <h1>{NPMPackage.title}</h1>
-
           <div className="menu clearfix">
-
             <ul className="nav navbar-nav">
               <li className={props.location.pathname.indexOf('/artists') > -1 ? 'active' : ''}>
                 <a href="#" onClick={this.onClickLink} data-destination="/artists">
@@ -56,7 +54,7 @@ export class Header extends React.Component {
           </div>
         </div>
         <a href="https://github.com/gilbarbara/react-redux" className="github-ribbon">
-          <img src="media/github-fork.png" />
+          <img src={require('../../../media/github-fork.png')} alt="Github Fork" />
         </a>
       </header>
     );

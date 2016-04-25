@@ -26,6 +26,7 @@ export class Popular extends React.Component {
     }
   }
 
+  @autobind
   loadMore() {
     this.props.dispatch(fetchPopular(`page=${this.props.data.page}`));
   }
@@ -43,23 +44,21 @@ export class Popular extends React.Component {
 
     if (data.ready) {
       output.html = data.items.map((d, i) =>
-        (
-          <div key={i} className="tracks">
-            <div className="tracks__image">
-              <img src={d.thumb_url_large} />
-            </div>
-            <div className="tracks__info">
-              <h2>
-                <a
-                  href={`http://hypem.com/track/${d.itemid}`}
-                  target="_blank">
-                  {d.artist} - {d.title}
-                </a>
-              </h2>
-              {d.description}
-            </div>
+        (<div key={i} className="tracks">
+          <div className="tracks__image">
+            <img src={d.thumb_url_large} alt={d.artist} />
           </div>
-        )
+          <div className="tracks__info">
+            <h2>
+              <a
+                href={`http://hypem.com/track/${d.itemid}`}
+                target="_blank">
+                {d.artist} - {d.title}
+              </a>
+            </h2>
+            {d.description}
+          </div>
+        </div>)
       );
 
       if (!data.error) {

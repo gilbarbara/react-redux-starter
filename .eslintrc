@@ -1,3 +1,4 @@
+
 {
   "extends": "airbnb",
   "parser": "babel-eslint",
@@ -7,17 +8,27 @@
   "globals": {
     "$": true,
     "Modernizr": false,
-    "fetch": false,
-    "ga": false
+    "fetch": false
   },
   "plugins": [
     "jsdoc"
   ],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "moduleDirectory": [
+          "node_modules",
+          "bower_components"
+        ]
+      }
+    }
+  },
   "rules": {
     "arrow-body-style": [
       1,
       "as-needed"
     ],
+    "block-spacing": 1,
     "brace-style": [
       1,
       "stroustrup",
@@ -28,6 +39,7 @@
     "camelcase": 0,
     "comma-dangle": 0,
     "dot-notation": 1,
+    "global-require": 0,
     "indent": [
       1,
       2,
@@ -43,7 +55,12 @@
       }
     ],
     "no-case-declarations": 1,
-    "no-confusing-arrow": 1,
+    "no-confusing-arrow": [
+      1,
+      {
+        "allowParens": true
+      }
+    ],
     "no-mixed-spaces-and-tabs": [
       1,
       "smart-tabs"
@@ -64,7 +81,14 @@
         "props": false
       }
     ],
+    "no-restricted-syntax": [
+      2,
+      "DebuggerStatement",
+      "LabeledStatement",
+      "WithStatement"
+    ],
     "no-trailing-spaces": 1,
+    "no-underscore-dangle": 0,
     "no-unused-vars": 1,
     "object-shorthand": [
       1,
@@ -124,11 +148,20 @@
     "jsdoc/newline-after-description": 1,
     "jsdoc/require-description-complete-sentence": 0,
     "jsdoc/require-hyphen-before-param-description": 1,
+    "import/no-unresolved": 1,
     // React
     "jsx-quotes": 1,
     "react/jsx-closing-bracket-location": [
       1,
       "after-props"
+    ],
+    "react/jsx-first-prop-new-line": [
+      1,
+      "multiline"
+    ],
+    "react/jsx-indent": [
+      1,
+      2
     ],
     "react/jsx-indent-props": [
       1,

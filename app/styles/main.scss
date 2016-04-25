@@ -5,7 +5,7 @@
 @import 'base/variables';
 
 // *** Libs
-@import 'fontawesome/scss/font-awesome';
+//@import 'fontawesome/scss/font-awesome';
 @import 'sass-mediaqueries/media-queries';
 
 // *** Base
@@ -34,8 +34,8 @@
 
 html {
   font-size: 62.5%;
-  height: 100%;
   -webkit-font-smoothing: antialiased;
+  height: 100%;
 }
 
 body {

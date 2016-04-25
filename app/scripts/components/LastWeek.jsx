@@ -26,6 +26,7 @@ export class LastWeek extends React.Component {
     }
   }
 
+  @autobind
   loadMore() {
     this.props.dispatch(fetchLastWeek(`page=${this.state.page}`));
   }

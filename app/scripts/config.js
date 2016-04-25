@@ -8,6 +8,6 @@ export default {
     { 'react-redux': NPMPackage.dependencies['react-redux'].replace(/~|\^/, '') },
     { 'react-router': NPMPackage.dependencies['react-router'].replace(/~|\^/, '') },
     { babel: NPMPackage.devDependencies['babel-core'].replace(/~|\^/, '') },
-    { browserify: NPMPackage.devDependencies.browserify.replace(/~|\^/, '') }
+    { webpack: NPMPackage.devDependencies.webpack.replace(/~|\^/, '') }
   ]
 };
