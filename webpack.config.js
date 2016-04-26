@@ -1,4 +1,4 @@
-/*eslint-disable no-var, one-var, func-names, indent, prefer-arrow-callback, object-shorthand, no-console, newline-per-chained-call, one-var-declaration-per-line, vars-on-top */
+/*eslint-disable no-var, one-var, func-names, indent, prefer-arrow-callback, object-shorthand, no-console, newline-per-chained-call, one-var-declaration-per-line, prefer-template, vars-on-top */
 var path              = require('path'),
     autoprefixer      = require('autoprefixer'),
     webpack           = require('webpack'),
@@ -11,11 +11,10 @@ var path              = require('path'),
 var env = process.env.NODE_ENV;
 
 var outputFile = '[name].js';
-var outputDir = path.join(__dirname, 'build');
-var cssLoaders = ['css', 'postcss?pack=custom', 'sass'];
+var outputDir = path.resolve(__dirname);
+var cssLoaders = 'css!postcss?pack=custom!sass';
 
 var plugins = [
-  new CleanPlugin(['dist'], { verbose: false }),
   new webpack.NoErrorsPlugin()
 ];
 
@@ -23,16 +22,24 @@ if (env === 'production') {
   outputFile = '[name].min.js';
   outputDir = path.join(__dirname, 'dist');
   plugins = plugins.concat([
+    new CleanPlugin(['dist'], { verbose: false }),
     new ExtractTextPlugin('/styles/app.css'),
     new HtmlPlugin({
       inject: false,
-      template: './app/index.ejs',
+      template: './index.ejs',
       title: 'React-Starter',
       appMountId: 'react',
       mobile: true,
-      minify: true
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true
+      }
     }),
-    new webpack.optimize.UglifyJsPlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      }
+    }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': '"production"'
     })
@@ -40,18 +47,18 @@ if (env === 'production') {
 }
 
 module.exports = {
+  context: path.join(__dirname, 'app'),
   resolve: {
     modulesDirectories: ['node_modules', 'bower_components'],
     extensions: ['', '.js', '.jsx', '.scss']
   },
   entry: {
-    '/scripts/app': ['./app/scripts/main.js']
+    '/scripts/app': ['./scripts/main.js']
     // '/scripts/vendor/modernizr': './app/scripts/vendor/modernizr-custom.js'
   },
   output: {
     path: outputDir,
-    filename: outputFile,
-    publicPath: '/build'
+    filename: outputFile
   },
   plugins,
   module: {
@@ -63,26 +70,26 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loaders: env === 'production' ? [ExtractTextPlugin.extract(cssLoaders)] : cssLoaders
+        loader: env === 'production' ? ExtractTextPlugin.extract(cssLoaders) : 'style!' + cssLoaders
       },
       {
         test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'url?name=/[path][name].[ext]&limit=10000&minetype=application/font-woff&context=./app'
+        loader: 'url?name=/[path][name].[ext]&limit=10000&minetype=application/font-woff'
       },
       {
         test: /fonts\/.*\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'file?name=/[path][name].[ext]&context=./app'
+        loader: 'file?name=/[path][name].[ext]'
       },
       {
         test: /media\/.*\.(jpe?g|png|gif|svg)$/i,
         loaders: [
-          'file?hash=sha512&digest=hex&name=/[path][name].[ext]&context=./app',
+          'file?hash=sha512&digest=hex&name=/[path][name].[ext]',
           'image-webpack?bypassOnDebug=false&optimizationLevel=7&interlaced=false'
         ]
       },
       {
         test: /\.ico/,
-        loader: 'file?name=/[path][name].[ext]&context=./app'
+        loader: 'file?name=/[path][name].[ext]'
       },
       {
         test: /\.json/,
@@ -111,7 +118,7 @@ module.exports = {
     };
   },
   sassLoader: {
-    includePaths: [path.resolve(__dirname, './bower_components')],
+    includePaths: [path.join(__dirname, 'bower_components')],
     sourceMap: true,
     sourceMapContents: true
   },

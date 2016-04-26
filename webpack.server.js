@@ -27,7 +27,7 @@ function getIPAddress() {
 config.devtool = 'eval';
 config.entry.bundle = [
   'webpack-dev-server/client?http://localhost:3030',
-  'webpack/hot/only-dev-server',
+  'webpack/hot/dev-server',
   config.entry['/scripts/app'][0]
 ];
 
@@ -63,10 +63,11 @@ compiler.plugin('done', function() {
 
 new WebpackDevServer(compiler, {
   contentBase: path.join(__dirname, 'app'),
-  publicPath: config.output.publicPath,
+  publicPath: '/',
   // in handy in more complicated setups.
   hot: true,
-  historyApiFallback: true
+  historyApiFallback: true,
+  stats: { colors: true }
 }).listen(3030, 'localhost', function(err, result) {
   if (err) {
     console.log('err', err);

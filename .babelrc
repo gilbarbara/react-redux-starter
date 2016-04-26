@@ -6,7 +6,13 @@
   ],
   "plugins": [
     "add-module-exports",
-    "transform-decorators-legacy",
-    "transform-runtime"
-  ]
+    "transform-decorators-legacy"
+  ],
+  "env": {
+    "production": {
+      "plugins": [
+        "transform-runtime"
+      ]
+    }
+  }
 }
