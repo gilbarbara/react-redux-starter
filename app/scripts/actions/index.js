@@ -1,4 +1,4 @@
-import { CALL_API } from 'redux-api-middleware';
+import { RSAA } from 'redux-api-middleware';
 import { routerActions } from 'react-router-redux';
 
 import config from '../config';
@@ -19,7 +19,7 @@ import { ActionTypes } from '../constants';
  */
 export function fetchArtists(query) {
   return {
-    [CALL_API]: {
+    [RSAA]: {
       endpoint: `${config.apiUrl}artists${(query ? `?${query}` : '')}`,
       method: 'GET',
       types: [
@@ -41,7 +41,7 @@ export function fetchArtists(query) {
  */
 export function fetchPopular(query) {
   return {
-    [CALL_API]: {
+    [RSAA]: {
       endpoint: `${config.apiUrl}popular${(query ? `?${query}` : '')}`,
       method: 'GET',
       types: [
@@ -63,7 +63,7 @@ export function fetchPopular(query) {
  */
 export function fetchLastWeek(query) {
   return {
-    [CALL_API]: {
+    [RSAA]: {
       endpoint: `${config.apiUrl}popular?mode=lastweek${(query ? `&${query}` : '')}`,
       method: 'GET',
       types: [
