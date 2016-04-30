@@ -4,11 +4,11 @@ var path              = require('path'),
     webpack           = require('webpack'),
     CleanPlugin       = require('clean-webpack-plugin'),
     ExtractTextPlugin = require('extract-text-webpack-plugin'),
-    HtmlPlugin        = require('html-webpack-plugin');
+    HtmlPlugin        = require('html-webpack-plugin'),
+    CopyPlugin        = require('copy-webpack-plugin');
 //    ScriptExtHtml     = require('script-ext-html-webpack-plugin'),
-//    CopyPlugin        = require('copy-webpack-plugin');
 
-var env = process.env.NODE_ENV;
+var build = process.env.NODE_ENV === 'production';
 
 var outputFile = '[name].js';
 var outputDir = path.resolve(__dirname);
@@ -18,11 +18,14 @@ var plugins = [
   new webpack.NoErrorsPlugin()
 ];
 
-if (env === 'production') {
+if (build) {
   outputFile = '[name].min.js';
   outputDir = path.join(__dirname, 'dist');
   plugins = plugins.concat([
     new CleanPlugin(['dist'], { verbose: false }),
+    new CopyPlugin([
+      { from: './app/robots.txt' }
+    ]),
     new ExtractTextPlugin('/styles/app.css'),
     new HtmlPlugin({
       inject: false,
@@ -30,18 +33,19 @@ if (env === 'production') {
       title: 'React-Starter',
       appMountId: 'react',
       mobile: true,
+      favicon: './favicon.ico',
       minify: {
         removeComments: true,
         collapseWhitespace: true
       }
     }),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': '"production"'
+    }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false
       }
-    }),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': '"production"'
     })
   ]);
 }
@@ -70,26 +74,22 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loader: env === 'production' ? ExtractTextPlugin.extract(cssLoaders) : 'style!' + cssLoaders
+        loader: build ? ExtractTextPlugin.extract(cssLoaders) : 'style!' + cssLoaders
       },
       {
-        test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'url?name=/[path][name].[ext]&limit=10000&minetype=application/font-woff'
+        test: /fonts\/.*\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'url?limit=10000&minetype=application/font-woff' + (build ? '&name=/fonts/[name].[ext]' : '')
       },
       {
         test: /fonts\/.*\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'file?name=/[path][name].[ext]'
+        loader: 'file' + (build ? '?name=/fonts/[name].[ext]' : '')
       },
       {
         test: /media\/.*\.(jpe?g|png|gif|svg)$/i,
         loaders: [
-          'file?hash=sha512&digest=hex&name=/[path][name].[ext]',
+          'file?hash=sha512&digest=hex' + (build ? '&name=/[path][name].[ext]' : ''),
           'image-webpack?bypassOnDebug=false&optimizationLevel=7&interlaced=false'
         ]
-      },
-      {
-        test: /\.ico/,
-        loader: 'file?name=/[path][name].[ext]'
       },
       {
         test: /\.json/,
@@ -118,12 +118,12 @@ module.exports = {
     };
   },
   sassLoader: {
-    includePaths: [path.join(__dirname, 'bower_components')],
+    includePaths: [path.join(__dirname, 'node_modules')],
     sourceMap: true,
     sourceMapContents: true
   },
   cssLoader: {
-    minification: env === 'production',
+    minification: build,
     sourceMap: true
   }
 };

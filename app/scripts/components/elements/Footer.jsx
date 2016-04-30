@@ -13,27 +13,27 @@ class Footer extends React.Component {
           <ul className="tech list-unstyled">
             <li>
               <a href="http://facebook.github.io/react/" target="_blank">
-                <img src="http://svgporn.com/logos/react.svg" width="96" />
+                <img src="http://svgporn.com/logos/react.svg" width="96" alt="React" />
               </a>
             </li>
             <li>
-              <a href="http://browserify.org/" target="_blank">
-                <img src="http://svgporn.com/logos/browserify-icon.svg" width="96" />
+              <a href="http://redux.js.org/" target="_blank">
+                <img src="http://svgporn.com/logos/redux.svg" width="96" alt="Redux" />
               </a>
             </li>
             <li>
-              <a href="http://gulpjs.com/" target="_blank">
-                <img src="http://svgporn.com/logos/gulp.svg" width="52" />
+              <a href="https://webpack.github.io/" target="_blank">
+                <img src="http://svgporn.com/logos/webpack.svg" width="96" alt="Webpack" />
               </a>
             </li>
             <li>
               <a href="https://babeljs.io/" target="_blank">
-                <img src="http://svgporn.com/logos/babel.svg" width="96" />
+                <img src="http://svgporn.com/logos/babel.svg" width="96" alt="Babel" />
               </a>
             </li>
             <li>
-              <a href="http://mochajs.org/" target="_blank">
-                <img src="http://svgporn.com/logos/mocha.svg" width="64" />
+              <a href="http://sass-lang.com/" target="_blank">
+                <img src="http://svgporn.com/logos/sass.svg" width="96" alt="Sass" />
               </a>
             </li>
           </ul>
