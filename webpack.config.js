@@ -62,8 +62,10 @@ module.exports = {
   },
   output: {
     path: outputDir,
-    filename: outputFile
+    filename: outputFile,
+    sourceMapFilename: outputFile + '.map'
   },
+  devtool: 'source-map',
   plugins,
   module: {
     loaders: [
