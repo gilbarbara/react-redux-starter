@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { autobind } from 'core-decorators';
-import shouldComponentUpdate from '../../utils/PureRender';
+import shouldComponentUpdate from '../utils/PureRender';
 
-import { goTo } from '../../actions';
-import NPMPackage from '../../../../package.json';
+import { goTo } from '../actions';
+import NPMPackage from '../../../package.json';
 
 export class Header extends React.Component {
   static propTypes = {
@@ -54,7 +54,7 @@ export class Header extends React.Component {
           </div>
         </div>
         <a href="https://github.com/gilbarbara/react-redux" className="github-ribbon">
-          <img src={require('../../../media/github-fork.png')} alt="Github Fork" />
+          <img src={require('../../media/github-fork.png')} alt="Github Fork" />
         </a>
       </header>
     );

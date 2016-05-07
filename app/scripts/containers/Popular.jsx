@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import { autobind } from 'core-decorators';
 import shouldComponentUpdate from '../utils/PureRender';
 
-import { fetchLastWeek, showAlert } from '../actions';
-import Loader from './elements/Loader';
+import { fetchPopular, showAlert } from '../actions';
+import Loader from './../components/Loader';
 
-export class LastWeek extends React.Component {
+export class Popular extends React.Component {
   static propTypes = {
     data: React.PropTypes.object.isRequired,
     dispatch: React.PropTypes.func.isRequired
@@ -16,7 +16,7 @@ export class LastWeek extends React.Component {
 
   componentDidMount() {
     if (!this.props.data.error && this.props.data.page === 1) {
-      this.props.dispatch(fetchLastWeek());
+      this.props.dispatch(fetchPopular());
     }
   }
 
@@ -28,7 +28,7 @@ export class LastWeek extends React.Component {
 
   @autobind
   loadMore() {
-    this.props.dispatch(fetchLastWeek(`page=${this.state.page}`));
+    this.props.dispatch(fetchPopular(`page=${this.props.data.page}`));
   }
 
   @autobind
@@ -44,23 +44,21 @@ export class LastWeek extends React.Component {
 
     if (data.ready) {
       output.html = data.items.map((d, i) =>
-        (
-          <div key={i} className="tracks">
-            <div className="tracks__image">
-              <img src={d.thumb_url_large} />
-            </div>
-            <div className="tracks__info">
-              <h2>
-                <a
-                  href={`http://hypem.com/track/${d.itemid}`}
-                  target="_blank">
-                  {d.artist} - {d.title}
-                </a>
-              </h2>
-              {d.description}
-            </div>
+        (<div key={i} className="tracks">
+          <div className="tracks__image">
+            <img src={d.thumb_url_large} alt={d.artist} />
           </div>
-        )
+          <div className="tracks__info">
+            <h2>
+              <a
+                href={`http://hypem.com/track/${d.itemid}`}
+                target="_blank">
+                {d.artist} - {d.title}
+              </a>
+            </h2>
+            {d.description}
+          </div>
+        </div>)
       );
 
       if (!data.error) {
@@ -81,7 +79,7 @@ export class LastWeek extends React.Component {
 
     return (
       <div key="Tracks" className="tracks-app">
-        <h1>Hype Machine - Last Week</h1>
+        <h1>Hype Machine - Popular</h1>
 
         <div className="tracks__wrapper">{output.html}</div>
         {output.actions}
@@ -91,7 +89,7 @@ export class LastWeek extends React.Component {
 }
 
 function mapStateToProps(state) {
-  return { data: state.lastweek };
+  return { data: state.popular };
 }
 
-export default connect(mapStateToProps)(LastWeek);
+export default connect(mapStateToProps)(Popular);

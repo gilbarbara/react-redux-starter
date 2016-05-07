@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { autobind } from 'core-decorators';
-import shouldComponentUpdate from '../../utils/PureRender';
+import shouldComponentUpdate from '../utils/PureRender';
 
-import { hideAlert } from '../../actions';
+import { hideAlert } from '../actions';
 
 let hideTimeout;
 
@@ -23,10 +23,6 @@ class SystemNotifications extends React.Component {
         this.hideNotification();
       }, 3500);
     }
-  }
-
-  componentWillUnmount() {
-    this.storeUnsubscribe();
   }
 
   hideNotification() {

@@ -1,5 +1,5 @@
 import React from 'react';
-import shouldComponentUpdate from '../../utils/PureRender';
+import shouldComponentUpdate from '../utils/PureRender';
 
 class Loader extends React.Component {
   shouldComponentUpdate = shouldComponentUpdate;

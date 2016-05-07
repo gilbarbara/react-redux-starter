@@ -4,7 +4,7 @@ import { autobind } from 'core-decorators';
 import shouldComponentUpdate from '../utils/PureRender';
 
 import { fetchArtists, showAlert } from '../actions';
-import Loader from './elements/Loader';
+import Loader from './../components/Loader';
 
 export class Artists extends React.Component {
   static propTypes = {
@@ -81,7 +81,6 @@ export class Artists extends React.Component {
     return (
       <div key="Artists" className="artists-app">
         <h1>Hype Machine - Artists</h1>
-
         <div className="artists row">{output.html}</div>
         {output.actions}
       </div>
