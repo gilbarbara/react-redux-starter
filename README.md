@@ -3,19 +3,19 @@ React Redux Starter Kit
 
 React with [redux](https://github.com/rackt/redux) and [react-router](https://github.com/rackt/react-router).  
 
-###[View Demo](http://gilbarbara.github.io/react-redux/)
-
 #### Tired of silly counters and todos?
 This starter kit implements the Hypemachine API to demonstrate how to use actions and reducers in real life.
+
+###[View Demo](http://gilbarbara.github.io/react-redux-starter/)
 
 ## Getting Started
 Clone the repo and install the dependencies.
 
 ```bash
-$ git clone https://github.com/gilbarbara/react-redux.git
-$ cd react-redux
-$ npm install && bower install
-$ gulp serve
+$ git clone https://github.com/gilbarbara/react-redux-starter.git
+$ cd react-redux-starter
+$ npm install
+$ npm start (or npm run build)
 ```
 
 ## Features
@@ -25,13 +25,12 @@ $ gulp serve
 - [scss_lint](https://github.com/brigade/scss-lint)
 
 #### Building
-- [browserify](https://github.com/substack/node-browserify) with [babelify](https://github.com/babel/babelify) (for ES2015, JSX, stage-1), [debowerify](https://github.com/eugeneware/debowerify) (for bower modules) and [browserify-shim](https://github.com/thlorenz/browserify-shim) (for globals like jQuery)
-- [redux-thunk](https://github.com/gaearon/redux-thunk) and [redux-api-middleware](https://github.com/agraboso/redux-api-middleware)
+- [webpack 2](https://github.com/webpack/webpack)
 - [core-js](https://github.com/zloirock/core-js) for polyfills.
 
 #### Development
+- [webpack-dev-server 2](https://github.com/webpack/webpack-dev-server) with [react-hot-loader 3](https://github.com/gaearon/react-hot-loader)  
 - [redux-devtools](https://github.com/gaearon/redux-devtools) and [redux-logger](https://github.com/fcomb/redux-logger)
-- [livereactload](https://github.com/milankinen/livereactload) (for "hot" reloading).
 
 #### Testing
 - [mocha](https://github.com/mochajs/mocha) with [expect](https://github.com/mjackson/expect)
