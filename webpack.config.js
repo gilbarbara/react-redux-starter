@@ -3,15 +3,13 @@ var path              = require('path'),
     autoprefixer      = require('autoprefixer'),
     webpack           = require('webpack'),
     CleanPlugin       = require('clean-webpack-plugin'),
-    ExtractTextPlugin = require('extract-text-webpack-plugin'),
+    ExtractText = require('extract-text-webpack-plugin'),
     HtmlPlugin        = require('html-webpack-plugin'),
     CopyPlugin        = require('copy-webpack-plugin');
 //    ScriptExtHtml     = require('script-ext-html-webpack-plugin'),
 
 var build = process.env.NODE_ENV === 'production';
 
-var outputFile = '[name].js';
-var outputDir = path.resolve(__dirname);
 var cssLoaders = 'css!postcss?pack=custom!sass';
 
 var plugins = [
@@ -19,14 +17,12 @@ var plugins = [
 ];
 
 if (build) {
-  outputFile = '[name].min.js';
-  outputDir = path.join(__dirname, 'dist');
   plugins = plugins.concat([
     new CleanPlugin(['dist'], { verbose: false }),
     new CopyPlugin([
       { from: './app/robots.txt' }
     ]),
-    new ExtractTextPlugin('/styles/app.css'),
+    new ExtractText('/styles/app.[hash].css'),
     new HtmlPlugin({
       inject: false,
       template: './index.ejs',
@@ -40,7 +36,7 @@ if (build) {
       }
     }),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': '"production"'
+      'process.env.NODE_ENV': JSON.stringify('production')
     }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
@@ -61,9 +57,8 @@ module.exports = {
     // '/scripts/vendor/modernizr': './app/scripts/vendor/modernizr-custom.js'
   },
   output: {
-    path: outputDir,
-    filename: outputFile,
-    sourceMapFilename: outputFile + '.map'
+    path: path.join(__dirname, 'dist'),
+    filename: '[name].[hash].js'
   },
   devtool: 'source-map',
   plugins,
@@ -76,7 +71,7 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loader: build ? ExtractTextPlugin.extract(cssLoaders) : 'style!' + cssLoaders
+        loader: build ? ExtractText.extract(cssLoaders) : 'style!' + cssLoaders
       },
       {
         test: /fonts\/.*\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,

@@ -24,14 +24,15 @@ function getIPAddress() {
   return '0.0.0.0';
 }
 
-config.devtool = 'eval';
+config.output.filename = '[name].js';
+config.devtool = '#inline-source-map';
 config.entry.bundle = [
   'webpack-dev-server/client?http://localhost:3030',
-  'webpack/hot/dev-server',
+  'webpack/hot/only-dev-server',
+  'react-hot-loader/patch',
   config.entry['/scripts/app'][0]
 ];
 
-config.module.loaders[0].loaders.unshift('react-hot');
 config.plugins.unshift(
   new webpack.HotModuleReplacementPlugin(),
   new BrowserSyncPlugin({
@@ -45,20 +46,12 @@ config.plugins.unshift(
   })
 );
 
-var bundleStart = null;
 var compiler = webpack(config);
 
 // We give notice in the terminal when it starts bundling and
 // set the time it started
 compiler.plugin('compile', function() {
   console.log('Bundling...');
-  bundleStart = Date.now();
-});
-
-// We also give notice when it is done compiling, including the
-// time it took. Nice to have
-compiler.plugin('done', function() {
-  console.log('Bundled in ' + (Date.now() - bundleStart) + 'ms!');
 });
 
 new WebpackDevServer(compiler, {
@@ -68,7 +61,7 @@ new WebpackDevServer(compiler, {
   hot: true,
   historyApiFallback: true,
   stats: { colors: true }
-}).listen(3030, 'localhost', function(err, result) {
+}).listen(3030, 'localhost', function(err) {
   if (err) {
     console.log('err', err);
   }

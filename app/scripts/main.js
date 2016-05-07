@@ -1,31 +1,31 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { Router, browserHistory } from 'react-router';
+import { render } from 'react-dom';
+import Root from './containers/Root';
+import { browserHistory } from 'react-router';
+import { AppContainer } from 'react-hot-loader';
 import { syncHistoryWithStore } from 'react-router-redux';
 
 import configStore from './store';
-import routes from './routes';
 
 import '../styles/main.scss';
 
 const store = configStore();
 const history = syncHistoryWithStore(browserHistory, store);
 
-document.addEventListener('DOMContentLoaded', () => {
-  let showDevTools;
+function renderApp(RootComponent) {
+  render(
+    <AppContainer>
+      <RootComponent store={store} history={history} />
+    </AppContainer>,
+    document.getElementById('react')
+  );
+}
 
-  if (process.env.NODE_ENV !== 'production') {
-    const DevTools = require('./components/DevTools');
-    showDevTools = <DevTools />;
-  }
+renderApp(Root);
 
-  ReactDOM.render(
-    <Provider store={store}>
-      <div>
-        <Router history={history} routes={routes} />
-        {showDevTools}
-      </div>
-    </Provider>,
-    document.getElementById('react'));
-});
+if (module.hot) {
+  module.hot.accept(
+    './containers/Root',
+    () => renderApp(require('./containers/Root'))
+  );
+}

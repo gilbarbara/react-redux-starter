@@ -13,6 +13,11 @@
       "plugins": [
         "transform-runtime"
       ]
+    },
+    "development": {
+      "plugins": [
+        "react-hot-loader/babel"
+      ]
     }
   }
 }
