@@ -26,12 +26,15 @@ function getIPAddress() {
 
 config.output.filename = '[name].js';
 config.devtool = '#inline-source-map';
-config.entry.bundle = [
-  'webpack-dev-server/client?http://localhost:3030',
-  'webpack/hot/only-dev-server',
-  'react-hot-loader/patch',
-  config.entry['/scripts/app'][0]
-];
+config.entry = {
+  bundle: [
+    'webpack-dev-server/client?http://localhost:3030',
+    'webpack/hot/only-dev-server',
+    'react-hot-loader/patch',
+    config.entry['/scripts/app']
+  ],
+  modernizr: config.entry['/scripts/vendor/modernizr']
+};
 
 config.plugins.unshift(
   new webpack.HotModuleReplacementPlugin(),

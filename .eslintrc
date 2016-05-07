@@ -14,14 +14,7 @@
     "jsdoc"
   ],
   "settings": {
-    "import/resolver": {
-      "node": {
-        "moduleDirectory": [
-          "node_modules",
-          "bower_components"
-        ]
-      }
-    }
+    "import/resolver": "webpack"
   },
   "rules": {
     "arrow-body-style": [

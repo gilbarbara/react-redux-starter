@@ -1,12 +1,11 @@
 /*eslint-disable no-var, one-var, func-names, indent, prefer-arrow-callback, object-shorthand, no-console, newline-per-chained-call, one-var-declaration-per-line, prefer-template, vars-on-top */
-var path              = require('path'),
-    autoprefixer      = require('autoprefixer'),
-    webpack           = require('webpack'),
-    CleanPlugin       = require('clean-webpack-plugin'),
-    ExtractText = require('extract-text-webpack-plugin'),
-    HtmlPlugin        = require('html-webpack-plugin'),
-    CopyPlugin        = require('copy-webpack-plugin');
-//    ScriptExtHtml     = require('script-ext-html-webpack-plugin'),
+var path         = require('path'),
+    autoprefixer = require('autoprefixer'),
+    webpack      = require('webpack'),
+    CleanPlugin  = require('clean-webpack-plugin'),
+    ExtractText  = require('extract-text-webpack-plugin'),
+    HtmlPlugin   = require('html-webpack-plugin'),
+    CopyPlugin   = require('copy-webpack-plugin');
 
 var build = process.env.NODE_ENV === 'production';
 
@@ -49,12 +48,15 @@ if (build) {
 module.exports = {
   context: path.join(__dirname, 'app'),
   resolve: {
+    alias: {
+      modernizr$: path.resolve(__dirname, './.modernizrrc')
+    },
     modulesDirectories: ['node_modules', 'bower_components'],
     extensions: ['', '.js', '.jsx', '.scss']
   },
   entry: {
-    '/scripts/app': ['./scripts/main.js']
-    // '/scripts/vendor/modernizr': './app/scripts/vendor/modernizr-custom.js'
+    '/scripts/app': './scripts/main.js',
+    '/scripts/vendor/modernizr': './scripts/vendor/modernizr-custom.js'
   },
   output: {
     path: path.join(__dirname, 'dist'),
@@ -89,8 +91,12 @@ module.exports = {
         ]
       },
       {
-        test: /\.json/,
+        test: /\.json$/,
         loader: 'json'
+      },
+      {
+        test: /\.modernizrrc$/,
+        loader: 'modernizr'
       }
     ]
   },
