@@ -3,7 +3,7 @@ React Redux Starter Kit
 
 React with [redux](https://github.com/rackt/redux) and [react-router](https://github.com/rackt/react-router).  
 
-###[View Demo](http://gilbarbara.github.io/react-redux/)
+###[View Demo](http://gilbarbara.github.io/react-redux-starter/)
 
 #### Tired of silly counters and todos?
 This starter kit implements the Hypemachine API to demonstrate how to use actions and reducers in real life.
@@ -12,8 +12,8 @@ This starter kit implements the Hypemachine API to demonstrate how to use action
 Clone the repo and install the dependencies.
 
 ```bash
-$ git clone https://github.com/gilbarbara/react-redux.git
-$ cd react-redux
+$ git clone https://github.com/gilbarbara/react-redux-starter.git
+$ cd react-redux-starter
 $ npm install && bower install
 $ gulp serve
 ```
