@@ -24,9 +24,11 @@ $ npm start (or npm run build)
 - [eslint](https://github.com/eslint/eslint) with [airbnb](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb) config
 - [scss_lint](https://github.com/brigade/scss-lint)
 
-#### Building
+#### Module Bundle
 - [webpack 2](https://github.com/webpack/webpack)
 - [core-js](https://github.com/zloirock/core-js) for polyfills.
+
+There's a gulp + browserify [branch](https://github.com/gilbarbara/react-redux-starter/tree/browserify) if that's your thing.
 
 #### Development
 - [webpack-dev-server 2](https://github.com/webpack/webpack-dev-server) with [react-hot-loader 3](https://github.com/gaearon/react-hot-loader)  
