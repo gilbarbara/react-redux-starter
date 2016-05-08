@@ -22,7 +22,7 @@
   <% if (htmlWebpackPlugin.options.baseHref) { %>
   <base href="<%= htmlWebpackPlugin.options.baseHref %>" />
   <% } %>
-  <script src="<%= htmlWebpackPlugin.files.chunks['/scripts/vendor/modernizr'].entry %>"></script>
+  <script src="<%= htmlWebpackPlugin.files.chunks['scripts/vendor/modernizr'].entry %>"></script>
 
 </head>
 <body>
@@ -55,7 +55,7 @@
 <% } %>
 
 <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
-<% if (chunk !== '/scripts/vendor/modernizr') { %>
+<% if (chunk !== 'scripts/vendor/modernizr') { %>
 <script src="<%= htmlWebpackPlugin.files.chunks[chunk].entry %>"></script>
 <% } %>
 <% } %>

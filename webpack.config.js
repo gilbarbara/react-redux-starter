@@ -21,7 +21,7 @@ if (build) {
     new CopyPlugin([
       { from: './app/robots.txt' }
     ]),
-    new ExtractText('/styles/app.[hash].css'),
+    new ExtractText('styles/app.[hash].css'),
     new HtmlPlugin({
       inject: false,
       template: './index.ejs',
@@ -55,8 +55,8 @@ module.exports = {
     extensions: ['', '.js', '.jsx', '.scss']
   },
   entry: {
-    '/scripts/app': './scripts/main.js',
-    '/scripts/vendor/modernizr': './scripts/vendor/modernizr-custom.js'
+    'scripts/app': './scripts/main.js',
+    'scripts/vendor/modernizr': './scripts/vendor/modernizr-custom.js'
   },
   output: {
     path: path.join(__dirname, 'dist'),
