@@ -77,16 +77,16 @@ module.exports = {
       },
       {
         test: /fonts\/.*\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'url?limit=10000&minetype=application/font-woff' + (build ? '&name=/fonts/[name].[ext]' : '')
+        loader: 'url?limit=10000&minetype=application/font-woff' + (build ? '&name=fonts/[name].[ext]' : '')
       },
       {
         test: /fonts\/.*\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'file' + (build ? '?name=/fonts/[name].[ext]' : '')
+        loader: 'file' + (build ? '?name=fonts/[name].[ext]' : '')
       },
       {
         test: /media\/.*\.(jpe?g|png|gif|svg)$/i,
         loaders: [
-          'file?hash=sha512&digest=hex' + (build ? '&name=/[path][name].[ext]' : ''),
+          'file?hash=sha512&digest=hex' + (build ? '&name=[path][name].[ext]' : ''),
           'image-webpack?bypassOnDebug=false&optimizationLevel=7&interlaced=false'
         ]
       },
