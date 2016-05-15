@@ -31,9 +31,9 @@ config.entry = {
     'webpack-dev-server/client?http://localhost:3030',
     'webpack/hot/only-dev-server',
     'react-hot-loader/patch',
-    config.entry['/scripts/app']
+    config.entry['scripts/app']
   ],
-  modernizr: config.entry['/scripts/vendor/modernizr']
+  modernizr: config.entry['scripts/vendor/modernizr']
 };
 
 config.plugins.unshift(
