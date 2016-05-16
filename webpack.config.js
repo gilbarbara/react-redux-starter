@@ -8,51 +8,16 @@ var path         = require('path'),
     CopyPlugin   = require('copy-webpack-plugin');
 
 var build = process.env.NODE_ENV === 'production';
-
 var cssLoaders = 'css!postcss?pack=custom!sass';
-
-var plugins = [
-  new webpack.NoErrorsPlugin()
-];
-
-if (build) {
-  plugins = plugins.concat([
-    new CleanPlugin(['dist'], { verbose: false }),
-    new CopyPlugin([
-      { from: './app/robots.txt' }
-    ]),
-    new ExtractText('styles/app.[hash].css'),
-    new HtmlPlugin({
-      inject: false,
-      template: './index.ejs',
-      title: 'React-Starter',
-      appMountId: 'react',
-      mobile: true,
-      favicon: './favicon.ico',
-      minify: {
-        removeComments: true,
-        collapseWhitespace: true
-      }
-    }),
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production')
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        warnings: false
-      }
-    })
-  ]);
-}
-
-module.exports = {
+var config = {
   context: path.join(__dirname, 'app'),
   resolve: {
     alias: {
       modernizr$: path.resolve(__dirname, './.modernizrrc')
     },
-    modulesDirectories: ['node_modules', 'bower_components'],
-    extensions: ['', '.js', '.jsx', '.scss']
+    modules: ['node_modules', path.join(__dirname, 'app/scripts')],
+    modulesDirectories: ['node_modules', path.join(__dirname, 'app/scripts')], // deprecated
+    extensions: ['', '.js', '.jsx']
   },
   entry: {
     'scripts/app': './scripts/main.js',
@@ -63,7 +28,9 @@ module.exports = {
     filename: '[name].[hash].js'
   },
   devtool: 'source-map',
-  plugins,
+  plugins: [
+    new webpack.NoErrorsPlugin()
+  ],
   module: {
     loaders: [
       {
@@ -76,12 +43,14 @@ module.exports = {
         loader: build ? ExtractText.extract(cssLoaders) : 'style!' + cssLoaders
       },
       {
-        test: /fonts\/.*\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'url?limit=10000&minetype=application/font-woff' + (build ? '&name=fonts/[name].[ext]' : '')
+        test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'url?limit=10000&minetype=application/font-woff' + (build ? '&name=fonts/[name].[ext]' : ''),
+        include: /fonts/
       },
       {
-        test: /fonts\/.*\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'file' + (build ? '?name=fonts/[name].[ext]' : '')
+        test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'file' + (build ? '?name=fonts/[name].[ext]' : ''),
+        include: /fonts/
       },
       {
         test: /media\/.*\.(jpe?g|png|gif|svg)$/i,
@@ -130,3 +99,35 @@ module.exports = {
     sourceMap: true
   }
 };
+
+if (build) {
+  config.plugins = config.plugins.concat([
+    new CleanPlugin(['dist'], { verbose: false }),
+    new CopyPlugin([
+      { from: './app/robots.txt' }
+    ]),
+    new ExtractText('styles/app.[hash].css'),
+    new HtmlPlugin({
+      inject: false,
+      template: './index.ejs',
+      title: 'React-Starter',
+      appMountId: 'react',
+      mobile: true,
+      favicon: './favicon.ico',
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true
+      }
+    }),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('production')
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      }
+    })
+  ]);
+}
+
+module.exports = config;
