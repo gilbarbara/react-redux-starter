@@ -1,3 +1,4 @@
+/*eslint-disable import/no-mutable-exports */
 let store;
 
 if (process.env.NODE_ENV === 'production') {
