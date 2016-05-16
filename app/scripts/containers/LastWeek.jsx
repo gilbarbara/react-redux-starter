@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { autobind } from 'core-decorators';
-import shouldComponentUpdate from '../utils/PureRender';
+import shouldComponentUpdate from 'utils/PureRender';
 
 import { fetchLastWeek, showAlert } from '../actions';
-import Loader from './../components/Loader';
+import Loader from 'components/Loader';
 
 export class LastWeek extends React.Component {
   static propTypes = {
@@ -44,23 +44,21 @@ export class LastWeek extends React.Component {
 
     if (data.ready) {
       output.html = data.items.map((d, i) =>
-        (
-          <div key={i} className="tracks">
-            <div className="tracks__image">
-              <img src={d.thumb_url_large} />
-            </div>
-            <div className="tracks__info">
-              <h2>
-                <a
-                  href={`http://hypem.com/track/${d.itemid}`}
-                  target="_blank">
-                  {d.artist} - {d.title}
-                </a>
-              </h2>
-              {d.description}
-            </div>
+        (<div key={i} className="tracks">
+          <div className="tracks__image">
+            <img src={d.thumb_url_large} alt={d.artist} />
           </div>
-        )
+          <div className="tracks__info">
+            <h2>
+              <a
+                href={`http://hypem.com/track/${d.itemid}`}
+                target="_blank">
+                {d.artist} - {d.title}
+              </a>
+            </h2>
+            {d.description}
+          </div>
+        </div>)
       );
 
       if (!data.error) {

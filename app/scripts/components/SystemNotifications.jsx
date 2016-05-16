@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { autobind } from 'core-decorators';
-import shouldComponentUpdate from '../utils/PureRender';
+import shouldComponentUpdate from 'utils/PureRender';
 
 import { hideAlert } from '../actions';
 

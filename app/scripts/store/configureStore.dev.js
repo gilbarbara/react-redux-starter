@@ -6,7 +6,7 @@ import { apiMiddleware } from 'redux-api-middleware';
 import createLogger from 'redux-logger';
 
 import rootReducer from '../reducers';
-import DevTools from '../components/DevTools';
+import DevTools from 'components/DevTools';
 
 const reducer = combineReducers(Object.assign({}, rootReducer, {
   routing: routerReducer

@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { autobind } from 'core-decorators';
-import shouldComponentUpdate from '../utils/PureRender';
+import shouldComponentUpdate from 'utils/PureRender';
 
 import { fetchPopular, showAlert } from '../actions';
-import Loader from './../components/Loader';
+import Loader from 'components/Loader';
 
 export class Popular extends React.Component {
   static propTypes = {

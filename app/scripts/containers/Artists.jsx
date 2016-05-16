@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { autobind } from 'core-decorators';
-import shouldComponentUpdate from '../utils/PureRender';
+import shouldComponentUpdate from 'utils/PureRender';
 
 import { fetchArtists, showAlert } from '../actions';
-import Loader from './../components/Loader';
+import Loader from 'components/Loader';
 
 export class Artists extends React.Component {
   static propTypes = {
@@ -49,7 +49,7 @@ export class Artists extends React.Component {
             <a
               href={`http://hypem.com/artist/${d.artist.replace(' ', '+')}`}
               target="_blank">
-              <img src={d.thumb_url_artist} />
+              <img src={d.thumb_url_artist} alt={d.artist} />
             </a>
           </div>
           <div className="artists__info">

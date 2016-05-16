@@ -1,7 +1,7 @@
 import React from 'react';
-import Header from './../components/Header';
-import Footer from './../components/Footer';
-import SystemNotifications from './../components/SystemNotifications';
+import Header from 'components/Header';
+import Footer from 'components/Footer';
+import SystemNotifications from 'components/SystemNotifications';
 
 class App extends React.Component {
   static propTypes = {

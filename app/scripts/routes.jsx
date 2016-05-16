@@ -1,12 +1,12 @@
 import React from 'react';
 import { Route, IndexRedirect } from 'react-router';
 
-import App from './containers/App';
-import About from './containers/About';
-import Artists from './containers/Artists';
-import Popular from './containers/Popular';
-import LastWeek from './containers/LastWeek';
-import NotFound from './containers/NotFound';
+import App from 'containers/App';
+import About from 'containers/About';
+import Artists from 'containers/Artists';
+import Popular from 'containers/Popular';
+import LastWeek from 'containers/LastWeek';
+import NotFound from 'containers/NotFound';
 
 export default (
   <Route path={location.host === 'gilbarbara.github.io' ? '/react-redux-starter/' : '/'} component={App}>
