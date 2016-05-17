@@ -9,7 +9,7 @@ import LastWeek from 'containers/LastWeek';
 import NotFound from 'containers/NotFound';
 
 export default (
-  <Route path={location.host === 'gilbarbara.github.io' ? '/react-redux-starter/' : '/'} component={App}>
+  <Route path="/" component={App}>
     <IndexRedirect to="artists" />
     <Route path="artists" component={Artists} />
     <Route path="popular" component={Popular} />

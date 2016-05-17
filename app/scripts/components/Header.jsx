@@ -17,8 +17,8 @@ export class Header extends React.Component {
   @autobind
   onClickLink(e) {
     e.preventDefault();
-    const dest = location.host === 'gilbarbara.github.io' ? '/react-redux-starter' : '';
-    this.props.dispatch(goTo(dest + e.currentTarget.dataset.destination));
+
+    this.props.dispatch(goTo(e.currentTarget.getAttribute('href')));
   }
 
   render() {
@@ -31,22 +31,22 @@ export class Header extends React.Component {
           <div className="menu clearfix">
             <ul className="nav navbar-nav">
               <li className={props.location.pathname.indexOf('/artists') > -1 ? 'active' : ''}>
-                <a href="#" onClick={this.onClickLink} data-destination="/artists">
+                <a href="/artists" onClick={this.onClickLink}>
                   <span className="fa fa-music" />Artists
                 </a>
               </li>
               <li className={props.location.pathname.indexOf('/popular') > -1 ? 'active' : ''}>
-                <a href="#" onClick={this.onClickLink} data-destination="/popular">
+                <a href="/popular" onClick={this.onClickLink}>
                   <span className="fa fa-fire" />Popular
                 </a>
               </li>
               <li className={props.location.pathname.indexOf('/lastweek') > -1 ? 'active' : ''}>
-                <a href="#" onClick={this.onClickLink} data-destination="/lastweek">
+                <a href="/lastweek" onClick={this.onClickLink}>
                   <span className="fa fa-calendar" />Last Week
                 </a>
               </li>
               <li className={props.location.pathname.indexOf('/about') > -1 ? 'active' : ''}>
-                <a href="#" onClick={this.onClickLink} data-destination="/about">
+                <a href="/about" onClick={this.onClickLink} >
                   <span className="fa fa-info-circle" />About
                 </a>
               </li>
