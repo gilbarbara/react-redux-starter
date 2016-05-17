@@ -25,7 +25,8 @@ var config = {
   },
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: '[name].[hash].js'
+    filename: '[name].[hash].js',
+    publicPath: '/react-redux-starter/'
   },
   devtool: 'source-map',
   plugins: [
@@ -108,16 +109,17 @@ if (build) {
     ]),
     new ExtractText('styles/app.[hash].css'),
     new HtmlPlugin({
-      inject: false,
-      template: './index.ejs',
-      title: 'React-Starter',
       appMountId: 'react',
-      mobile: true,
+      baseHref: '/react-redux-starter/',
       favicon: './favicon.ico',
+      inject: false,
       minify: {
         removeComments: true,
         collapseWhitespace: true
-      }
+      },
+      mobile: true,
+      template: './index.ejs',
+      title: 'React-Starter'
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
