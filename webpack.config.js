@@ -25,12 +25,15 @@ var config = {
   },
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: '[name].[hash].js',
-    publicPath: '/react-redux-starter/'
+    filename: '[name].[hash].js'
   },
   devtool: 'source-map',
   plugins: [
-    new webpack.NoErrorsPlugin()
+    new webpack.NoErrorsPlugin(),
+    new webpack.LoaderOptionsPlugin({
+      minimize: true,
+      debug: false
+    })
   ],
   module: {
     loaders: [
@@ -102,6 +105,8 @@ var config = {
 };
 
 if (build) {
+  config.output.publicPath = '/react-redux-starter/';
+
   config.plugins = config.plugins.concat([
     new CleanPlugin(['dist'], { verbose: false }),
     new CopyPlugin([
