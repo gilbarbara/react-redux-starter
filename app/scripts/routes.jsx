@@ -8,13 +8,15 @@ import Popular from 'containers/Popular';
 import LastWeek from 'containers/LastWeek';
 import NotFound from 'containers/NotFound';
 
-export default (
-  <Route path="/" component={App}>
-    <IndexRedirect to="artists" />
-    <Route path="artists" component={Artists} />
-    <Route path="popular" component={Popular} />
-    <Route path="lastweek" component={LastWeek} />
-    <Route path="about" component={About} />
-    <Route path="*" component={NotFound} />
-  </Route>
-);
+export default function createRoutes() {
+  return (
+    <Route path="/" component={App}>
+      <IndexRedirect to="artists" />
+      <Route path="artists" component={Artists} />
+      <Route path="popular" component={Popular} />
+      <Route path="lastweek" component={LastWeek} />
+      <Route path="about" component={About} />
+      <Route path="*" component={NotFound} />
+    </Route>
+  );
+}
