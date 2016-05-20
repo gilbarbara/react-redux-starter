@@ -1,0 +1,12 @@
+.app__footer {
+  background-color: lighten($brand-primary, 35);
+  border-top: 0.3rem solid $brand-primary;
+  color: $brand-primary;
+  line-height: 1;
+  padding: ($grid-gutter-width / 2) 0;
+
+  .app__container {
+    display: flex;
+    justify-content: space-between;
+  }
+}

@@ -13,17 +13,17 @@
 @import 'base/bootstrap';
 @import 'base/bootstrap-theme';
 
-// *** Elements
-@import 'elements/loader';
-@import 'elements/header';
-@import 'elements/footer';
-@import 'elements/system-notifications';
-
 // *** Components
-@import 'components/app';
-@import 'components/tracks';
-@import 'components/artists';
-@import 'components/about';
+@import 'components/loader';
+@import 'components/header';
+@import 'components/footer';
+@import 'components/system-notifications';
+
+// *** Containers
+@import 'containers/app';
+@import 'containers/tracks';
+@import 'containers/artists';
+@import 'containers/about';
 
 .browsehappy {
   background: #ccc;

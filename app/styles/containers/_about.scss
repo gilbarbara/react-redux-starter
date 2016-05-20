@@ -1,0 +1,38 @@
+.about {
+  h1 {
+    margin-bottom: $grid-gutter-width;
+  }
+
+  .row {
+    display: flex;
+    flex-direction: row;
+
+    > div {
+      margin-bottom: $grid-gutter-width;
+    }
+  }
+
+  .item {
+    background-color: #f7f7f7;
+    border: 2px solid lighten($brand-primary, 25%);
+    font-size: 2.2rem;
+    padding: 2.5rem;
+    text-align: center;
+
+    h3 {
+      line-height: 1;
+      margin-bottom: 5px;
+      margin-top: 0;
+    }
+
+    &__logo {
+      margin-bottom: $grid-gutter-width / 2;
+      min-height: 8rem;
+
+      img {
+        max-height: 8rem;
+        max-width: 15rem;
+      }
+    }
+  }
+}
