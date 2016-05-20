@@ -1,11 +1,10 @@
 {
   "presets": [
-    "es2015",
+    "es2015-native-modules",
     "react",
     "stage-1"
   ],
   "plugins": [
-    "add-module-exports",
     "transform-decorators-legacy"
   ],
   "env": {
