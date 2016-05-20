@@ -8,35 +8,18 @@ class Footer extends React.Component {
     return (
       <footer className="app__footer">
         <div className="app__container">
-          <h3>Powered by:</h3>
-
-          <ul className="tech list-unstyled">
-            <li>
-              <a href="http://facebook.github.io/react/" target="_blank">
-                <img src="http://svgporn.com/logos/react.svg" width="96" alt="React" />
-              </a>
-            </li>
-            <li>
-              <a href="http://redux.js.org/" target="_blank">
-                <img src="http://svgporn.com/logos/redux.svg" width="96" alt="Redux" />
-              </a>
-            </li>
-            <li>
-              <a href="https://webpack.github.io/" target="_blank">
-                <img src="http://svgporn.com/logos/webpack.svg" width="96" alt="Webpack" />
-              </a>
-            </li>
-            <li>
-              <a href="https://babeljs.io/" target="_blank">
-                <img src="http://svgporn.com/logos/babel.svg" width="96" alt="Babel" />
-              </a>
-            </li>
-            <li>
-              <a href="http://sass-lang.com/" target="_blank">
-                <img src="http://svgporn.com/logos/sass.svg" width="96" alt="Sass" />
-              </a>
-            </li>
-          </ul>
+          <iframe
+            src="https://ghbtns.com/github-btn.html?user=gilbarbara&amp;repo=react-redux-starter&amp;type=star&amp;count=true"
+            frameBorder="0"
+            scrolling="0"
+            width="110px"
+            height="20px" />
+          <iframe
+            src="https://ghbtns.com/github-btn.html?user=gilbarbara&amp;type=follow&amp;count=true"
+            frameBorder="0"
+            scrolling="0"
+            width="130px"
+            height="20px" />
         </div>
       </footer>
     );

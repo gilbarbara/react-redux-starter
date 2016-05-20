@@ -15,20 +15,24 @@ class About extends React.Component {
   shouldComponentUpdate = shouldComponentUpdate;
 
   render() {
-    const items = this.state.items.map((item, i) => {
-      const key = Object.keys(item);
-      return (
-        <div key={i} className="col-xs-12 col-sm-6 col-md-4">
-          <div className="item">
-            <h3>{key}</h3>
-            {item[key]}
+    const items = this.state.items.map((item, i) =>
+      (<div key={i} className="col-xs-12 col-sm-6 col-lg-4">
+        <div className="item">
+          <div className="item__logo">
+            <img src={item.logo} alt={item.name} />
+          </div>
+
+          <div className="item__info">
+            <h3>{item.name}</h3>
+            <div>{item.version}</div>
           </div>
         </div>
-      );
-    });
+      </div>)
+    );
 
     return (
-      <div key="About" className="home">
+      <div key="About" className="about">
+        <h1>Powered by:</h1>
         <div className="row">{items}</div>
       </div>
     );
