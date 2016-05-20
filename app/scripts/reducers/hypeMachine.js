@@ -4,6 +4,7 @@ export const artistsState = {
   ready: false,
   running: false
 };
+
 export const popularState = {
   items: [],
   page: 1,

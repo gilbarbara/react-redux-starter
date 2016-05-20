@@ -1,17 +1,13 @@
-import { applyMiddleware, createStore, combineReducers, compose } from 'redux';
+import { applyMiddleware, createStore, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { browserHistory } from 'react-router';
-import { routerMiddleware, routerReducer } from 'react-router-redux';
+import { routerMiddleware } from 'react-router-redux';
 import { apiMiddleware } from 'redux-api-middleware';
 import createLogger from 'redux-logger';
 
 import rootReducer from '../reducers';
 import DevTools from 'components/DevTools';
-
-const reducer = combineReducers(Object.assign({}, rootReducer, {
-  routing: routerReducer
-}));
-
+console.log(rootReducer);
 const logger = createLogger();
 
 export default (initialState = {}) => {
@@ -20,7 +16,7 @@ export default (initialState = {}) => {
     DevTools.instrument()
   )(createStore);
 
-  const store = createStoreWithMiddleware(reducer, initialState);
+  const store = createStoreWithMiddleware(rootReducer, initialState);
 
   // Hot reload reducers (requires Webpack or Browserify HMR to be enabled)
   if (module.hot) {

@@ -1,7 +1,13 @@
+import { combineReducers } from 'redux';
+import { routerReducer } from 'react-router-redux';
+
 import browser from './browser';
 import hypeMachine from './hypeMachine';
 
-export default {
+const rootReducer = combineReducers({
   ...browser,
-  ...hypeMachine
-};
+  ...hypeMachine,
+  routing: routerReducer
+});
+
+export default rootReducer;

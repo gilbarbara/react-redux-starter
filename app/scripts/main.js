@@ -25,6 +25,6 @@ renderApp(Root);
 if (module.hot) {
   module.hot.accept(
     'containers/Root',
-    () => renderApp(require('containers/Root/Root.dev').default)
+    () => renderApp(require('./containers/Root'))
   );
 }
