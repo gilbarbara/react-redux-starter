@@ -1,6 +1,12 @@
-if (process.env.NODE_ENV === 'production') {
-  module.exports = require('./configureStore.prod').default;
+let configStore;
+
+if (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'test') {
+  configStore = require('./configureStore.prod').default;
 }
 else {
-  module.exports = require('./configureStore.dev').default;
+  configStore = require('./configureStore.dev').default;
 }
+
+const store = configStore();
+
+export default store;
