@@ -1,6 +1,8 @@
 React Redux Starter Kit
 ===
 
+<a href="https://codeclimate.com/github/gilbarbara/react-redux-starter" target="_blank"><img src="https://codeclimate.com/github/gilbarbara/react-redux-starter/badges/gpa.svg" /></a>
+
 React with [redux](https://github.com/rackt/redux) and [react-router](https://github.com/rackt/react-router).  
 
 #### Tired of silly counters and todos?

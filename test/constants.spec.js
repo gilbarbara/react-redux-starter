@@ -1,5 +1,5 @@
 import expect from 'expect';
-import { ActionTypes } from '../constants';
+import { ActionTypes } from 'constants/index';
 
 describe('Constants', () => {
   it('should have "POPULAR_REQUEST"', () => {

@@ -1,7 +1,7 @@
 import expect from 'expect';
 
-import * as Actions from '../actions';
-import { ActionTypes } from '../constants';
+import * as Actions from 'actions/index';
+import { ActionTypes } from 'constants/index';
 
 describe('Actions', () => {
   describe('goTo', () => {

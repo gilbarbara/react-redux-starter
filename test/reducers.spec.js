@@ -1,10 +1,10 @@
 import expect from 'expect';
 
-import reducers from '../reducers';
-import { browserState } from '../reducers/browser';
-import { artistsState, popularState, lastweekState } from '../reducers/hypeMachine';
-import * as Actions from '../actions';
-import { ActionTypes } from '../constants';
+import reducers from 'reducers/index';
+import { browserState } from 'reducers/browser';
+import { artistsState, popularState, lastweekState } from 'reducers/hypeMachine';
+import * as Actions from 'actions/index';
+import { ActionTypes } from 'constants/index';
 
 describe('Reducers', () => {
   context('browser', () => {

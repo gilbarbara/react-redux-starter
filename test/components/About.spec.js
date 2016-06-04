@@ -2,7 +2,7 @@ import expect from 'expect';
 import React from 'react';
 import TestUtils from 'react-addons-test-utils';
 
-import About from '../../containers/About';
+import About from 'containers/About';
 
 function setup() {
   const props = {
@@ -22,9 +22,11 @@ function setup() {
 describe('About', () => {
   it('should render properly', () => {
     const { output } = setup(true);
+    expect(output.props.className).toBe('about');
 
-    expect(output.props.className).toBe('home');
-    expect(output.props.children.props.className).toBe('row');
-    expect(output.props.children.props.children.length).toBe(6);
+    const [h1, row] = output.props.children;
+    expect(h1.type).toBe('h1');
+    expect(row.props.className).toBe('row');
+    expect(row.props.children.length).toBe(6);
   });
 });

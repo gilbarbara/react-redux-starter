@@ -7,7 +7,9 @@ var path         = require('path'),
     HtmlPlugin   = require('html-webpack-plugin'),
     CopyPlugin   = require('copy-webpack-plugin');
 
-var build = process.env.NODE_ENV === 'production';
+var isProd = process.env.NODE_ENV === 'production';
+var isTest = process.env.NODE_ENV === 'test';
+
 var cssLoaders = 'css!postcss?pack=custom!sass';
 var config = {
   context: path.join(__dirname, 'app'),
@@ -15,8 +17,8 @@ var config = {
     alias: {
       modernizr$: path.resolve(__dirname, './.modernizrrc')
     },
-    modules: ['node_modules', path.join(__dirname, 'app/scripts')],
-    modulesDirectories: ['node_modules', path.join(__dirname, 'app/scripts')], // deprecated
+    modules: [path.join(__dirname, 'app/scripts'), 'node_modules'],
+    modulesDirectories: [path.join(__dirname, 'app/scripts'), 'node_modules'], // deprecated
     extensions: ['', '.js', '.jsx']
   },
   entry: {
@@ -29,11 +31,7 @@ var config = {
   },
   devtool: 'source-map',
   plugins: [
-    new webpack.NoErrorsPlugin(),
-    new webpack.LoaderOptionsPlugin({
-      minimize: true,
-      debug: false
-    })
+    new webpack.NoErrorsPlugin()
   ],
   module: {
     loaders: [
@@ -44,22 +42,22 @@ var config = {
       },
       {
         test: /\.scss$/,
-        loader: build ? ExtractText.extract(cssLoaders) : 'style!' + cssLoaders
+        loader: isProd ? ExtractText.extract(cssLoaders) : 'style!' + cssLoaders
       },
       {
         test: /\.woff2?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'url?limit=10000&minetype=application/font-woff' + (build ? '&name=fonts/[name].[ext]' : ''),
+        loader: 'url?limit=10000&minetype=application/font-woff' + (isProd ? '&name=fonts/[name].[ext]' : ''),
         include: /fonts/
       },
       {
         test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'file' + (build ? '?name=fonts/[name].[ext]' : ''),
+        loader: 'file' + (isProd ? '?name=fonts/[name].[ext]' : ''),
         include: /fonts/
       },
       {
         test: /media\/.*\.(jpe?g|png|gif|svg)$/i,
         loaders: [
-          'file?hash=sha512&digest=hex' + (build ? '&name=[path][name].[ext]' : ''),
+          'file?hash=sha512&digest=hex' + (isProd ? '&name=[path][name].[ext]' : ''),
           'image-webpack?bypassOnDebug=false&optimizationLevel=7&interlaced=false'
         ]
       },
@@ -99,12 +97,21 @@ var config = {
     sourceMapContents: true
   },
   cssLoader: {
-    minification: build,
+    minification: isProd,
     sourceMap: true
   }
 };
 
-if (build) {
+if (isTest || isProd) {
+  config.plugins = config.plugins.concat([
+    new webpack.LoaderOptionsPlugin({
+      minimize: true,
+      debug: false
+    })
+  ]);
+}
+
+if (isProd) {
   config.output.publicPath = '/react-redux-starter/';
 
   config.plugins = config.plugins.concat([
@@ -126,6 +133,7 @@ if (build) {
       template: './index.ejs',
       title: 'React-Starter'
     }),
+    new webpack.optimize.DedupePlugin(),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
     }),
