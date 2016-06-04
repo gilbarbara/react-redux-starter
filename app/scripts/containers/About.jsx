@@ -1,6 +1,6 @@
 import React from 'react';
 import shouldComponentUpdate from 'utils/PureRender';
-import config from '../config';
+import config from 'config';
 
 class About extends React.Component {
   constructor(props) {

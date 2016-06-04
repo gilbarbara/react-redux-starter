@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { autobind } from 'core-decorators';
 import shouldComponentUpdate from 'utils/PureRender';
 
-import { fetchPopular, showAlert } from '../actions';
+import { fetchPopular, showAlert } from 'actions/index';
 import Loader from 'components/Loader';
 
 export class Popular extends React.Component {

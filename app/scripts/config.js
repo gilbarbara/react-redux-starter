@@ -2,6 +2,7 @@ import NPMPackage from '../../package.json';
 
 export default {
   apiUrl: 'https://api.hypem.com/v2/',
+  name: NPMPackage.name,
   items: [
     {
       name: 'react',

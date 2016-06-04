@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { autobind } from 'core-decorators';
 import shouldComponentUpdate from 'utils/PureRender';
 
-import { fetchLastWeek, showAlert } from '../actions';
+import { fetchLastWeek, showAlert } from 'actions/index';
 import Loader from 'components/Loader';
 
 export class LastWeek extends React.Component {

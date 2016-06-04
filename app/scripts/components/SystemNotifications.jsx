@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { autobind } from 'core-decorators';
 import shouldComponentUpdate from 'utils/PureRender';
 
-import { hideAlert } from '../actions';
+import { hideAlert } from 'actions/index';
 
 let hideTimeout;
 

@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { autobind } from 'core-decorators';
 import shouldComponentUpdate from 'utils/PureRender';
 
-import { goTo } from '../actions';
-import NPMPackage from '../../../package.json';
+import { goTo } from 'actions/index';
+import config from 'config';
 
 export class Header extends React.Component {
   static propTypes = {
@@ -27,7 +27,7 @@ export class Header extends React.Component {
     return (
       <header className="app__header">
         <div className="app__container">
-          <h1>{NPMPackage.title}</h1>
+          <h1>{config.name}</h1>
           <div className="menu clearfix">
             <ul className="nav navbar-nav">
               <li className={props.location.pathname.indexOf('/artists') > -1 ? 'active' : ''}>

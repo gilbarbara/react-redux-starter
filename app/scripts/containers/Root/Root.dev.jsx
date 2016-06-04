@@ -1,8 +1,8 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router';
-import DevTools from '../../components/DevTools';
-import createRoutes from '../../routes';
+import DevTools from 'components/DevTools';
+import createRoutes from 'routes';
 
 export default class Root extends React.Component {
   static propTypes = {

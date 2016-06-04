@@ -1,8 +1,8 @@
 import { RSAA } from 'redux-api-middleware';
 import { routerActions } from 'react-router-redux';
 
-import config from '../config';
-import { ActionTypes } from '../constants';
+import config from 'config';
+import { ActionTypes } from 'constants/index';
 
 /**
  * @module Actions
