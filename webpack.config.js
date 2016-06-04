@@ -55,11 +55,12 @@ var config = {
         include: /fonts/
       },
       {
-        test: /media\/.*\.(jpe?g|png|gif|svg)$/i,
+        test: /\.(jpe?g|png|gif|svg)$/i,
         loaders: [
           'file?hash=sha512&digest=hex' + (isProd ? '&name=[path][name].[ext]' : ''),
           'image-webpack?bypassOnDebug=false&optimizationLevel=7&interlaced=false'
-        ]
+        ],
+        include: /media/
       },
       {
         test: /\.json$/,
