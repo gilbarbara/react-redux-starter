@@ -67,6 +67,7 @@
     "gh-pages": "^0.11",
     "html-loader": "^0.4",
     "html-webpack-plugin": "^2.19",
+    "husky": "^0.11",
     "image-webpack-loader": "^1.8",
     "imports-loader": "^0.6",
     "jsdom": "^9.2",
@@ -104,6 +105,8 @@
     "docs": "node tools docs",
     "test": "mocha-webpack --opts test/lib/mocha-webpack.opts",
     "test:watch": "npm test -- --watch"
+    "precommit": "node tools commits && npm run lint && npm test >/dev/null 2>&1",
+    "postmerge": "node tools modified package.json && npm update"
   },
   "engines": {
     "node": ">=5.0.0",

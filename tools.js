@@ -1,16 +1,18 @@
-/*eslint-disable no-console */
-const path = require('path');
-const exec = require('child_process').exec;
-const del = require('del');
-const ghPages = require('gh-pages');
+/*eslint-disable no-var, vars-on-top, no-console */
+var path = require('path');
+var exec = require('child_process').exec;
+var del = require('del');
+var ghPages = require('gh-pages');
 
-const args = process.argv.slice(2);
+var args = process.argv.slice(2);
 
 if (!args[0]) {
   console.log(`Valid arguments:
   • publish (push to github)
   • deploy (build & publish)
-  • docs (rebuild documentation)`
+  • docs (rebuild documentation)
+  • modified (file has changed in the last merge)
+  • commits (has new remote commits)`
   );
 }
 
@@ -72,4 +74,66 @@ if (args[0] === 'docs') {
       console.log('Generating documentation...');
       return exec('jsdoc -c .jsdoc.json -R README.md');
     });
+}
+
+if (args[0] === 'modified') {
+  if (!args[1]) {
+    throw new Error('Nothing to search');
+  }
+
+  exec('git diff-tree -r --name-only --no-commit-id ORIG_HEAD HEAD', (err, stdout) => {
+    if (err) {
+      throw new Error(err);
+    }
+
+    if (!stdout.match(args[1])) {
+      process.exit(1);
+    }
+  });
+}
+
+if (args[0] === 'commits') {
+  exec('git remote -v update', (errRemote) => {
+    if (errRemote) {
+      throw new Error(errRemote);
+    }
+
+    var local = new Promise((resolve, reject) => {
+      exec('git rev-parse @', (err, stdout) => {
+        if (err) {
+          return reject(err);
+        }
+
+        return resolve(stdout);
+      });
+    });
+
+    var remote = new Promise((resolve, reject) => {
+      exec('git rev-parse @{u}', (err, stdout) => {
+        if (err) {
+          return reject(err);
+        }
+
+        return resolve(stdout);
+      });
+    });
+
+    var base = new Promise((resolve, reject) => {
+      exec('git rev-parse @ @{u}', (err, stdout) => {
+        if (err) {
+          return reject(err);
+        }
+        return resolve(stdout);
+      });
+    });
+
+    Promise.all([local, remote, base])
+      .then(values => {
+        let [$local, $remote, $base] = values;
+
+        if ($local === $base) {
+          process.exit(1);
+        }
+      });
+  });
 }
