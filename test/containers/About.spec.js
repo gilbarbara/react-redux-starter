@@ -2,7 +2,7 @@ import expect from 'expect';
 import React from 'react';
 import TestUtils from 'react-addons-test-utils';
 
-import About from 'containers/About';
+import About from '../../app/scripts/containers/About';
 
 function setup() {
   const props = {

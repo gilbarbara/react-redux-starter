@@ -1,3 +1,3 @@
 describe('Components', () => {
-  require('./components/About.spec.js');
+  require('./components/Header.spec');
 });

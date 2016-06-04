@@ -32,22 +32,26 @@ export class Header extends React.Component {
             <ul className="nav navbar-nav">
               <li className={props.location.pathname.indexOf('/artists') > -1 ? 'active' : ''}>
                 <a href="/artists" onClick={this.onClickLink}>
-                  <span className="fa fa-music" />Artists
+                  <span className="fa fa-music" />
+                  <span>Artists</span>
                 </a>
               </li>
               <li className={props.location.pathname.indexOf('/popular') > -1 ? 'active' : ''}>
                 <a href="/popular" onClick={this.onClickLink}>
-                  <span className="fa fa-fire" />Popular
+                  <span className="fa fa-fire" />
+                  <span>Popular</span>
                 </a>
               </li>
               <li className={props.location.pathname.indexOf('/lastweek') > -1 ? 'active' : ''}>
                 <a href="/lastweek" onClick={this.onClickLink}>
-                  <span className="fa fa-calendar" />Last Week
+                  <span className="fa fa-calendar" />
+                  <span>Last Week</span>
                 </a>
               </li>
               <li className={props.location.pathname.indexOf('/about') > -1 ? 'active' : ''}>
                 <a href="/about" onClick={this.onClickLink} >
-                  <span className="fa fa-info-circle" />About
+                  <span className="fa fa-info-circle" />
+                  <span>About</span>
                 </a>
               </li>
             </ul>

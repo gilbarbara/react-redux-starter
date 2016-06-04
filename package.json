@@ -40,7 +40,7 @@
     "babel-loader": "^6.2",
     "babel-plugin-transform-decorators-legacy": "^1.3",
     "babel-plugin-transform-runtime": "^6.9",
-    "babel-preset-es2015-native-modules": "^6.6",
+    "babel-preset-es2015": "^6.9",
     "babel-preset-react": "^6.5",
     "babel-preset-stage-1": "^6.5",
     "babel-register": "^6.9",
@@ -70,6 +70,7 @@
     "husky": "^0.11",
     "image-webpack-loader": "^1.8",
     "imports-loader": "^0.6",
+    "inject-loader": "^2.0",
     "jsdom": "^9.2",
     "json-loader": "^0.5",
     "minami": "^1.1",
@@ -92,7 +93,7 @@
     "source-map-support": "^0.4",
     "style-loader": "^0.13",
     "url-loader": "^0.5",
-    "webpack": "^2.1.0-beta.8",
+    "webpack": "^2.1.0-beta.7",
     "webpack-dev-server": "^2.0.0-beta",
     "webpack-node-externals": "^1.2.0"
   },
@@ -104,7 +105,7 @@
     "publish": "node tools publish",
     "docs": "node tools docs",
     "test": "mocha-webpack --opts test/lib/mocha-webpack.opts",
-    "test:watch": "npm test -- --watch"
+    "test:watch": "npm test -- --watch",
     "precommit": "node tools commits && npm run lint && npm test >/dev/null 2>&1",
     "postmerge": "node tools modified package.json && npm update"
   },
